@@ -33,11 +33,11 @@
 
     self.rootNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory controllerWithloginIn]];
     self.actNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
-    self.newsNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
-    self.photoNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
-    self.weiboNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
+    self.newsNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory draftListViewController]];
+    self.photoNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory orderListViewController]];
+    self.weiboNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory faqListViewController]];
     self.moreNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
-    self.partnerNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
+    self.partnerNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory ticketListViewController]];
     
 }
 

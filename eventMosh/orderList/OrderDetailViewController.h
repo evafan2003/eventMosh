@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface OrderDetailViewController : BaseViewController
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(Order *)order;
 @end

@@ -104,6 +104,16 @@
 		50988664198B7CD800B71D7A /* TicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5098865F198B7CD800B71D7A /* TicketType.m */; };
 		50988668198B831E00B71D7A /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50988666198B831E00B71D7A /* ActivityDetailViewController.m */; };
 		50988669198B831E00B71D7A /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50988667198B831E00B71D7A /* ActivityDetailViewController.xib */; };
+		50A457A01990951B002CC678 /* DraftDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4579E1990951B002CC678 /* DraftDetailViewController.m */; };
+		50A457A11990951B002CC678 /* DraftDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A4579F1990951B002CC678 /* DraftDetailViewController.xib */; };
+		50A457A31990A5D7002CC678 /* arrow_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A457A21990A5D7002CC678 /* arrow_gray@2x.png */; };
+		50A457A51990A772002CC678 /* btn_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A457A41990A772002CC678 /* btn_red@2x.png */; };
+		50A457A81990CD62002CC678 /* Faq.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A457A71990CD62002CC678 /* Faq.m */; };
+		50A457AA1990D0F2002CC678 /* FaqDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A457A91990D0F2002CC678 /* FaqDetailViewController.xib */; };
+		50A457AD1990DDB4002CC678 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A457AC1990DDB4002CC678 /* Order.m */; };
+		50A457B01990E88D002CC678 /* Ticket.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A457AF1990E88D002CC678 /* Ticket.m */; };
+		50A457B31990EA11002CC678 /* TicketDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A457B21990EA11002CC678 /* TicketDetailViewController.m */; };
+		50A457B51990EC34002CC678 /* TicketDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A457B41990EC34002CC678 /* TicketDetailViewController.xib */; };
 		667CFE7A19664BDA00D15783 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7919664BDA00D15783 /* Foundation.framework */; };
 		667CFE7C19664BDA00D15783 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7B19664BDA00D15783 /* CoreGraphics.framework */; };
 		667CFE7E19664BDA00D15783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7D19664BDA00D15783 /* UIKit.framework */; };
@@ -280,6 +290,21 @@
 		50988665198B831E00B71D7A /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		50988666198B831E00B71D7A /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		50988667198B831E00B71D7A /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		50A4579D1990951B002CC678 /* DraftDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftDetailViewController.h; sourceTree = "<group>"; };
+		50A4579E1990951B002CC678 /* DraftDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftDetailViewController.m; sourceTree = "<group>"; };
+		50A4579F1990951B002CC678 /* DraftDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftDetailViewController.xib; sourceTree = "<group>"; };
+		50A457A21990A5D7002CC678 /* arrow_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_gray@2x.png"; sourceTree = "<group>"; };
+		50A457A41990A772002CC678 /* btn_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_red@2x.png"; sourceTree = "<group>"; };
+		50A457A61990CD62002CC678 /* Faq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Faq.h; sourceTree = "<group>"; };
+		50A457A71990CD62002CC678 /* Faq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Faq.m; sourceTree = "<group>"; };
+		50A457A91990D0F2002CC678 /* FaqDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaqDetailViewController.xib; sourceTree = "<group>"; };
+		50A457AB1990DDB4002CC678 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		50A457AC1990DDB4002CC678 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		50A457AE1990E88D002CC678 /* Ticket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticket.h; sourceTree = "<group>"; };
+		50A457AF1990E88D002CC678 /* Ticket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticket.m; sourceTree = "<group>"; };
+		50A457B11990EA11002CC678 /* TicketDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketDetailViewController.h; sourceTree = "<group>"; };
+		50A457B21990EA11002CC678 /* TicketDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketDetailViewController.m; sourceTree = "<group>"; };
+		50A457B41990EC34002CC678 /* TicketDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketDetailViewController.xib; sourceTree = "<group>"; };
 		667CFE7619664BDA00D15783 /* eventMosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eventMosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		667CFE7919664BDA00D15783 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		667CFE7B19664BDA00D15783 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -439,6 +464,9 @@
 				50332299198FB1DD005D4C06 /* DraftCell.xib */,
 				5033229D198FB21B005D4C06 /* Draft.h */,
 				5033229E198FB21B005D4C06 /* Draft.m */,
+				50A4579D1990951B002CC678 /* DraftDetailViewController.h */,
+				50A4579E1990951B002CC678 /* DraftDetailViewController.m */,
+				50A4579F1990951B002CC678 /* DraftDetailViewController.xib */,
 			);
 			path = draftList;
 			sourceTree = "<group>";
@@ -459,9 +487,12 @@
 				503322A5198FB32F005D4C06 /* FaqViewController.m */,
 				503322A7198FB348005D4C06 /* FaqDetailViewController.h */,
 				503322A8198FB348005D4C06 /* FaqDetailViewController.m */,
+				50A457A91990D0F2002CC678 /* FaqDetailViewController.xib */,
 				503322AA198FB379005D4C06 /* FaqCell.h */,
 				503322AB198FB379005D4C06 /* FaqCell.m */,
 				503322AC198FB379005D4C06 /* FaqCell.xib */,
+				50A457A61990CD62002CC678 /* Faq.h */,
+				50A457A71990CD62002CC678 /* Faq.m */,
 			);
 			path = faqList;
 			sourceTree = "<group>";
@@ -476,6 +507,8 @@
 				503322BD198FB54A005D4C06 /* OrderCell.h */,
 				503322BE198FB54A005D4C06 /* OrderCell.m */,
 				503322BF198FB54A005D4C06 /* OrderCell.xib */,
+				50A457AB1990DDB4002CC678 /* Order.h */,
+				50A457AC1990DDB4002CC678 /* Order.m */,
 			);
 			path = orderList;
 			sourceTree = "<group>";
@@ -488,6 +521,11 @@
 				503322B2198FB4D1005D4C06 /* TicketCell.h */,
 				503322B3198FB4D1005D4C06 /* TicketCell.m */,
 				503322B4198FB4D1005D4C06 /* TicketCell.xib */,
+				50A457AE1990E88D002CC678 /* Ticket.h */,
+				50A457AF1990E88D002CC678 /* Ticket.m */,
+				50A457B11990EA11002CC678 /* TicketDetailViewController.h */,
+				50A457B21990EA11002CC678 /* TicketDetailViewController.m */,
+				50A457B41990EC34002CC678 /* TicketDetailViewController.xib */,
 			);
 			path = ticketList;
 			sourceTree = "<group>";
@@ -597,6 +635,8 @@
 		667CFEA819664C2800D15783 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				50A457A41990A772002CC678 /* btn_red@2x.png */,
+				50A457A21990A5D7002CC678 /* arrow_gray@2x.png */,
 				5019B61B198A564B00B3920C /* btn_bg_1@2x.png */,
 				5019B61C198A564B00B3920C /* btn_bg_2@2x.png */,
 				5019B61D198A564B00B3920C /* btn_bg_3@2x.png */,
@@ -897,9 +937,11 @@
 				500644CB1966B1BE0047DF77 /* textFieldBg_02@2x.png in Resources */,
 				500644C11966B1BE0047DF77 /* navBg_ios7@2x.png in Resources */,
 				500644D21966B1BE0047DF77 /* user_info1@2x.png in Resources */,
+				50A457A11990951B002CC678 /* DraftDetailViewController.xib in Resources */,
 				500644A01966B1BE0047DF77 /* actList_button@2x.png in Resources */,
 				500644BB1966B1BE0047DF77 /* nav_check@2x.png in Resources */,
 				5019B61F198A564B00B3920C /* btn_bg_1@2x.png in Resources */,
+				50A457B51990EC34002CC678 /* TicketDetailViewController.xib in Resources */,
 				500644C61966B1BE0047DF77 /* QueryCell@2x.png in Resources */,
 				500644D31966B1BE0047DF77 /* user_info2@2x.png in Resources */,
 				500644CF1966B1BE0047DF77 /* thin@2x.png in Resources */,
@@ -954,7 +996,10 @@
 				500644A81966B1BE0047DF77 /* bg@2x.png in Resources */,
 				500644C31966B1BE0047DF77 /* off@2x.png in Resources */,
 				5019B621198A564B00B3920C /* btn_bg_3@2x.png in Resources */,
+				50A457AA1990D0F2002CC678 /* FaqDetailViewController.xib in Resources */,
+				50A457A31990A5D7002CC678 /* arrow_gray@2x.png in Resources */,
 				500644CE1966B1BE0047DF77 /* thickPressed@2x.png in Resources */,
+				50A457A51990A772002CC678 /* btn_red@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,6 +1028,7 @@
 				500644631966AFC60047DF77 /* PasswordViewController.m in Sources */,
 				503322B1198FB488005D4C06 /* TicketListViewController.m in Sources */,
 				667CFEC119664C3F00D15783 /* AFImageRequestOperation.m in Sources */,
+				50A457B01990E88D002CC678 /* Ticket.m in Sources */,
 				667CFEDA19664C9300D15783 /* CacheHanding.m in Sources */,
 				667CFF0219664CBB00D15783 /* BaseViewController.m in Sources */,
 				667CFEC419664C3F00D15783 /* AFPropertyListRequestOperation.m in Sources */,
@@ -998,6 +1044,7 @@
 				50988664198B7CD800B71D7A /* TicketType.m in Sources */,
 				50988668198B831E00B71D7A /* ActivityDetailViewController.m in Sources */,
 				667CFED919664C9300D15783 /* HTTPClient.m in Sources */,
+				50A457A01990951B002CC678 /* DraftDetailViewController.m in Sources */,
 				50988660198B7CD800B71D7A /* Activity.m in Sources */,
 				667CFE8A19664BDA00D15783 /* AppDelegate.m in Sources */,
 				667CFEF019664CB300D15783 /* CityPickerView.m in Sources */,
@@ -1005,6 +1052,7 @@
 				5033229F198FB21B005D4C06 /* Draft.m in Sources */,
 				667CFEC619664C3F00D15783 /* AFXMLRequestOperation.m in Sources */,
 				667CFEF619664CB300D15783 /* URLDefine.m in Sources */,
+				50A457A81990CD62002CC678 /* Faq.m in Sources */,
 				50332296198FB19E005D4C06 /* DraftViewController.m in Sources */,
 				503322AD198FB379005D4C06 /* FaqCell.m in Sources */,
 				500644E01966C87D0047DF77 /* UserInfo.m in Sources */,
@@ -1017,6 +1065,7 @@
 				667CFECF19664C6000D15783 /* MBProgressHUD.m in Sources */,
 				667CFEEF19664CB300D15783 /* GlobalConfig.m in Sources */,
 				667CFEC319664C3F00D15783 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				50A457AD1990DDB4002CC678 /* Order.m in Sources */,
 				50988661198B7CD800B71D7A /* ActivityCell.m in Sources */,
 				667CFEC719664C3F00D15783 /* UIImageView+AFNetworking.m in Sources */,
 				500644E11966C87D0047DF77 /* UserInfoCell.m in Sources */,
@@ -1026,6 +1075,7 @@
 				5019B62C198A61D900B3920C /* MoshNavigationController.m in Sources */,
 				667CFEF419664CB300D15783 /* MoshDefine.m in Sources */,
 				50988663198B7CD800B71D7A /* ActivityViewController.m in Sources */,
+				50A457B31990EA11002CC678 /* TicketDetailViewController.m in Sources */,
 				500644611966AFC60047DF77 /* LoginViewController.m in Sources */,
 				5019B62E198A61D900B3920C /* LeftViewController.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "FaqDetailViewController.h"
+#import "FaqCell.h"
 
 @interface FaqDetailViewController ()
 
@@ -14,19 +15,44 @@
 
 @implementation FaqDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil faq:(Faq *)faq {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        //        _act = act;
+        //        self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://e.mosh.cn/%@",_act.eid]];
+        self.title = NAVTITLE_FAQDETAIL;
     }
     return self;
+}
+
+- (IBAction)sendMail:(id)sender {
+    if (self.checkMail.hidden) {
+        self.checkMail.hidden = NO;
+    } else {
+        self.checkMail.hidden = YES;
+    }
+}
+
+- (IBAction)sendSite:(id)sender {
+    if (self.checkSite.hidden) {
+        self.checkSite.hidden = NO;
+    } else {
+        self.checkSite.hidden = YES;
+    }
+}
+
+- (IBAction)save:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    FaqCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([FaqCell class]) owner:self options:nil][0];
+    cell.frame = CGRectMake(0, 0, 320, 150);
+    [self.view addSubview:cell];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_FAQDETAIL];
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,6 +7,14 @@
 //
 
 #import "TicketListViewController.h"
+#import "TicketCell.h"
+
+static CGFloat activityHeight = 150;
+static CGFloat headerHeight = 13;
+static NSString *cellIdentifier = @"activityCell";
+static NSString *act_end = @"actList_cellBg03";
+static NSString *act_display = @"actList_cellBg01";
+static NSString *act_notStart = @"actList_cellBg02";
 
 @interface TicketListViewController ()
 
@@ -26,7 +34,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //初始化
+    self.cellHeight = activityHeight;
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
+    //    [self createSearchBar];
+    [self addHeaderView];
+    //    [self downloadData];
+    //    [self showLoadingView];
+    
+    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    
+    [self addEGORefreshOnTableView:self.baseTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +53,86 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark self.action
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) addHeaderView
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    self.baseTableView.tableHeaderView = [GlobalConfig createViewWithFrame:CGRectMake(POINT_X, POINT_Y, SCREENWIDTH, headerHeight)];
 }
-*/
+
+
+- (void) downloadData
+{
+    //    [[HTTPClient shareHTTPClient] activityListWithPage:self.page
+    //                                               success:^(NSMutableArray *array){
+    //
+    //                                                   [self listFinishWithDataArray:array];
+    //                                               }];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TicketCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([TicketCell class]) owner:self options:nil][0];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //        cell.delegate = self;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    
+    //背景
+    //    [self changeBackgroundColorForCell:cell indexPath:indexPath];
+    
+    //赋值
+    //    [self addDataToCell:cell indexPath:indexPath];
+    
+    //加载更多
+    //    [self downloadMore:indexPath textColor:BLACKCOLOR];
+    
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Ticket *act = self.dataArray[indexPath.row];
+    UIViewController *ctl = [ControllerFactory ticketDetailControllerWithTicket:act];
+    [self.navigationController pushViewController:ctl animated:YES];
+}
+
+//更改cell背景色
+- (void) changeBackgroundColorForCell:(TicketCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    //    Activity *act = self.dataArray[indexPath.row];
+    //
+    //    //当前时间大于开始时间
+    //    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
+    //        //大于结束时间 已结束
+    //        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
+    //            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
+    //            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
+    //        }
+    //        else {//进行中
+    //            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
+    //            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
+    //        }
+    //    }
+    //    else {//未开始
+    //        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
+    //        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
+    //    }
+}
+
+//对cell内容赋值
+- (void) addDataToCell:(Ticket *)cell indexPath:(NSIndexPath *)indexPath
+{
+    //    Activity *act = self.dataArray[indexPath.row];
+    //
+    //    cell.activityTitle.text = act.title;
+    //    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
+    //    cell.activityAddress.text = act.address;
+    
+}
+
+
 
 @end

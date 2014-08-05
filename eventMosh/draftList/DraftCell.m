@@ -1,5 +1,5 @@
 //
-//  DraftCell.m
+//  DraftCell.mDraftCell
 //  eventMosh
 //
 //  Created by  evafan2003 on 14-8-4.

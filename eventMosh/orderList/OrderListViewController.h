@@ -7,7 +7,7 @@
 //
 
 #import "BaseTableViewController.h"
-
+#import "OrderCell.h"
 @interface OrderListViewController : BaseTableViewController
 
 @end

@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *orderTitle;
+@property (weak, nonatomic) IBOutlet UILabel *orderDate;
+@property (weak, nonatomic) IBOutlet UILabel *from;
+@property (weak, nonatomic) IBOutlet UILabel *payMethod;
+@property (weak, nonatomic) IBOutlet UILabel *status;
+@property (weak, nonatomic) IBOutlet UILabel *totalPrice;
+@property (weak, nonatomic) IBOutlet UILabel *orderUser;
+@property (weak, nonatomic) IBOutlet UILabel *orderTel;
 
 @end

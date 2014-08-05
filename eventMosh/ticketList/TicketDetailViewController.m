@@ -1,26 +1,25 @@
 //
-//  OrderDetailViewController.m
+//  TicketDetailViewController.m
 //  eventMosh
 //
-//  Created by  evafan2003 on 14-8-4.
+//  Created by  evafan2003 on 14-8-5.
 //  Copyright (c) 2014年 mosh. All rights reserved.
 //
 
-#import "OrderDetailViewController.h"
+#import "TicketDetailViewController.h"
 
-@interface OrderDetailViewController ()
+@interface TicketDetailViewController ()
 
 @end
 
-@implementation OrderDetailViewController
+@implementation TicketDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(Order *)order
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ticket:(Ticket *)ticket
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        //        _act = act;
-        //        self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://e.mosh.cn/%@",_act.eid]];
-        self.title = NAVTITLE_FAQDETAIL;
+        // Custom initialization
+        self.title = NAVTITLE_TICKETDETAIL;
     }
     return self;
 }
@@ -29,6 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TICKETDETAIL];
 }
 
 - (void)didReceiveMemoryWarning

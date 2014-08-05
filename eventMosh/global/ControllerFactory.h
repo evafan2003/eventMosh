@@ -19,7 +19,10 @@
 //#import "PasswordViewController.h"
 //#import "WebViewController.h"
 #import "Activity.h"
-
+#import "Draft.h"
+#import "Faq.h"
+#import "Order.h"
+#import "Ticket.h"
 @interface ControllerFactory : NSObject
 
 //菜单
@@ -42,9 +45,29 @@
 
 //活动列表
 +(UIViewController *) activityListViewController;
+
 //活动详情
 + (UIViewController *) actDetailControllerWithActivity:(Activity *)act;
 
+//审核列表
++(UIViewController *) draftListViewController;
+
+//审核详情
++ (UIViewController *) draftDetailControllerWithDraft:(Draft *)act;
+
+//咨询列表
++(UIViewController *) faqListViewController;
+//咨询详情
++ (UIViewController *) faqDetailControllerWithFaq:(Faq *)act;
+
+//订单查询
++(UIViewController *) orderListViewController;
+
+//票种管理
++(UIViewController *) ticketListViewController;
+
+//票种详情
++ (UIViewController *) ticketDetailControllerWithTicket:(Ticket *)ticket;
 //活动统计
 //+ (UIViewController *) activityStatisticalWithActivity:(Activity *)act;
 

@@ -7,7 +7,12 @@
 //
 
 #import "DraftViewController.h"
-
+static CGFloat activityHeight = 150;
+static CGFloat headerHeight = 13;
+static NSString *cellIdentifier = @"activityCell";
+static NSString *act_end = @"actList_cellBg03";
+static NSString *act_display = @"actList_cellBg01";
+static NSString *act_notStart = @"actList_cellBg02";
 @interface DraftViewController ()
 
 @end
@@ -35,7 +40,7 @@
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
     //    [self createSearchBar];
     [self addHeaderView];
     //    [self downloadData];
@@ -71,11 +76,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    DraftCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
-        cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([ActivityCell class]) owner:self options:nil][0];
+        cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DraftCell class]) owner:self options:nil][0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.delegate = self;
+//        cell.delegate = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     
@@ -93,70 +98,70 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //     Activity *act = self.dataArray[indexPath.row];
-    //    UIViewController *ctl = [ControllerFactory actDetailControllerWithActivity:act];
-    //    [self.navigationController pushViewController:ctl animated:YES];
+         Draft *act = self.dataArray[indexPath.row];
+        UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
+        [self.navigationController pushViewController:ctl animated:YES];
 }
 
 //更改cell背景色
-- (void) changeBackgroundColorForCell:(ActivityCell *)cell indexPath:(NSIndexPath *)indexPath
+- (void) changeBackgroundColorForCell:(DraftCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    Activity *act = self.dataArray[indexPath.row];
-    
-    //当前时间大于开始时间
-    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
-        //大于结束时间 已结束
-        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
-            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-        }
-        else {//进行中
-            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-        }
-    }
-    else {//未开始
-        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-    }
+//    Activity *act = self.dataArray[indexPath.row];
+//    
+//    //当前时间大于开始时间
+//    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
+//        //大于结束时间 已结束
+//        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
+//            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
+//            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
+//        }
+//        else {//进行中
+//            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
+//            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
+//        }
+//    }
+//    else {//未开始
+//        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
+//        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
+//    }
 }
 
 //对cell内容赋值
-- (void) addDataToCell:(ActivityCell *)cell indexPath:(NSIndexPath *)indexPath
+- (void) addDataToCell:(Draft *)cell indexPath:(NSIndexPath *)indexPath
 {
-    Activity *act = self.dataArray[indexPath.row];
-    
-    cell.activityTitle.text = act.title;
-    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
+//    Activity *act = self.dataArray[indexPath.row];
+//    
+//    cell.activityTitle.text = act.title;
+//    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
     //    cell.activityAddress.text = act.address;
     
 }
 
 #pragma mark AcitivityCellDelegate
 //数据统计
-- (void) checkStatisticalWithCell:(ActivityCell *)cell
+- (void) checkStatisticalWithCell:(DraftCell *)cell
 {
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
+//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+//    Activity *act = self.dataArray[indexPath.row];
     //查看统计 act.eid
     //    [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
 }
 
 //活动验票
-- (void) checkTicketWithCell:(ActivityCell *)cell
+- (void) checkTicketWithCell:(DraftCell *)cell
 {
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
+//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+//    Activity *act = self.dataArray[indexPath.row];
     //验票 act.eid
     //    [self.navigationController pushViewController:[ControllerFactory ticketConfigViewControllerWithActivity:act] animated:YES];
     
 }
 
 //报名信息
-- (void) memberInfoWithCell:(ActivityCell *)cell
+- (void) memberInfoWithCell:(DraftCell *)cell
 {
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
+//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+//    Activity *act = self.dataArray[indexPath.row];
     
     // act.eid
     //    [self.navigationController pushViewController:[ControllerFactory memberStatisticViewControllerWithActivity:act] animated:YES];

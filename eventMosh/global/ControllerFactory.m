@@ -13,6 +13,13 @@
 #import "UserInfoViewController.h"
 #import "ActivityViewController.h"
 #import "ActivityDetailViewController.h"
+#import "DraftViewController.h"
+#import "DraftDetailViewController.h"
+#import "FaqViewController.h"
+#import "FaqDetailViewController.h"
+#import "OrderListViewController.h"
+#import "TicketListViewController.h"
+#import "TicketDetailViewController.h"
 
 @implementation ControllerFactory
 
@@ -77,6 +84,41 @@ static LeftViewController *leftContrller = nil;
 + (UIViewController *) actDetailControllerWithActivity:(Activity *)act
 {
     return [[ActivityDetailViewController alloc] initWithNibName:NSStringFromClass([ActivityDetailViewController class]) bundle:nil activity:act];
+}
+
+//审核管理列表
++(UIViewController *) draftListViewController {
+    return [DraftViewController viewController];
+}
+
+//审核管理详情
++ (UIViewController *) draftDetailControllerWithDraft:(Draft *)act {
+    return [[DraftDetailViewController alloc] initWithNibName:NSStringFromClass([DraftDetailViewController class]) bundle:nil draft:act];
+}
+
+//咨询列表
++(UIViewController *) faqListViewController {
+    return [FaqViewController viewController];
+}
+
+//咨询详情
++ (UIViewController *) faqDetailControllerWithFaq:(Faq *)faq {
+    return [[FaqDetailViewController alloc] initWithNibName:NSStringFromClass([FaqDetailViewController class]) bundle:nil faq:faq];
+}
+
+//订单管理
++(UIViewController *) orderListViewController {
+    return [OrderListViewController viewController];
+}
+
+//票种管理
++(UIViewController *) ticketListViewController {
+    return [TicketListViewController viewController];
+}
+
+//票种详情
++ (UIViewController *) ticketDetailControllerWithTicket:(Ticket *)ticket {
+    return [[TicketDetailViewController alloc] initWithNibName:NSStringFromClass([TicketDetailViewController class]) bundle:nil ticket:ticket];
 }
 
 + (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url

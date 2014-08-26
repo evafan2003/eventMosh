@@ -24,17 +24,27 @@
  网址
  */
 
-#define MOSHHOST        @"http://ly.lootai.com/api/" //host
+//#define MOSHHOST        @"http://api.mosh.cn/eventmosh/" //host
+#define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
+#define URL_USER        @"user=%@&pass=%@"
+#define URL_PAGE                @"page=%@"
 
-
-#define URL_REG         @"user/register?user=%@&password=%@"  //注册
-#define URL_LOGIN       @"user/login?user=%@&password=%@"  //登录
-#define URL_USERINFO    @"user/userInfo?token=%@" //用户信息
-#define URL_CARLIST     @"car/carlist?token=%@" //车辆列表
-#define URL_CARDEL      @"car/del?cid=%@&token=%@" //车辆删除
-#define URL_ADDCAR      @"car/registcar?code=%@&c_type=%@&c_length=%@&phone=%@&c_number=%@token=%@" //添加车辆 code 车牌号 c_type 类型  c_length 长度  c_number gps号
-#define URL_UPDATECAR      @"car/updatecarinfo?code=%@&c_type=%@&c_length=%@&phone=%@&c_number=%@token=%@" //修改车辆信息 code 车牌号 c_type 类型  c_length 长度  c_number gps号
-
+#define URL_LOGIN               @"login?"                           //登录
+#define URL_EVENTLIST           @"eventmanage?"                                 //活动列表 page
+#define URL_DRAFT               @"draft?"                            //审核    page
+#define URL_EVENTVIEW           @"eventview?"                        //详情eid(搜索)
+#define URL_MANAGE              @"manage?"                           //活动修改eid post
+#define URL_SUGGEST             @"suggest?"                          //咨询建议
+#define URL_SUGGESTSHOW         @"suggestshow?"                      //咨询建议详情sid
+#define URL_SUGGESTREPLY        @"suggestreply?"                      //回复建议sid
+#define URL_ORDER               @"order?"                            //订单信息
+#define URL_ORDERVIEW           @"orderview?"                      //订单详情eid
+#define URL_ORDEREDIT           @"orderedit?"                      //咨询编辑eid
+#define URL_TICKET              @"ticket?"                      //咨询建议详情eid
+#define URL_GETTICKETLIST       @"getticketlist?"                      //查询票列表 page
+#define URL_GETTICKET           @"getticketbyid?"                      //票详情
+#define URL_SAVEMOD             @"savemod?"                      //修改票种信息
+#define URL_POS                 @"pos?"                      //活动排名
 
 @interface URLDefine : NSObject
 

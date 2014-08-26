@@ -32,88 +32,125 @@ typedef void (^Success)(id jsonData);
  */
 - (void) loginWithUserName:(NSString *)userName
                   password:(NSString *)password
-                 phoneCode:(NSString *)code
                    success:(void (^)(id jsonData))success
                       fail:(void (^)(void))fail;
-/**
- *  获取验证码
- *
- *  @param userName
- *  @param password
- *  @param success
- *  @param fail
- */
-- (void) checkNumberWithUserName:(NSString *)userName
-                        password:(NSString *)password
-                         success:(void (^)(id))success
-                            fail:(void (^)(void))fail;
-/*
- 找回密码之获取验证码
- */
-- (void) findPasswordWithUsername:(NSString *)username
-                         userType:(NSString *)type
-                          success:(void(^)(id jsondata))success
-                             fail:(void(^)(void))fail;
-/*
- 找回密码之修改密码
- */
-- (void) updatePasswordWithUsername:(NSString *)username
-                           userType:(NSString *)type
-                           password:(NSString *)password
-                            success:(void(^)(id jsondata))success
-                               fail:(void(^)(void))fail;
 
-
-/*
- 账户概览
- */
-- (void) userInfoWithUid:(NSString *)uid
-                 success:(void (^)(UserInfo *info))success
-                    fail:(void (^)(void))fail;
 /*
  活动列表
  page 加载的页数
  */
-- (void) activityListWithPage:(int)page
+- (void) eventListWithPage:(int)page
                       success:(void (^)(NSMutableArray *array))success;
-/*
- 统计结果
- */
-//- (void) statisticalResultWithEid:(NSString *)eid
-//                          success:(void (^)(ActivityStatistical *sta))success;
 
 /*
- 添加/移除收藏
+ 审核管理
+ page 加载的页数
+ eid,title,uid,username,startDate,endDate,status,class_id
  */
-- (void) addCollectWithEventID:(NSString *)eid;
-
-- (void) removeCollectWithEventID:(NSString *)eid;
-
+- (void) draftWithPage:(int)page
+                 searchArr:(NSMutableArray *)searchArr
+                   success:(void (^)(NSMutableArray *array))success;
 
 
 /*
- 下载票数据 (还没想好存数据库在哪一步搞，姑且先返回之)
+ 审核详情
+ eid 活动id
  */
-//- (void) getAllTicketWitheid:(NSString *)eid
-//                     success:(void (^)(NSMutableArray *tickets))success
-//                        fail:(void(^)(void))fail;
-///*
-// 联机验票
-// */
-//- (void) checkTicketWithtid:(NSString *)tid eid:(NSString *)eid password:(NSString *)password
-//                    success:(void (^)(Ticket *ticket))success;
+- (void) eventWithId:(NSString *)eid
+                      success:(void (^)(NSDictionary *dic))success;
 
 /*
- 上传本地验票结果
+ 保存活动修改信息
+ eid 活动id
+ post方式
  */
-- (void) uploadTicketWitheid:(NSString *)eid
-                         dic:(NSDictionary *)dic
-                      sucess:(void (^)(NSString *str))sucess;
+- (void) manageEvent:(NSString *)eid
+                 dic:(NSDictionary *)dic
+             success:(void (^)(NSDictionary *dic))success;
 
-- (void) uploadTicketWitheid:(NSString *)eid
-                         dic:(NSDictionary *)dic
-                      sucess:(void (^)(NSString *str))sucess
-                        fail:(void(^)(void))fail;
+/*
+ 咨询列表 page
+ (搜索条件)class,state,uid,username,email
+ */
+- (void) suggestWithPage:(int)page
+                   success:(void (^)(NSMutableArray *array))success;
+
+/*
+ 咨询详情
+ sid 咨询id
+ */
+- (void) suggestWithId:(NSString *)sid
+             success:(void (^)(NSDictionary *dic))success;
+
+/*
+ 咨询回复
+ sid,reply_content,is_email,is_notice,reply_email
+ */
+- (void) replySuggest:(NSString *)eid
+                  dic:(NSDictionary *)dic
+               sucess:(void (^)(NSString *str))sucess;
+
+
+/*
+ 订单管理
+ page 加载的页数
+ od,title,eid,name,startdate,enddate,status,class_id,uid,tel,is_mobile,order_from
+ */
+- (void) orderWithPage:(int)page
+             searchArr:(NSMutableArray *)searchArr
+               success:(void (^)(NSMutableArray *array))success;
+
+/*
+ 订单详情
+ eid 活动id
+ */
+- (void) orderWithId:(NSString *)eid
+             success:(void (^)(NSDictionary *dic))success;
+
+
+/*
+ 订单编辑post
+ oid,exit_explain
+ */
+- (void) replyOrder:(NSString *)oid
+                  dic:(NSDictionary *)dic
+               sucess:(void (^)(NSString *str))sucess;
+
+/*
+ 票种管理
+ page 加载的页数
+ ticket_id,eid,tikcet_name,event_name,page
+ */
+- (void) ticketWithPage:(int)page
+             searchArr:(NSMutableArray *)searchArr
+               success:(void (^)(NSMutableArray *array))success;
+
+
+/*
+ 票详情
+ eid 活动id
+ */
+- (void) ticketWithId:(NSString *)tid
+             success:(void (^)(NSDictionary *dic))success;
+
+
+/*
+ 票种编辑post
+ oid,exit_explain
+ */
+- (void) replyTicket:(NSString *)oid
+                dic:(NSDictionary *)dic
+             sucess:(void (^)(NSString *str))sucess;
+
+
+/*
+ 活动排名
+ selyear,selmonth,selweek,selday,type
+ */
+- (void) posEvent:(NSString *)eid
+               success:(void (^)(NSDictionary *dic))success;
+
+
 
 
 //得到最后一次加载时间

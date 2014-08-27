@@ -28,6 +28,12 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+     [[ControllerFactory getSingleDDMenuController] gestureSetEnable:YES isShowRight:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

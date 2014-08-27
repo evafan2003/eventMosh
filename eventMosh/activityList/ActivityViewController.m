@@ -39,6 +39,7 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:NO];
     
 }
@@ -52,10 +53,10 @@ static NSString *act_notStart = @"actList_cellBg02";
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
 //    [self createSearchBar];
     [self addHeaderView];
-//    [self downloadData];
-//    [self showLoadingView];
+    [self downloadData];
+    [self showLoadingView];
     
-    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+//    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
     
     [self addEGORefreshOnTableView:self.baseTableView];
 }
@@ -76,11 +77,10 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) downloadData
 {
-//    [[HTTPClient shareHTTPClient] activityListWithPage:self.page
-//                                               success:^(NSMutableArray *array){
-//                                                   
-//                                                   [self listFinishWithDataArray:array];
-//                                               }];
+    [[HTTPClient shareHTTPClient] eventListWithPage:self.page success:^(NSMutableArray *array) {
+        [self hideLoadingView];
+       [self listFinishWithDataArray:array];
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,14 +93,11 @@ static NSString *act_notStart = @"actList_cellBg02";
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     
-    //背景
-//    [self changeBackgroundColorForCell:cell indexPath:indexPath];
-    
     //赋值
-//    [self addDataToCell:cell indexPath:indexPath];
+    [self addDataToCell:cell indexPath:indexPath];
     
     //加载更多
-//    [self downloadMore:indexPath textColor:BLACKCOLOR];
+    [self downloadMore:indexPath textColor:BLACKCOLOR];
 
     return cell;
 }
@@ -112,28 +109,6 @@ static NSString *act_notStart = @"actList_cellBg02";
 //    [self.navigationController pushViewController:ctl animated:YES];
 }
 
-//更改cell背景色
-- (void) changeBackgroundColorForCell:(ActivityCell *)cell indexPath:(NSIndexPath *)indexPath
-{
-    Activity *act = self.dataArray[indexPath.row];
-    
-    //当前时间大于开始时间
-    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
-        //大于结束时间 已结束
-        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
-            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-        }
-        else {//进行中
-            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-        }
-    }
-    else {//未开始
-        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-    }
-}
 
 //对cell内容赋值
 - (void) addDataToCell:(ActivityCell *)cell indexPath:(NSIndexPath *)indexPath
@@ -141,8 +116,7 @@ static NSString *act_notStart = @"actList_cellBg02";
     Activity *act = self.dataArray[indexPath.row];
 
     cell.activityTitle.text = act.title;
-    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
-//    cell.activityAddress.text = act.address;
+    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:act.end_date format:DATEFORMAT_03]];
 
 }
 

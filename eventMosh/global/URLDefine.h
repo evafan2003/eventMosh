@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#define JSONKEY     @"res"
+#define JSONKEY_RES     @"res"
 #define JSONFEEDBACK    @"feedback"
 #define Encrypt      YES
 #define JSONLIST    @"list"
 
 #define JSONKEY_DATA    @"data"
-#define JSONKEY_SUCCESS    @"success"
+#define JSONKEY_SUCCESS    @"status"
 #define JSONKEY_ERROR    @"errCode"
 #define JSONKEY_TOKEN    @"token"
 
@@ -27,9 +27,9 @@
 //#define MOSHHOST        @"http://api.mosh.cn/eventmosh/" //host
 #define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
 #define URL_USER        @"user=%@&pass=%@"
-#define URL_PAGE                @"page=%@"
+#define URL_PAGE                @"&page=%d"
 
-#define URL_LOGIN               @"login?"                           //登录
+#define URL_LOGIN               @"login?user=%@&pass=%@"             //登录
 #define URL_EVENTLIST           @"eventmanage?"                                 //活动列表 page
 #define URL_DRAFT               @"draft?"                            //审核    page
 #define URL_EVENTVIEW           @"eventview?"                        //详情eid(搜索)

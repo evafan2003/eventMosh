@@ -30,7 +30,8 @@ static NSInteger autoTimer = 60;
 - (void) viewWillAppear:(BOOL)animated
 {
     [self.navigationController.navigationBar setHidden:YES];
-
+    
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
 }
 
 - (void)viewDidLoad
@@ -43,8 +44,11 @@ static NSInteger autoTimer = 60;
     [GlobalConfig textFieldAddLeftView:self.checkNumber];
     [self setUserInfo];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidDisapper:) name:UIKeyboardDidHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidDisapper:) name:UIKeyboardDidHideNotification object:nil];
+    
+     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
+    [self.backScrollView addGestureRecognizer:tapGesture];
 }
 
 
@@ -67,21 +71,18 @@ static NSInteger autoTimer = 60;
 
 - (IBAction)login:(id)sender {
     
-    //直接进入
-    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
-    return;
+//    //直接进入
+//    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
+//    return;
     
     
     if (![self loginCheck]) {
         return;
     }
-    if (![GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.checkNumber.text Alert:ERROR_CHECKNUMBER]) {
-        return;
-    };
+
     [self showLoadingView];
     [[HTTPClient shareHTTPClient] loginWithUserName:self.userName.text
                                            password:self.password.text
-                                          phoneCode:self.checkNumber.text
                                             success:^(id json){
                                                 [self hideLoadingView];
                                                 
@@ -111,28 +112,28 @@ static NSInteger autoTimer = 60;
         return;
     }
     [self showLoadingView];
-    [[HTTPClient shareHTTPClient] checkNumberWithUserName:self.userName.text
-                                                 password:self.password.text
-                                                  success:^(id json){
-                                                      [self hideLoadingView];
-                                                      [self getCheckNumberSuccess:json];
-                                                  }
-                                                     fail:^{
-                                                         [self hideLoadingView];
-                                                         [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
-                                                         [self getCheckNUmberFail];
-                                                     }];
+//    [[HTTPClient shareHTTPClient] checkNumberWithUserName:self.userName.text
+//                                                 password:self.password.text
+//                                                  success:^(id json){
+//                                                      [self hideLoadingView];
+//                                                      [self getCheckNumberSuccess:json];
+//                                                  }
+//                                                     fail:^{
+//                                                         [self hideLoadingView];
+//                                                         [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+//                                                         [self getCheckNUmberFail];
+//                                                     }];
 }
 
 - (void) requestSuccess:(id)json
 {
     if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:json]) {
-        NSString *uid = json[JSONKEY];
-        NSNumber *feedback = json[JSONFEEDBACK];
-        NSString *alert = json[@"alert"];
-        if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:uid] && [feedback isEqualToNumber:@1]) {
+//        NSString *uid = json[JSONKEY];
+        NSNumber *feedback = json[@"status"];
+        NSString *alert = json[@"msg"];
+        if ([feedback isEqualToNumber:@1]) {
             //保存用户信息
-            [GlobalConfig saveUserInfoWithUid:uid
+            [GlobalConfig saveUserInfoWithUid:nil
                                      userName:self.userName.text
                                      passWord:self.password.text
                                         phone:nil
@@ -154,7 +155,8 @@ static NSInteger autoTimer = 60;
     }
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(UITapGestureRecognizer *)gesture
+//- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.userName resignFirstResponder];
     [self.password resignFirstResponder];
@@ -165,7 +167,7 @@ static NSInteger autoTimer = 60;
 {
     if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:json]) {
         NSNumber *feedback = [GlobalConfig convertToNumber:json[JSONFEEDBACK]];
-        NSString *res = [GlobalConfig convertToString:json[JSONKEY]];
+        NSString *res = [GlobalConfig convertToString:json[JSONKEY_RES]];
         if ([feedback isEqualToNumber:@1] && res.length > 0) {
             [GlobalConfig alert:res];
             [self checkNumberStartTimer];

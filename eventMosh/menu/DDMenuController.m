@@ -101,6 +101,11 @@
 
 - (void)pan:(UIPanGestureRecognizer*)gesture {
     
+  
+    if (![_pan isEnabled]) {
+        return;
+    }
+    
     CGPoint offset = [gesture translationInView:self.view];
     
     if (gesture.state == UIGestureRecognizerStateBegan) {

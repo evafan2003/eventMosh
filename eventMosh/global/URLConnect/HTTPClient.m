@@ -8,6 +8,7 @@
 
 #import "HTTPClient.h"
 #import "GlobalConfig.h"
+#import "Activity.h"
 
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
@@ -43,7 +44,6 @@
             return array;
         }
         else {
-            NSNumber *errorCode = [GlobalConfig convertToNumber:JSONKEY_ERROR];
             
         }
     }
@@ -66,5 +66,45 @@
                              fail:fail];
 }
 
+-(void)loginWithUserName:(NSString *)userName
+                password:(NSString *)password
+                 success:(void (^)(id))success
+                    fail:(void (^)(void))fail {
+    
+    [_request beginRequestWithUrl:[NSString stringWithFormat:URL_LOGIN,userName,password] isAppendHost:YES isEncrypt:NO success:success fail:fail];
+}
+
+- (void) eventListWithPage:(int)page
+                   success:(void (^)(NSMutableArray *array))success
+{
+    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTLIST page:page addon:nil] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    
+         NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Activity *act = [[Activity alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+    
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+}
+
+//组合
+-(NSString *) makeUrl:(NSString *)str page:(int)page addon:(NSString *)addon {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   str = [str stringByAppendingString:[NSString stringWithFormat:URL_USER,[defaults objectForKey:USER_USERNAME],[defaults objectForKey:USER_PASSWORD]]];
+    if (page!=0) {
+      str  =  [str stringByAppendingString:[NSString stringWithFormat:URL_PAGE,page]];
+    }
+    if (addon.length>1) {
+       str = [str stringByAppendingString:addon];
+    }
+    return str;
+}
 
 @end

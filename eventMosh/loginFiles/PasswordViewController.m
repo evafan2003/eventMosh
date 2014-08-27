@@ -146,44 +146,44 @@ static NSInteger autoTimer = 60;
 
     //获取验证码
     [self showLoadingView];
-    [[HTTPClient shareHTTPClient] findPasswordWithUsername:self.usernameView_username.text userType:self.userType success:^(id jsondata){
-        [self hideLoadingView];
-        [self checkNumberRandom];
-        if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsondata]) {
-            NSString *feedback = [GlobalConfig convertToString:jsondata[JSONFEEDBACK]];
-            NSString *checkNumber = [GlobalConfig convertToString:jsondata[JSONKEY]];
-            if ([feedback isEqualToString:@"1"]) {
-                //联网成功后进入下一页
-                
-                if (self.userType == userType_email) {
-                    [self showView:_emailAlertView];
-                }
-                else {
-                    [self showView:_checkNumberView];
-                    //开始倒计时
-                    //重新获取按钮设置无效，开始倒计时
-                    [self getCheckNUmberValid:NO];
-                    [self checkNumberStartTimer];
-                }
-                self.checkNumber = checkNumber;
-            }
-            else if ([feedback isEqualToString:@"2"]){
-                [GlobalConfig alert:ERROR_LOGINFAIL2];
-            }
-            else {
-                [GlobalConfig alert:ERROR_LOGINFAIL3];
-            }
-            
-        }
-        else {
-            [GlobalConfig alert:ERROR_LOGINFAIL3];
-        }
-        
-    } fail:^{
-                [self hideLoadingView];
-        [self checkNumberRandom];
-                 [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
-    }];
+//    [[HTTPClient shareHTTPClient] findPasswordWithUsername:self.usernameView_username.text userType:self.userType success:^(id jsondata){
+//        [self hideLoadingView];
+//        [self checkNumberRandom];
+//        if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsondata]) {
+//            NSString *feedback = [GlobalConfig convertToString:jsondata[JSONFEEDBACK]];
+//            NSString *checkNumber = [GlobalConfig convertToString:jsondata[JSONKEY]];
+//            if ([feedback isEqualToString:@"1"]) {
+//                //联网成功后进入下一页
+//                
+//                if (self.userType == userType_email) {
+//                    [self showView:_emailAlertView];
+//                }
+//                else {
+//                    [self showView:_checkNumberView];
+//                    //开始倒计时
+//                    //重新获取按钮设置无效，开始倒计时
+//                    [self getCheckNUmberValid:NO];
+//                    [self checkNumberStartTimer];
+//                }
+//                self.checkNumber = checkNumber;
+//            }
+//            else if ([feedback isEqualToString:@"2"]){
+//                [GlobalConfig alert:ERROR_LOGINFAIL2];
+//            }
+//            else {
+//                [GlobalConfig alert:ERROR_LOGINFAIL3];
+//            }
+//            
+//        }
+//        else {
+//            [GlobalConfig alert:ERROR_LOGINFAIL3];
+//        }
+//        
+//    } fail:^{
+//                [self hideLoadingView];
+//        [self checkNumberRandom];
+//                 [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+//    }];
     
 }
 
@@ -213,21 +213,21 @@ static NSInteger autoTimer = 60;
     
     [self showLoadingView];
     
-    [[HTTPClient shareHTTPClient] updatePasswordWithUsername:self.usernameView_username.text
-                                                    userType:self.userType
-                                                    password:self.passwordView_password.text
-                                                     success:^(id json){
-                                                    [self hideLoadingView];
-                                                    
-                                                    [self requestSuccess:json];
-        
-    }
-                                                        fail:^{
-                                                            
-                                                            [self hideLoadingView];
-                                                            [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
-                                                        }];
-    
+//    [[HTTPClient shareHTTPClient] updatePasswordWithUsername:self.usernameView_username.text
+//                                                    userType:self.userType
+//                                                    password:self.passwordView_password.text
+//                                                     success:^(id json){
+//                                                    [self hideLoadingView];
+//                                                    
+//                                                    [self requestSuccess:json];
+//        
+//    }
+//                                                        fail:^{
+//                                                            
+//                                                            [self hideLoadingView];
+//                                                            [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+//                                                        }];
+//    
 }
 
 - (IBAction)emailAlertViewButtonPress:(id)sender {
@@ -254,37 +254,37 @@ static NSInteger autoTimer = 60;
     [self keyboardHidden];
     
     //获取验证码
-    [self showLoadingView];
-    [[HTTPClient shareHTTPClient] findPasswordWithUsername:self.usernameView_username.text
-                                                  userType:self.userType
-                                                   success:^(id jsondata){
-        [self hideLoadingView];
-        
-        if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsondata]) {
-            NSString *feedback = [GlobalConfig convertToString:jsondata[JSONFEEDBACK]];
-            NSString *checkNumber = [GlobalConfig convertToString:jsondata[JSONKEY]];
-            if ([feedback isEqualToString:@"1"]) {
-            
-                //成功
-                //重新获取按钮设置无效，开始倒计时
-                [self getCheckNUmberValid:NO];
-                self.checkNumber = checkNumber;
-            }
-            else {
-                [GlobalConfig alert:ERROR_LOGINFAIL3];
-            }
-        }
-        else {
-            [GlobalConfig alert:ERROR_LOGINFAIL3];
-        }
-        
-    }
-                                                      fail:^{
-        [self hideLoadingView];
-                                                          
-        [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
-    }];
-    
+//    [self showLoadingView];
+//    [[HTTPClient shareHTTPClient] findPasswordWithUsername:self.usernameView_username.text
+//                                                  userType:self.userType
+//                                                   success:^(id jsondata){
+//        [self hideLoadingView];
+//        
+//        if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsondata]) {
+//            NSString *feedback = [GlobalConfig convertToString:jsondata[JSONFEEDBACK]];
+//            NSString *checkNumber = [GlobalConfig convertToString:jsondata[JSONKEY]];
+//            if ([feedback isEqualToString:@"1"]) {
+//            
+//                //成功
+//                //重新获取按钮设置无效，开始倒计时
+//                [self getCheckNUmberValid:NO];
+//                self.checkNumber = checkNumber;
+//            }
+//            else {
+//                [GlobalConfig alert:ERROR_LOGINFAIL3];
+//            }
+//        }
+//        else {
+//            [GlobalConfig alert:ERROR_LOGINFAIL3];
+//        }
+//        
+//    }
+//                                                      fail:^{
+//        [self hideLoadingView];
+//                                                          
+//        [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+//    }];
+//    
 }
 
 //设置重新获取按钮有效或无效
@@ -345,7 +345,7 @@ static NSInteger autoTimer = 60;
 - (void) requestSuccess:(id)json
 {
     if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:json]) {
-        NSDictionary *res = json[JSONKEY];
+        NSDictionary *res = json[JSONKEY_RES];
         NSString *uid = [GlobalConfig convertToString:res[@"uid"]];
         if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:uid]) {
             //保存用户信息

@@ -62,17 +62,17 @@ static CGFloat cellHeight = 70;
     [self showLoadingView];
    NSString *uid = [[NSUserDefaults standardUserDefaults] objectForKey:USER_USERID];
     
-    [[HTTPClient shareHTTPClient] userInfoWithUid:[GlobalConfig convertToString:uid]
-                                          success:^(UserInfo *info) {
-                                              [self hideLoadingView];
-                                              self.userInfo = info;
-                                              [self reloadData];
-                                              [self.baseTableView reloadData];
-                                          } fail:^{
-                                              [self hideLoadingView];
-                                              
-                                              [GlobalConfig showAlertViewWithMessage:ERROR_LOADINGFAIL superView:self.view];
-                                          }];
+//    [[HTTPClient shareHTTPClient] userInfoWithUid:[GlobalConfig convertToString:uid]
+//                                          success:^(UserInfo *info) {
+//                                              [self hideLoadingView];
+//                                              self.userInfo = info;
+//                                              [self reloadData];
+//                                              [self.baseTableView reloadData];
+//                                          } fail:^{
+//                                              [self hideLoadingView];
+//                                              
+//                                              [GlobalConfig showAlertViewWithMessage:ERROR_LOADINGFAIL superView:self.view];
+//                                          }];
     
 }
 

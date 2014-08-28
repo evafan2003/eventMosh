@@ -48,7 +48,7 @@ typedef void (^Success)(id jsonData);
  eid,title,uid,username,startDate,endDate,status,class_id
  */
 - (void) draftWithPage:(int)page
-                 searchArr:(NSMutableArray *)searchArr
+                search:(NSString *)search
                    success:(void (^)(NSMutableArray *array))success;
 
 
@@ -66,7 +66,16 @@ typedef void (^Success)(id jsonData);
  */
 - (void) manageEvent:(NSString *)eid
                  dic:(NSDictionary *)dic
-             success:(void (^)(NSDictionary *dic))success;
+             success:(void (^)(NSDictionary *dic))success
+                fail:(void (^)(void))fail;
+
+/*
+ 删除活动修改信息
+ eid 活动id
+ */
+- (void) deleteEvent:(NSString *)eid
+             success:(void (^)(NSDictionary *dic))success
+                fail:(void (^)(void))fail;
 
 /*
  咨询列表 page
@@ -97,7 +106,7 @@ typedef void (^Success)(id jsonData);
  od,title,eid,name,startdate,enddate,status,class_id,uid,tel,is_mobile,order_from
  */
 - (void) orderWithPage:(int)page
-             searchArr:(NSMutableArray *)searchArr
+             search:(NSString *)search
                success:(void (^)(NSMutableArray *array))success;
 
 /*
@@ -122,7 +131,7 @@ typedef void (^Success)(id jsonData);
  ticket_id,eid,tikcet_name,event_name,page
  */
 - (void) ticketWithPage:(int)page
-             searchArr:(NSMutableArray *)searchArr
+             search:(NSString *)search
                success:(void (^)(NSMutableArray *array))success;
 
 

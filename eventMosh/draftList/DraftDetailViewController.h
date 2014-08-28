@@ -8,8 +8,13 @@
 
 #import "BaseViewController.h"
 
-@interface DraftDetailViewController : BaseViewController<UIActionSheetDelegate>
+@interface DraftDetailViewController : BaseViewController<UIActionSheetDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *type;
+@property (weak, nonatomic) IBOutlet UISwitch *theSwitch;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil draft:(Draft *)act;
 - (IBAction)save:(id)sender;
 - (IBAction)changeType:(id)sender;

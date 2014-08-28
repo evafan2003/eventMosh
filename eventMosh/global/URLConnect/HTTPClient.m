@@ -9,7 +9,7 @@
 #import "HTTPClient.h"
 #import "GlobalConfig.h"
 #import "Activity.h"
-
+#import "Draft.h"
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
 @implementation HTTPClient
@@ -74,6 +74,10 @@
     [_request beginRequestWithUrl:[NSString stringWithFormat:URL_LOGIN,userName,password] isAppendHost:YES isEncrypt:NO success:success fail:fail];
 }
 
+/*
+ 活动列表
+ page 加载的页数
+ */
 - (void) eventListWithPage:(int)page
                    success:(void (^)(NSMutableArray *array))success
 {
@@ -92,6 +96,58 @@
         [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
     }];
 }
+
+/*
+ 审核管理
+ page 加载的页数
+ eid,title,uid,username,startDate,endDate,status,class_id
+ */
+- (void) draftWithPage:(int)page
+                search:(NSString *)search
+               success:(void (^)(NSMutableArray *array))success {
+    
+    [_request beginRequestWithUrl:[self makeUrl:URL_DRAFT page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        
+        NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Draft *act = [[Draft alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+}
+
+/*
+ 保存活动修改信息
+ eid 活动id
+ post方式
+ */
+- (void) manageEvent:(NSString *)eid
+                 dic:(NSDictionary *)dic
+             success:(void (^)(NSDictionary *dic))success
+                fail:(void (^)(void))fail
+{
+    [_request postRequestWithUrl:[self makeUrl:URL_MANAGE page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
+
+}
+/*
+ 删除活动修改信息
+ eid 活动id
+ */
+- (void) deleteEvent:(NSString *)eid
+             success:(void (^)(NSDictionary *dic))success
+                fail:(void (^)(void))fail
+{
+    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTDEL page:0 addon:nil] isAppendHost:YES isEncrypt:NO success:success fail:fail];
+    
+}
+
+
 
 //组合
 -(NSString *) makeUrl:(NSString *)str page:(int)page addon:(NSString *)addon {

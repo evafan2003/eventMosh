@@ -42,11 +42,14 @@ static NSString *act_notStart = @"actList_cellBg02";
     self.cellHeight = activityHeight;
     [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
     //    [self createSearchBar];
-    [self addHeaderView];
-    //    [self downloadData];
-    //    [self showLoadingView];
+
+    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     
-    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    [self addHeaderView];
+    [self downloadData];
+    [self showLoadingView];
+    
+//    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
     
     [self addEGORefreshOnTableView:self.baseTableView];
 }
@@ -67,11 +70,13 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) downloadData
 {
-    //    [[HTTPClient shareHTTPClient] activityListWithPage:self.page
-    //                                               success:^(NSMutableArray *array){
-    //
-    //                                                   [self listFinishWithDataArray:array];
-    //                                               }];
+    [[HTTPClient shareHTTPClient] draftWithPage:self.page
+                                         search:nil
+                                        success:^(NSMutableArray *array){
+                                            
+                                            [self listFinishWithDataArray:array];
+                                            
+                                        }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,24 +88,24 @@ static NSString *act_notStart = @"actList_cellBg02";
 //        cell.delegate = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
-    
+
     //背景
     //    [self changeBackgroundColorForCell:cell indexPath:indexPath];
     
     //赋值
-    //    [self addDataToCell:cell indexPath:indexPath];
+    [self addDataToCell:cell indexPath:indexPath];
     
     //加载更多
-    //    [self downloadMore:indexPath textColor:BLACKCOLOR];
+    [self downloadMore:indexPath textColor:BLACKCOLOR];
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-         Draft *act = self.dataArray[indexPath.row];
-        UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
-        [self.navigationController pushViewController:ctl animated:YES];
+    Draft *act = self.dataArray[indexPath.row];
+    UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 //更改cell背景色
@@ -127,44 +132,17 @@ static NSString *act_notStart = @"actList_cellBg02";
 }
 
 //对cell内容赋值
-- (void) addDataToCell:(Draft *)cell indexPath:(NSIndexPath *)indexPath
+- (void) addDataToCell:(DraftCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-//    Activity *act = self.dataArray[indexPath.row];
-//    
-//    cell.activityTitle.text = act.title;
-//    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
-    //    cell.activityAddress.text = act.address;
+    Draft *act = self.dataArray[indexPath.row];
     
-}
-
-#pragma mark AcitivityCellDelegate
-//数据统计
-- (void) checkStatisticalWithCell:(DraftCell *)cell
-{
-//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-//    Activity *act = self.dataArray[indexPath.row];
-    //查看统计 act.eid
-    //    [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
-}
-
-//活动验票
-- (void) checkTicketWithCell:(DraftCell *)cell
-{
-//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-//    Activity *act = self.dataArray[indexPath.row];
-    //验票 act.eid
-    //    [self.navigationController pushViewController:[ControllerFactory ticketConfigViewControllerWithActivity:act] animated:YES];
-    
-}
-
-//报名信息
-- (void) memberInfoWithCell:(DraftCell *)cell
-{
-//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-//    Activity *act = self.dataArray[indexPath.row];
-    
-    // act.eid
-    //    [self.navigationController pushViewController:[ControllerFactory memberStatisticViewControllerWithActivity:act] animated:YES];
+    cell.draftTitle.text = act.title;
+    cell.draftDate.text = [GlobalConfig dateFormater:act.creation_date format:DATEFORMAT_01];
+    cell.user_name.text = [NSString stringWithFormat:@"用户名：%@",act.mosh_user];
+    cell.publisher.text = act.issue_name;
+    cell.company.text = act.orgname;
+    cell.type.text = act.class_name;
+    cell.status.text = [self setStatus:act.status];
 }
 
 

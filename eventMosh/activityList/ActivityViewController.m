@@ -50,14 +50,15 @@ static NSString *act_notStart = @"actList_cellBg02";
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
+    self.navigationItem.hidesBackButton = YES;
 //    [self createSearchBar];
     [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
 //    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
-    
+    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     [self addEGORefreshOnTableView:self.baseTableView];
 }
 
@@ -117,7 +118,12 @@ static NSString *act_notStart = @"actList_cellBg02";
 
     cell.activityTitle.text = act.title;
     cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:act.end_date format:DATEFORMAT_03]];
-
+    cell.contact.text = act.issue_name;
+    cell.sell_ticket_num.text = [NSString stringWithFormat:@"成功订单：%@",act.sell_order_num];
+    cell.sell_ticket_money.text = act.sell_ticket_money;
+    cell.status.text = [self setStatus:act.status];
+    cell.is_allpay.text = [self setIsAllpay:act.is_allpay];
+    cell.ticket_status.text = [self setSellStatus:act.sell_status];
 }
 
 #pragma mark AcitivityCellDelegate

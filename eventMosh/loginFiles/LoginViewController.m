@@ -145,6 +145,7 @@ static NSInteger autoTimer = 60;
             [GlobalConfig saveObject:@YES withKey:USERDEFULT_LOGIN];
             //登录成功 进入下一个controller
             [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
+            [self touchesBegan:nil];
         }
         else if ([feedback isEqualToNumber:@0] && alert.length > 0) {
             [GlobalConfig alert:alert];
@@ -160,7 +161,7 @@ static NSInteger autoTimer = 60;
 {
     [self.userName resignFirstResponder];
     [self.password resignFirstResponder];
-    [self.checkNumber resignFirstResponder];
+//    [self.checkNumber resignFirstResponder];
 }
 
 - (void) getCheckNumberSuccess:(id)json

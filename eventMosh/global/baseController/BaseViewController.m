@@ -254,4 +254,74 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+
+//设置发布状态
+-(NSString *) setStatus:(NSString *)status {
+    
+    NSString *value;
+    switch ([status intValue]) {
+        case 1:
+            value = @"已审核";
+            break;
+        case 2:
+            value = @"未审核";
+            break;
+        case 3:
+            value = @"取消";
+            break;
+        case 4:
+            value = @"暂停";
+            break;
+        case 5:
+            value = @"发布中修改待审核";
+            break;
+        case 6:
+            value = @"已删除";
+            break;
+        case 7:
+            value = @"审核未通过";
+            break;
+        default:
+            break;
+    }
+    return value;
+}
+
+//设置售票状态
+-(NSString *) setSellStatus:(NSString *)status {
+    NSString *value;
+    if ([status isEqualToString:@"notStarted"]) {
+        value = @"未开始";
+    } else if ([status isEqualToString:@"ing"]) {
+        value = @"售票中";
+    } else {
+        value = @"售票结束";
+    }
+    return value;
+}
+
+//设置结款状态
+-(NSString *) setIsAllpay:(NSString *)status {
+    NSString *value;
+    switch ([status intValue]) {
+        case 1:
+            value = @"未结款";
+            break;
+        case 2:
+            value = @"已结款";
+            break;
+        case 3:
+            value = @"已取消";
+            break;
+        case 4:
+            value = @"已申请";
+            break;
+        default:
+            break;
+    }
+    return value;
+}
+
+
 @end

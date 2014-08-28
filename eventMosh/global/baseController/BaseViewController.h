@@ -117,5 +117,12 @@ typedef enum {
 - (void) navCheckClick;
 - (void) navAddClick;
 
+//设置发布状态
+-(NSString *) setStatus:(NSString *)status;
 
+//设置售票状态
+-(NSString *) setSellStatus:(NSString *)status;
+
+//设置结款状态
+-(NSString *) setIsAllpay:(NSString *)status;
 @end

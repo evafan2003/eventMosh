@@ -34,6 +34,7 @@
 #define URL_DRAFT               @"draft?"                            //审核    page
 #define URL_EVENTVIEW           @"eventview?"                        //详情eid(搜索)
 #define URL_MANAGE              @"manage?"                           //活动修改eid post
+#define URL_EVENTDEL              @"eventdel?"                           //活动删除 eid
 #define URL_SUGGEST             @"suggest?"                          //咨询建议
 #define URL_SUGGESTSHOW         @"suggestshow?"                      //咨询建议详情sid
 #define URL_SUGGESTREPLY        @"suggestreply?"                      //回复建议sid

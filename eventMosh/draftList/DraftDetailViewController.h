@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *theSwitch;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+- (IBAction)switchPass:(id)sender;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil draft:(Draft *)act;

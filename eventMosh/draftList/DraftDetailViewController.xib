@@ -52,6 +52,10 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ynx-z2-Bl1">
                     <rect key="frame" x="238" y="225" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="switchPass:" destination="-1" eventType="touchDragInside" id="6U1-em-P0r"/>
+                        <action selector="switchPass:" destination="-1" eventType="touchUpInside" id="urK-sr-TE4"/>
+                    </connections>
                 </switch>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="指派给 - 请选择" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNc-1a-siA">
                     <rect key="frame" x="19" y="174" width="184" height="44"/>

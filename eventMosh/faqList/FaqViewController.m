@@ -43,6 +43,7 @@ static NSString *cellIdentifier = @"draftCell";
     //初始化
     self.cellHeight = activityHeight;
     [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_FAQLIST];
+    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
     [self addHeaderView];
     //    [self downloadData];

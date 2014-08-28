@@ -37,6 +37,7 @@ static NSString *act_notStart = @"actList_cellBg02";
     //初始化
     self.cellHeight = activityHeight;
     [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
+    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
     [self addHeaderView];
     //    [self downloadData];

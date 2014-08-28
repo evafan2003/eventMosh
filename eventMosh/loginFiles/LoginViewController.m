@@ -72,8 +72,8 @@ static NSInteger autoTimer = 60;
 - (IBAction)login:(id)sender {
     
 //    //直接进入
-//    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
-//    return;
+    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
+    return;
     
     
     if (![self loginCheck]) {

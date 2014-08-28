@@ -105,9 +105,9 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//     Activity *act = self.dataArray[indexPath.row];
-//    UIViewController *ctl = [ControllerFactory actDetailControllerWithActivity:act];
-//    [self.navigationController pushViewController:ctl animated:YES];
+    Activity *act = self.dataArray[indexPath.row];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ORDERDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid]];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 
 

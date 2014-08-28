@@ -21,6 +21,8 @@ static NSString *sayNO = @"请填写审核不通过理由";
 @implementation DraftDetailViewController
 
 
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil draft:(Draft *)act
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,6 +88,7 @@ static NSString *sayNO = @"请填写审核不通过理由";
         [self addDataToCell:cell];
     }
     
+    //触摸手势（收键盘）
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
     [self.view addGestureRecognizer:tapGesture];
     
@@ -208,8 +211,26 @@ static NSString *sayNO = @"请填写审核不通过理由";
 
 - (void) keyBoardDisapper:(NSNotification *)noti
 {
-    [UIView animateWithDuration:0.4 animations:^(){
+    [UIView animateWithDuration:0.3 animations:^(){
         self.view.frame = CGRectMake(0, NAVHEIGHT, SCREENWIDTH, SCREENHEIGHT);
     }];
 }
+
+//隐藏理由。。。
+- (IBAction)switchPass:(id)sender {
+    
+    if (self.theSwitch.on) {
+        //隐藏
+        [UIView animateWithDuration:0.5 animations:^(){
+            self.theSwitch.alpha = 0;
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^(){
+            self.theSwitch.alpha = 1;
+        }];
+    }
+    
+}
+
+
 @end

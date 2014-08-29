@@ -10,6 +10,8 @@
 #import "GlobalConfig.h"
 #import "Activity.h"
 #import "Draft.h"
+#import "Faq.h"
+
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
 @implementation HTTPClient
@@ -143,10 +145,32 @@
              success:(void (^)(NSDictionary *dic))success
                 fail:(void (^)(void))fail
 {
-    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTDEL page:0 addon:nil] isAppendHost:YES isEncrypt:NO success:success fail:fail];
+    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTDEL page:0 addon:[NSString stringWithFormat:@"&eid=%@",eid]] isAppendHost:YES isEncrypt:NO success:success fail:fail];
     
 }
 
+/*
+ 咨询列表 page
+ (搜索条件)class,state,uid,username,email
+ */
+- (void) faqWithPage:(int)page
+              search:(NSString *)search
+             success:(void (^)(NSMutableArray *array))success {
+    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGEST page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        
+        NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Faq *act = [[Faq alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+}
 
 
 //组合

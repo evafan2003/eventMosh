@@ -13,6 +13,7 @@ static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
+
 @interface DraftViewController ()
 
 @end
@@ -34,6 +35,10 @@ static NSString *act_notStart = @"actList_cellBg02";
     
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    
+}
 
 - (void)viewDidLoad
 {
@@ -52,7 +57,17 @@ static NSString *act_notStart = @"actList_cellBg02";
 //    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    //删除的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(draftReload) name:DRAFT_NOTI object:nil];
 }
+
+-(void) draftReload {
+    [self showLoadingView];
+    self.page = 1;
+    [self downloadData];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

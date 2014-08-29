@@ -29,7 +29,7 @@ static LeftViewController *leftContrller = nil;
 
 + (UIViewController *) controllerWithloginIn
 {
-    if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:[[NSUserDefaults standardUserDefaults] objectForKey:USER_USERID]] && [[[NSUserDefaults standardUserDefaults] objectForKey:USERDEFULT_LOGIN] isEqualToNumber:@YES]) {
+    if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:[[NSUserDefaults standardUserDefaults] objectForKey:USER_USERNAME]] && [GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:[[NSUserDefaults standardUserDefaults] objectForKey:USER_PASSWORD]] ) {
         return [ControllerFactory controllerWithLoginSuccess];
     }
     return [ControllerFactory loginInViewController];

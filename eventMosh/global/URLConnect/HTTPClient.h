@@ -81,21 +81,22 @@ typedef void (^Success)(id jsonData);
  咨询列表 page
  (搜索条件)class,state,uid,username,email
  */
-- (void) suggestWithPage:(int)page
-                   success:(void (^)(NSMutableArray *array))success;
+- (void) faqWithPage:(int)page
+              search:(NSString *)search
+             success:(void (^)(NSMutableArray *array))success;
 
 /*
  咨询详情
  sid 咨询id
  */
-- (void) suggestWithId:(NSString *)sid
+- (void) faqWithId:(NSString *)sid
              success:(void (^)(NSDictionary *dic))success;
 
 /*
  咨询回复
  sid,reply_content,is_email,is_notice,reply_email
  */
-- (void) replySuggest:(NSString *)eid
+- (void) replyFaq:(NSString *)eid
                   dic:(NSDictionary *)dic
                sucess:(void (^)(NSString *str))sucess;
 

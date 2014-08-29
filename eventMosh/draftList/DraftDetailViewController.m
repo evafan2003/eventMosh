@@ -43,6 +43,7 @@ static NSString *sayNO = @"请填写审核不通过理由";
         return;
     }
 
+    [self showLoadingView];
     //审核通过否...
     if (self.theSwitch.on) {
         
@@ -57,6 +58,7 @@ static NSString *sayNO = @"请填写审核不通过理由";
     
     [[HTTPClient shareHTTPClient] manageEvent:draft.eid dic:postDic success:^(id json){
         [self hideLoadingView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DRAFT_NOTI object:nil];
         [self.navigationController popViewControllerAnimated:YES];
         
     } fail:^{
@@ -65,7 +67,6 @@ static NSString *sayNO = @"请填写审核不通过理由";
         [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
     }];
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //选择类型
@@ -88,13 +89,18 @@ static NSString *sayNO = @"请填写审核不通过理由";
         [self addDataToCell:cell];
     }
     
+    //初始化各个状态
+    if (self.theSwitch.on) {
+        self.textView.alpha = 0;
+    }
+    
     //触摸手势（收键盘）
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
     [self.view addGestureRecognizer:tapGesture];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDisapper:) name:UIKeyboardWillHideNotification object:nil];
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,10 +163,11 @@ static NSString *sayNO = @"请填写审核不通过理由";
         //删除
         [[HTTPClient shareHTTPClient] deleteEvent:draft.eid success:^(id json){
             [self hideLoadingView];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DRAFT_NOTI object:nil];
             [self.navigationController popViewControllerAnimated:YES];
             
         } fail:^{
-            
+
             [self hideLoadingView];
             [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
         }];
@@ -175,7 +182,7 @@ static NSString *sayNO = @"请填写审核不通过理由";
     [postDic setValue:draft.eid forKey:@"eid"];
     [postDic setValue:teamId forKey:@"e_team"];
     [postDic setValue:@"default" forKey:@"rate"];
-    [postDic setValue:self.textView.text forKey:@"explain"];
+    [postDic setValue:[self.textView.text isEqualToString:sayNO]?@"":self.textView.text forKey:@"explain"];
     
 }
 
@@ -216,17 +223,17 @@ static NSString *sayNO = @"请填写审核不通过理由";
     }];
 }
 
-//隐藏理由。。。
+//隐藏审核拒绝理由。。。
 - (IBAction)switchPass:(id)sender {
     
     if (self.theSwitch.on) {
         //隐藏
-        [UIView animateWithDuration:0.5 animations:^(){
-            self.theSwitch.alpha = 0;
+        [UIView animateWithDuration:0.3 animations:^(){
+            self.textView.alpha = 0;
         }];
     } else {
-        [UIView animateWithDuration:0.5 animations:^(){
-            self.theSwitch.alpha = 1;
+        [UIView animateWithDuration:0.3 animations:^(){
+            self.textView.alpha = 1;
         }];
     }
     

@@ -63,6 +63,10 @@ static Faq *theFaq;
     [self.view addSubview:cell];
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_FAQDETAIL];
     
+    if (theFaq) {
+        [self addDataToCell:cell];
+    }
+    
     //触摸手势（收键盘）
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -88,7 +92,16 @@ static Faq *theFaq;
     
 }
 
-
+//对cell内容赋值
+- (void) addDataToCell:(FaqCell *)cell
+{
+    cell.faqTitle.text = theFaq.content;
+    cell.name.text = theFaq.username;
+    cell.faqtime.text = [GlobalConfig dateFormater:theFaq.sug_date format:DATEFORMAT_01];
+    cell.email.text = theFaq.email;
+    cell.type.text = theFaq.sug_class;
+    
+}
 
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {

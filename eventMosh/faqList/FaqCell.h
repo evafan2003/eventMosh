@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *type;
 @property (weak, nonatomic) IBOutlet UILabel *email;
 @property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *reply_y;
+@property (weak, nonatomic) IBOutlet UILabel *reply_n;
 
 @end

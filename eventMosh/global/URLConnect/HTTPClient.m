@@ -11,6 +11,7 @@
 #import "Activity.h"
 #import "Draft.h"
 #import "Faq.h"
+#import "Order.h"
 
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
@@ -54,6 +55,28 @@
     }
     return nil;
 
+}
+
+- (NSDictionary *) dicAnalyze:(id) jsonData arrayKey:(NSString *)key
+{
+    //json格式正确
+    if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsonData]) {
+        
+        //成功
+        NSNumber *number = [GlobalConfig convertToNumber:jsonData[JSONKEY_SUCCESS]];
+        if ([number boolValue] == YES) {
+            NSDictionary *dic = [GlobalConfig convertToDictionary:jsonData[key]];
+            return dic;
+        }
+        else {
+            
+        }
+    }
+    else {
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }
+    return nil;
+    
 }
 
 - (void) testWithUserName:(NSString *)userName
@@ -170,6 +193,60 @@
         success(nil);
         [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
     }];
+}
+
+/*
+ 咨询详情
+ sid 咨询id
+ */
+- (void) faqWithId:(NSString *)sid
+           success:(void (^)(NSDictionary *dic))success {
+    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGESTSHOW page:0 addon:[NSString stringWithFormat:@"&sid=%@",sid]] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        NSDictionary *dic = [self dicAnalyze:jsondata arrayKey:JSONKEY_RES];
+        success(dic);
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+}
+
+/*
+ 咨询回复
+ sid,reply_content,is_email,is_notice,reply_email
+ */
+- (void) replyFaq:(NSString *)eid
+              dic:(NSDictionary *)dic
+           sucess:(void (^)(NSString *str))success
+             fail:(void (^)(void))fail {
+    
+    [_request postRequestWithUrl:[self makeUrl:URL_SUGGESTREPLY page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
+}
+
+
+/*
+ 订单管理
+ page 加载的页数
+ od,title,eid,name,startdate,enddate,status,class_id,uid,tel,is_mobile,order_from
+ */
+- (void) orderWithPage:(int)page
+                search:(NSString *)search
+               success:(void (^)(NSMutableArray *array))success {
+
+    [_request beginRequestWithUrl:[self makeUrl:URL_ORDER page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        
+        NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Order *act = [[Order alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+    
 }
 
 

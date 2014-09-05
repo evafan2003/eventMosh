@@ -72,8 +72,8 @@ static NSInteger autoTimer = 60;
 - (IBAction)login:(id)sender {
     
 //    //直接进入
-    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
-    return;
+//    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
+//    return;
     
     
     if (![self loginCheck]) {
@@ -131,9 +131,10 @@ static NSInteger autoTimer = 60;
 //        NSString *uid = json[JSONKEY];
         NSNumber *feedback = json[@"status"];
         NSString *alert = json[@"msg"];
+        NSString *admin_id = json[@"res"][@"uid"];
         if ([feedback isEqualToNumber:@1]) {
             //保存用户信息
-            [GlobalConfig saveUserInfoWithUid:nil
+            [GlobalConfig saveUserInfoWithUid:admin_id
                                      userName:self.userName.text
                                      passWord:self.password.text
                                         phone:nil

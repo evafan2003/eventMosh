@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BaseModel.h"
 
-@interface Order : NSObject
+@interface Order :BaseModel
 
 @end

@@ -30,16 +30,6 @@ static Faq *theFaq;
     return self;
 }
 
-//发送邮件
-- (IBAction)sendMail:(id)sender {
-    if (self.checkMail.hidden) {
-        self.checkMail.hidden = NO;
-    } else {
-        self.checkMail.hidden = YES;
-    }
-}
-
-
 - (IBAction)sendSite:(id)sender {
     if (self.checkSite.hidden) {
         self.checkSite.hidden = NO;
@@ -51,22 +41,25 @@ static Faq *theFaq;
 //发送反馈
 - (IBAction)save:(id)sender {
     [self setPostValue];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    FaqCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([FaqCell class]) owner:self options:nil][0];
-    cell.frame = CGRectMake(0, 0, 320, 150);
-    [self.view addSubview:cell];
+
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_FAQDETAIL];
     
     if (theFaq) {
-        [self addDataToCell:cell];
+        
+        [self showLoadingView];
+        [self downloadData];
+        
+    } else {
+        
     }
-    
+
     //触摸手势（收键盘）
     UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
     [self.view addGestureRecognizer:tapGesture];
@@ -85,21 +78,77 @@ static Faq *theFaq;
 -(void) setPostValue {
     
     postDic = [NSMutableDictionary dictionary];
-//    [postDic setValue:theFaq.eid forKey:@"eid"];
-//    [postDic setValue:teamId forKey:@"e_team"];
-//    [postDic setValue:@"default" forKey:@"rate"];
-//    [postDic setValue:self.reply.text forKey:@"explain"];
+    if (self.checkSite.hidden && self.mailField.text.length==0) {
+        [GlobalConfig alert:@"请选择一种回复方式"];
+        return;
+    }
     
+    //站内信
+    if (!self.checkSite.hidden) {
+        [postDic setValue:@"y" forKey:@"is_notice"];
+
+    } else {
+        [postDic setValue:@"n" forKey:@"is_notice"];
+    }
+    //邮件
+    if (self.mailField.text.length>1) {
+        if (![GlobalConfig isValidateEmail:self.mailField.text]) {
+            [GlobalConfig alert:@"邮箱格式不正确"];
+            return;
+        }
+        [postDic setValue:@"y" forKey:@"is_email"];
+        [postDic setValue:self.mailField.text forKey:@"reply_email"];
+    }
+    
+    if (self.reply.text.length==0) {
+        [GlobalConfig alert:@"请填写回复内容"];
+        return;
+    }
+    [postDic setValue:[GlobalConfig getObjectWithKey:USER_USERID] forKey:@"admin_id"];
+    [postDic setValue:theFaq.sid forKey:@"sid"];
+    [postDic setValue:self.reply.text forKey:@"reply_content"];
+    
+    [[HTTPClient shareHTTPClient] replyFaq:theFaq.sid dic:postDic sucess:^(id json){
+
+        [self hideLoadingView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FAQ_NOTI object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } fail:^{
+        [self hideLoadingView];
+        [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+    }];
 }
 
 //对cell内容赋值
-- (void) addDataToCell:(FaqCell *)cell
+- (void) addDataToCell
 {
+    FaqCell *cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([FaqCell class]) owner:self options:nil][0];
+    cell.frame = CGRectMake(0, 0, 320, 150);
+    
     cell.faqTitle.text = theFaq.content;
     cell.name.text = theFaq.username;
-    cell.faqtime.text = [GlobalConfig dateFormater:theFaq.sug_date format:DATEFORMAT_01];
+    cell.faqtime.text = [GlobalConfig dateFormater:theFaq.sug_date format:DATEFORMAT_02];
     cell.email.text = theFaq.email;
     cell.type.text = theFaq.sug_class;
+    
+    if ([theFaq.is_reply isEqualToString:@"y"]) {
+        self.showView.hidden = NO;
+        [self.showView addSubview:cell];
+        self.replyDate.text = [NSString stringWithFormat:@"回复时间：%@",[GlobalConfig dateFormater:theFaq.reply_date format:DATEFORMAT_02]];
+        self.replyMail.text = [NSString stringWithFormat:@"回复方式：%@",theFaq.reply_email.length>1?theFaq.reply_email:@"站内信"];
+        self.replyContent.text = [NSString stringWithFormat:@"回复内容：%@",theFaq.reply_content];
+
+        CGRect rect = self.replyContent.frame;
+        rect.size = [GlobalConfig getAdjustHeightOfContent:self.replyContent.text width:280 fontSize:14];
+        self.replyContent.frame = rect;
+
+        
+    } else {
+        self.replyView.hidden = NO;
+        [self.replyView addSubview:cell];
+    }
+
     
 }
 
@@ -139,4 +188,17 @@ static Faq *theFaq;
         self.view.frame = CGRectMake(0, NAVHEIGHT, SCREENWIDTH, SCREENHEIGHT);
     }];
 }
+
+
+//下载数据
+- (void) downloadData
+{
+    [[HTTPClient shareHTTPClient] faqWithId:theFaq.sid
+                                    success:^(NSDictionary *dic){
+                                        theFaq = [[Faq alloc] initWithDictionary:dic];
+                                        [self hideLoadingView];
+                                        [self addDataToCell];
+                                      }];
+}
+
 @end

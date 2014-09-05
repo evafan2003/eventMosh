@@ -5,7 +5,26 @@
 //  Created by 魔时网 on 14-7-4.
 //  Copyright (c) 2014年 mosh. All rights reserved.
 //
-
+/*code is far away from bug with the animal protecting
+ * ┏┓　　　 ┏┓
+ *┏┛┻━━━━━━┛┻┓
+ *┃　　　　　　┃
+ *┃　　 ━     ┃
+ *┃　┳┛　 ┗┳　┃
+ *┃　　　　　　┃
+ *┃　　 ┻　　　┃
+ *┃　　　　　　┃
+ *┗━┓　　　┏━┛
+ *  ┃　　　┃   神兽保佑
+ *  ┃　　　┃   代码无BUG！
+ *  ┃　　　┗━━━┓
+ *  ┃　　　　　 ┣┓
+ *  ┃　　　　　 ┏┛
+ *  ┗┓┓┏━━━┳┓┏┛
+ *　　┃┫┫　┃┫┫
+ *　　┗┻┛　┗┻┛
+ *
+ */
 #import "AppDelegate.h"
 #import "ControllerFactory.h"
 

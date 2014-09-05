@@ -39,10 +39,10 @@ static NSString *act_notStart = @"actList_cellBg02";
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
     [self addHeaderView];
-    //    [self downloadData];
-    //    [self showLoadingView];
+    [self downloadData];
+    [self showLoadingView];
     
-    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+//    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
     
     [self addEGORefreshOnTableView:self.baseTableView];
 }
@@ -63,11 +63,9 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) downloadData
 {
-    //    [[HTTPClient shareHTTPClient] activityListWithPage:self.page
-    //                                               success:^(NSMutableArray *array){
-    //
-    //                                                   [self listFinishWithDataArray:array];
-    //                                               }];
+    [[HTTPClient shareHTTPClient] orderWithPage:self.page search:nil success:^(NSMutableArray *array){
+                               [self listFinishWithDataArray:array];
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

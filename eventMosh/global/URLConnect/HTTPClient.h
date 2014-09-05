@@ -97,8 +97,9 @@ typedef void (^Success)(id jsonData);
  sid,reply_content,is_email,is_notice,reply_email
  */
 - (void) replyFaq:(NSString *)eid
-                  dic:(NSDictionary *)dic
-               sucess:(void (^)(NSString *str))sucess;
+              dic:(NSDictionary *)dic
+           sucess:(void (^)(NSString *str))success
+             fail:(void (^)(void))fail;
 
 
 /*
@@ -123,8 +124,9 @@ typedef void (^Success)(id jsonData);
  oid,exit_explain
  */
 - (void) replyOrder:(NSString *)oid
-                  dic:(NSDictionary *)dic
-               sucess:(void (^)(NSString *str))sucess;
+                dic:(NSDictionary *)dic
+             sucess:(void (^)(NSString *str))success
+               fail:(void (^)(void))fail;
 
 /*
  票种管理

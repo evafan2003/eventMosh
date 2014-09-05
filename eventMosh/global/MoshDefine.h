@@ -205,6 +205,7 @@ _Pragma("clang diagnostic pop") \
 #define ERROR_LOGINFAIL4             @"登录失败，请检查密码格式"
 
 #define DRAFT_NOTI                  @"DraftRemoveNotification"
+#define FAQ_NOTI                  @"FaqRemoveNotification"
 
 @interface MoshDefine : NSObject
 

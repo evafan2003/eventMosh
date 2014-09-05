@@ -50,7 +50,17 @@ static NSString *cellIdentifier = @"draftCell";
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    //刷新的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faqReload) name:FAQ_NOTI object:nil];
 }
+
+-(void) faqReload {
+    [self showLoadingView];
+    self.page = 1;
+    [self downloadData];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -114,6 +124,11 @@ static NSString *cellIdentifier = @"draftCell";
     cell.faqtime.text = [GlobalConfig dateFormater:act.sug_date format:DATEFORMAT_01];
     cell.email.text = act.email;
     cell.type.text = act.sug_class;
+    if ([act.is_reply isEqualToString:@"y"]) {
+        cell.reply_y.hidden = NO;
+    } else {
+        cell.reply_n.hidden = NO;
+    }
     
 }
 

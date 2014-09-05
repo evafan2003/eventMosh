@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *sug_class;
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSString *sug_date;//发布时间
-@property (nonatomic, strong) NSString *is_reply;//是否回复
+@property (nonatomic, strong) NSString *is_reply;//是否回复y,n
 @property (nonatomic, strong) NSString *reply_date;
 @property (nonatomic, strong) NSString *reply_content;
 @property (nonatomic, strong) NSString *reply_email;

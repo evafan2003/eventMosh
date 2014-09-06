@@ -118,42 +118,12 @@ static NSString *act_notStart = @"actList_cellBg02";
 
     cell.activityTitle.text = act.title;
     cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:act.end_date format:DATEFORMAT_03]];
-    cell.contact.text = act.issue_name;
+    cell.contact.text = [NSString stringWithFormat:@"联系人：%@",act.issue_name];
     cell.sell_ticket_num.text = [NSString stringWithFormat:@"成功订单：%@",act.sell_order_num];
-    cell.sell_ticket_money.text = act.sell_ticket_money;
+    cell.sell_ticket_money.text = [NSString stringWithFormat:@"票款：%@",act.sell_ticket_money];
     cell.status.text = [self setStatus:act.status];
     cell.is_allpay.text = [self setIsAllpay:act.is_allpay];
     cell.ticket_status.text = [self setSellStatus:act.sell_status];
-}
-
-#pragma mark AcitivityCellDelegate
-//数据统计
-- (void) checkStatisticalWithCell:(ActivityCell *)cell
-{
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
-    //查看统计 act.eid
-//    [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
-}
-
-//活动验票
-- (void) checkTicketWithCell:(ActivityCell *)cell
-{
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
-    //验票 act.eid
-//    [self.navigationController pushViewController:[ControllerFactory ticketConfigViewControllerWithActivity:act] animated:YES];
-    
-}
-
-//报名信息
-- (void) memberInfoWithCell:(ActivityCell *)cell
-{
-    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-    Activity *act = self.dataArray[indexPath.row];
-    
-    // act.eid
-//    [self.navigationController pushViewController:[ControllerFactory memberStatisticViewControllerWithActivity:act] animated:YES];
 }
 
 

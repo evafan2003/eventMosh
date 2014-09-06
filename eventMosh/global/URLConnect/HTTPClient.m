@@ -148,6 +148,15 @@
 }
 
 /*
+ 审核详情
+ eid 活动id
+ */
+- (void) eventWithId:(NSString *)eid
+             success:(void (^)(NSDictionary *dic))success {
+    
+}
+
+/*
  保存活动修改信息
  eid 活动id
  post方式
@@ -249,6 +258,64 @@
     
 }
 
+/*
+ 订单详情
+ eid 活动id
+ */
+- (void) orderWithId:(NSString *)eid
+             success:(void (^)(NSDictionary *dic))success {
+    
+}
+
+/*
+ 订单编辑post
+ oid,exit_explain
+ */
+- (void) replyOrder:(NSString *)oid
+                dic:(NSDictionary *)dic
+             sucess:(void (^)(NSString *str))success
+               fail:(void (^)(void))fail {
+    
+}
+
+/*
+ 票种管理
+ page 加载的页数
+ ticket_id,eid,tikcet_name,event_name,page
+ */
+- (void) ticketWithPage:(int)page
+                 search:(NSString *)search
+                success:(void (^)(NSMutableArray *array))success {
+    
+}
+
+/*
+ 票详情
+ eid 活动id
+ */
+- (void) ticketWithId:(NSString *)tid
+              success:(void (^)(NSDictionary *dic))success {
+    
+}
+
+/*
+ 票种编辑post
+ oid,exit_explain
+ */
+- (void) replyTicket:(NSString *)oid
+                 dic:(NSDictionary *)dic
+              sucess:(void (^)(NSString *str))sucess {
+    
+}
+
+/*
+ 活动排名
+ selyear,selmonth,selweek,selday,type
+ */
+- (void) posEvent:(NSString *)eid
+          success:(void (^)(NSDictionary *dic))success {
+    
+}
 
 //组合
 -(NSString *) makeUrl:(NSString *)str page:(int)page addon:(NSString *)addon {

@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 @property (weak, nonatomic) IBOutlet UILabel *orderUser;
 @property (weak, nonatomic) IBOutlet UILabel *orderTel;
+@property (weak, nonatomic) IBOutlet UILabel *not_Pay;
 
 @end

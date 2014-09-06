@@ -165,9 +165,9 @@ typedef void (^Success)(id jsonData);
 
 
 
-//得到最后一次加载时间
-- (NSNumber *) getLastDownloadDateWithKey:(NSString *)key;
-
-//保存最后一次加载时间
-- (void) saveLastDownloadDate:(NSNumber *)time key:(NSString *)key;
+////得到最后一次加载时间
+//- (NSNumber *) getLastDownloadDateWithKey:(NSString *)key;
+//
+////保存最后一次加载时间
+//- (void) saveLastDownloadDate:(NSNumber *)time key:(NSString *)key;
 @end

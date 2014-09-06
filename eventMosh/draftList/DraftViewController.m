@@ -7,7 +7,7 @@
 //
 
 #import "DraftViewController.h"
-static CGFloat activityHeight = 150;
+static CGFloat activityHeight = 155;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
@@ -123,29 +123,6 @@ static NSString *act_notStart = @"actList_cellBg02";
     [self.navigationController pushViewController:ctl animated:YES];
 }
 
-//更改cell背景色
-- (void) changeBackgroundColorForCell:(DraftCell *)cell indexPath:(NSIndexPath *)indexPath
-{
-//    Activity *act = self.dataArray[indexPath.row];
-//    
-//    //当前时间大于开始时间
-//    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
-//        //大于结束时间 已结束
-//        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
-//            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-//            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-//        }
-//        else {//进行中
-//            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-//            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-//        }
-//    }
-//    else {//未开始
-//        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-//        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-//    }
-}
-
 //对cell内容赋值
 - (void) addDataToCell:(DraftCell *)cell indexPath:(NSIndexPath *)indexPath
 {
@@ -154,10 +131,14 @@ static NSString *act_notStart = @"actList_cellBg02";
     cell.draftTitle.text = act.title;
     cell.draftDate.text = [GlobalConfig dateFormater:act.creation_date format:DATEFORMAT_01];
     cell.user_name.text = [NSString stringWithFormat:@"用户名：%@",act.mosh_user];
-    cell.publisher.text = act.issue_name;
-    cell.company.text = act.orgname;
+    cell.publisher.text = [NSString stringWithFormat:@"联系人：%@",act.issue_name];
+    cell.company.text = [NSString stringWithFormat:@"主办方：%@",act.orgname];
     cell.type.text = act.class_name;
     cell.status.text = [self setStatus:act.status];
+    
+    if ([cell.status.text isEqualToString:@"未审核"]) {
+        cell.status.textColor = [UIColor redColor];
+    }
 }
 
 

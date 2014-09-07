@@ -12,6 +12,7 @@
 #import "Draft.h"
 #import "Faq.h"
 #import "Order.h"
+#import "Ticket.h"
 
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
@@ -286,6 +287,21 @@
 - (void) ticketWithPage:(int)page
                  search:(NSString *)search
                 success:(void (^)(NSMutableArray *array))success {
+    [_request beginRequestWithUrl:[self makeUrl:URL_TICKET page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        
+        NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Ticket *act = [[Ticket alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+    
     
 }
 
@@ -302,9 +318,11 @@
  票种编辑post
  oid,exit_explain
  */
-- (void) replyTicket:(NSString *)oid
+- (void) replyTicket:(NSString *)tid
                  dic:(NSDictionary *)dic
-              sucess:(void (^)(NSString *str))sucess {
+              sucess:(void (^)(NSString *str))success
+                fail:(void (^)(void))fail {
+        [_request postRequestWithUrl:[self makeUrl:URL_SAVEMOD page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
     
 }
 

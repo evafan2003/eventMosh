@@ -8,13 +8,16 @@
 
 #import "TicketListViewController.h"
 #import "TicketCell.h"
+#import "Ticket.h"
 
-static CGFloat activityHeight = 150;
+static CGFloat activityHeight = 155;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
+
+static NSString *search_addon = @"";
 
 @interface TicketListViewController ()
 
@@ -40,10 +43,8 @@ static NSString *act_notStart = @"actList_cellBg02";
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
     [self addHeaderView];
-    //    [self downloadData];
-    //    [self showLoadingView];
-    
-    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    [self downloadData];
+    [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
 }
@@ -64,11 +65,10 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) downloadData
 {
-    //    [[HTTPClient shareHTTPClient] activityListWithPage:self.page
-    //                                               success:^(NSMutableArray *array){
-    //
-    //                                                   [self listFinishWithDataArray:array];
-    //                                               }];
+    [[HTTPClient shareHTTPClient] ticketWithPage:self.page search:search_addon success:^(NSMutableArray *array){
+                                                        [self listFinishWithDataArray:array];
+        
+    }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,14 +81,11 @@ static NSString *act_notStart = @"actList_cellBg02";
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     
-    //背景
-    //    [self changeBackgroundColorForCell:cell indexPath:indexPath];
-    
     //赋值
-    //    [self addDataToCell:cell indexPath:indexPath];
+    [self addDataToCell:cell indexPath:indexPath];
     
     //加载更多
-    //    [self downloadMore:indexPath textColor:BLACKCOLOR];
+    [self downloadMore:indexPath textColor:BLACKCOLOR];
     
     return cell;
 }
@@ -100,40 +97,37 @@ static NSString *act_notStart = @"actList_cellBg02";
     [self.navigationController pushViewController:ctl animated:YES];
 }
 
-//更改cell背景色
-- (void) changeBackgroundColorForCell:(TicketCell *)cell indexPath:(NSIndexPath *)indexPath
-{
-    //    Activity *act = self.dataArray[indexPath.row];
-    //
-    //    //当前时间大于开始时间
-    //    if ([GlobalConfig dateCompareWithCurrentDate:act.startDate] == NSOrderedAscending) {
-    //        //大于结束时间 已结束
-    //        if ([GlobalConfig dateCompareWithCurrentDate:act.endDate] == NSOrderedAscending) {
-    //            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-    //            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_end]];
-    //        }
-    //        else {//进行中
-    //            cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-    //            cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_display]];
-    //        }
-    //    }
-    //    else {//未开始
-    //        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-    //        cell.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:act_notStart]];
-    //    }
-}
-
 //对cell内容赋值
-- (void) addDataToCell:(Ticket *)cell indexPath:(NSIndexPath *)indexPath
+- (void) addDataToCell:(TicketCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    //    Activity *act = self.dataArray[indexPath.row];
-    //
-    //    cell.activityTitle.text = act.title;
-    //    cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.startDate format:DATEFORMAT_03],[GlobalConfig dateFormater:act.endDate format:DATEFORMAT_03]];
-    //    cell.activityAddress.text = act.address;
+    Ticket *theTic = self.dataArray[indexPath.row];
+    
+    cell.title.text = theTic.ticket_name;
+    cell.date.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:theTic.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:theTic.end_date format:DATEFORMAT_03]];
+    cell.sold.text = [NSString stringWithFormat:@"已售：%@",theTic.cou_num];
+    cell.remain.text = [NSString stringWithFormat:@"剩余：%@",theTic.sur_num];
+    cell.price.text = [NSString stringWithFormat:@"票款：%@",theTic.price];
+    cell.event_name.text = [NSString stringWithFormat:@"活动：%@",theTic.event_title];
+    cell.status.text = [NSString stringWithFormat:@"状态：%@",[self getStatus:theTic.status]];
     
 }
 
-
+-(NSString *) getStatus:(NSString *)theStatus {
+    switch ([theStatus intValue]) {
+        case 1:
+            return @"未开始和售票中";
+            break;
+        case 2:
+            return @"删除和已结束";
+            break;
+        case 3:
+            return @"暂停";
+            break;
+        default:
+            return @"";
+            break;
+    }
+    
+}
 
 @end

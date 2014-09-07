@@ -7,6 +7,12 @@
 //
 
 #import "TicketDetailViewController.h"
+#import "Ticket.h"
+
+
+static NSMutableDictionary *postDic;
+static Ticket *theTic;
+static WSDatePickerView *picker;
 
 @interface TicketDetailViewController ()
 
@@ -14,11 +20,44 @@
 
 @implementation TicketDetailViewController
 
+#pragma mark
+#pragma WSDatePickerViewDelegate
+
+- (void)wsdatePickerSelectDate:(NSDate *)date mode:(UIDatePickerMode)mode {
+
+}
+
+
+- (IBAction)startDatePressed:(id)sender {
+
+//    picker
+
+}
+
+- (IBAction)endDatePressed:(id)sender {
+
+    
+}
+
+- (IBAction)savePressed:(id)sender {
+    [self showLoadingView];
+    [self setPostValue];
+    [[HTTPClient shareHTTPClient] replyTicket:theTic.ticket_id dic:postDic sucess:^(id json){
+        [self hideLoadingView];
+        [self.navigationController popViewControllerAnimated:YES];
+    } fail:^(){
+        [self hideLoadingView];
+        [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
+    }];
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ticket:(Ticket *)ticket
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        theTic = ticket;
         self.title = NAVTITLE_TICKETDETAIL;
     }
     return self;
@@ -29,7 +68,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TICKETDETAIL];
-    
+
+    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
     
     self.t_num.keyboardType = UIKeyboardTypeNumberPad;
     self.t_price.keyboardType = UIKeyboardTypeNumberPad;
@@ -43,6 +83,27 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDisapper:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+    //设置数据
+    self.ticketTitle.text = theTic.event_title;
+    self.t_name.text = theTic.ticket_name;
+    self.t_price.text = theTic.price;
+    self.t_num.text = theTic.sur_num;
+    self.original_num.text = theTic.original_price;
+    self.order_min_num.text = theTic.lowest_sell;
+    self.order_max_num.text = theTic.highest_sell;
+    self.startDateLabel.text = [GlobalConfig dateFormater:theTic.start_date format:DATEFORMAT_03];
+    self.endDateLabel.text = [GlobalConfig dateFormater:theTic.end_date format:DATEFORMAT_03];
+    
+    if ([theTic.is_free isEqualToString:@"y"]) {
+        self.isFree.on = YES;
+    } else {
+        
+        self.isFree.on = NO;
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,12 +116,23 @@
 //组装一些post用的值.....
 -(void) setPostValue {
     
-//    postDic = [NSMutableDictionary dictionary];
-//    [postDic setValue:draft.eid forKey:@"eid"];
-//    [postDic setValue:teamId forKey:@"e_team"];
-//    [postDic setValue:@"default" forKey:@"rate"];
-//    [postDic setValue:self.textView.text forKey:@"explain"];
-    
+    postDic = [NSMutableDictionary dictionary];
+    [postDic setValue:theTic.ticket_id forKey:@"ticket_id"];
+    [postDic setValue:self.startDateLabel.text forKey:@"startDate"];
+    [postDic setValue:self.endDateLabel.text forKey:@"endDate"];
+    [postDic setValue:theTic.ticket_num forKey:@"ticket_num"];
+    [postDic setValue:self.order_min_num.text forKey:@"lowest_sell"];
+    [postDic setValue:self.order_max_num.text forKey:@"highest_sell"];
+    [postDic setValue:self.t_num.text forKey:@"sur_num"];
+    [postDic setValue:self.t_price.text forKey:@"price"];
+    [postDic setValue:self.original_num.text forKey:@"original_price"];
+    [postDic setValue:self.t_name.text forKey:@"ticket_name"];
+    if (self.isFree.on) {
+        [postDic setValue:@"y" forKey:@"is_free"];
+    } else {
+        [postDic setValue:@"n" forKey:@"is_free"];
+    }
+
 }
 
 - (void)touchesBegan:(UITapGestureRecognizer *)gesture

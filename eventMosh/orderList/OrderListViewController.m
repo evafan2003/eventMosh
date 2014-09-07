@@ -79,6 +79,8 @@ static NSString *act_notStart = @"actList_cellBg02";
     
     //赋值
     [self addDataToCell:cell indexPath:indexPath];
+    //加载更多
+    [self downloadMore:indexPath textColor:BLACKCOLOR];
     
     return cell;
 }

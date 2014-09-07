@@ -150,9 +150,10 @@ typedef void (^Success)(id jsonData);
  票种编辑post
  oid,exit_explain
  */
-- (void) replyTicket:(NSString *)oid
+- (void) replyTicket:(NSString *)tid
                 dic:(NSDictionary *)dic
-             sucess:(void (^)(NSString *str))sucess;
+              sucess:(void (^)(NSString *str))success
+                fail:(void (^)(void))fail;
 
 
 /*

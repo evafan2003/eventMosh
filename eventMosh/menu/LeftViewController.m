@@ -36,7 +36,7 @@
     self.newsNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory draftListViewController]];
     self.photoNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory orderListViewController]];
     self.weiboNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory faqListViewController]];
-    self.moreNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory activityListViewController]];
+    self.moreNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory posListViewController]];
     self.partnerNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory ticketListViewController]];
     
 }

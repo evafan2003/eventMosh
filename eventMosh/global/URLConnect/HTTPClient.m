@@ -13,6 +13,7 @@
 #import "Faq.h"
 #import "Order.h"
 #import "Ticket.h"
+#import "PosModel.h"
 
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
@@ -79,6 +80,29 @@
     return nil;
     
 }
+
+- (NSDictionary *) posAnalyze:(id) jsonData arrayKey:(NSString *)key
+{
+    //json格式正确
+    if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:jsonData]) {
+        
+        //成功
+        NSNumber *number = [GlobalConfig convertToNumber:jsonData[JSONKEY_SUCCESS]];
+        if ([number boolValue] == YES) {
+            NSDictionary *dic = [GlobalConfig convertToDictionary:jsonData[key]];
+            return dic;
+        }
+        else {
+            
+        }
+    }
+    else {
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }
+    return nil;
+    
+}
+
 
 - (void) testWithUserName:(NSString *)userName
                   password:(NSString *)password
@@ -330,9 +354,34 @@
  活动排名
  selyear,selmonth,selweek,selday,type
  */
-- (void) posEvent:(NSString *)eid
-          success:(void (^)(NSDictionary *dic))success {
-    
+- (void) posEvent:(NSString *)search
+                success:(void (^)(NSDictionary *dic))success {
+    [_request beginRequestWithUrl:[self makeUrl:URL_POS page:0 addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+        
+        NSDictionary *resDic = [self posAnalyze:jsondata arrayKey:JSONKEY_RES];
+
+        NSMutableDictionary *newDic = [NSMutableDictionary dictionary];
+
+        NSArray *allKey = [resDic allKeys];
+        
+        for (NSString *key in allKey) {
+            
+            NSMutableArray *dataArray = [NSMutableArray new];
+            NSArray *dicaaaa = resDic[key];
+            for (NSDictionary *dic in dicaaaa) {
+                PosModel *act = [[PosModel alloc] initWithDictionary:dic];
+                [dataArray addObject:act];
+            }
+            [newDic setObject:dataArray forKey:key];
+            
+        }
+        
+        success(newDic);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
 }
 
 //组合

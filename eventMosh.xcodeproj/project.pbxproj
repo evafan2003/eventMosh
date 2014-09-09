@@ -97,6 +97,9 @@
 		503322C0198FB54A005D4C06 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503322BE198FB54A005D4C06 /* OrderCell.m */; };
 		503322C1198FB54A005D4C06 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 503322BF198FB54A005D4C06 /* OrderCell.xib */; };
 		503322C4198FB718005D4C06 /* ActivityOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503322C3198FB718005D4C06 /* ActivityOrderViewController.m */; };
+		507667C619BF1A8B00D3079D /* PosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 507667C519BF1A8B00D3079D /* PosModel.m */; };
+		507667CA19BF1AAC00D3079D /* PoseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 507667C819BF1AAC00D3079D /* PoseCell.m */; };
+		507667CB19BF1AAC00D3079D /* PoseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507667C919BF1AAC00D3079D /* PoseCell.xib */; };
 		50988660198B7CD800B71D7A /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 50988658198B7CD800B71D7A /* Activity.m */; };
 		50988661198B7CD800B71D7A /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5098865A198B7CD800B71D7A /* ActivityCell.m */; };
 		50988662198B7CD800B71D7A /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5098865B198B7CD800B71D7A /* ActivityCell.xib */; };
@@ -288,6 +291,11 @@
 		503322BF198FB54A005D4C06 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		503322C2198FB718005D4C06 /* ActivityOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityOrderViewController.h; sourceTree = "<group>"; };
 		503322C3198FB718005D4C06 /* ActivityOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityOrderViewController.m; sourceTree = "<group>"; };
+		507667C419BF1A8B00D3079D /* PosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosModel.h; sourceTree = "<group>"; };
+		507667C519BF1A8B00D3079D /* PosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PosModel.m; sourceTree = "<group>"; };
+		507667C719BF1AAC00D3079D /* PoseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoseCell.h; sourceTree = "<group>"; };
+		507667C819BF1AAC00D3079D /* PoseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoseCell.m; sourceTree = "<group>"; };
+		507667C919BF1AAC00D3079D /* PoseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PoseCell.xib; sourceTree = "<group>"; };
 		50988657198B7CD800B71D7A /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		50988658198B7CD800B71D7A /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		50988659198B7CD800B71D7A /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
@@ -504,6 +512,11 @@
 			children = (
 				503322C2198FB718005D4C06 /* ActivityOrderViewController.h */,
 				503322C3198FB718005D4C06 /* ActivityOrderViewController.m */,
+				507667C419BF1A8B00D3079D /* PosModel.h */,
+				507667C519BF1A8B00D3079D /* PosModel.m */,
+				507667C719BF1AAC00D3079D /* PoseCell.h */,
+				507667C819BF1AAC00D3079D /* PoseCell.m */,
+				507667C919BF1AAC00D3079D /* PoseCell.xib */,
 			);
 			path = activityOrder;
 			sourceTree = "<group>";
@@ -1018,6 +1031,7 @@
 				500644AD1966B1BE0047DF77 /* btn_done_down@2x.png in Resources */,
 				5019B622198A564B00B3920C /* btn_exit@2x.png in Resources */,
 				500644D41966B1BE0047DF77 /* user_info3@2x.png in Resources */,
+				507667CB19BF1AAC00D3079D /* PoseCell.xib in Resources */,
 				500644C91966B1BE0047DF77 /* tab@2x.png in Resources */,
 				500644C71966B1BE0047DF77 /* resouce_01@2x.png in Resources */,
 				500644C41966B1BE0047DF77 /* on@2x.png in Resources */,
@@ -1079,6 +1093,7 @@
 				667CFEDA19664C9300D15783 /* CacheHanding.m in Sources */,
 				667CFF0219664CBB00D15783 /* BaseViewController.m in Sources */,
 				667CFEC419664C3F00D15783 /* AFPropertyListRequestOperation.m in Sources */,
+				507667C619BF1A8B00D3079D /* PosModel.m in Sources */,
 				50D2145F19AFA8580076E5F4 /* FaqSearchViewController.m in Sources */,
 				503322B5198FB4D1005D4C06 /* TicketCell.m in Sources */,
 				5033229A198FB1DD005D4C06 /* DraftCell.m in Sources */,
@@ -1116,6 +1131,7 @@
 				667CFEC319664C3F00D15783 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				50A457AD1990DDB4002CC678 /* Order.m in Sources */,
 				50988661198B7CD800B71D7A /* ActivityCell.m in Sources */,
+				507667CA19BF1AAC00D3079D /* PoseCell.m in Sources */,
 				667CFEC719664C3F00D15783 /* UIImageView+AFNetworking.m in Sources */,
 				500644E11966C87D0047DF77 /* UserInfoCell.m in Sources */,
 				667CFEF219664CB300D15783 /* BaseModel.m in Sources */,

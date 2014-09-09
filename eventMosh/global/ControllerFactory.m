@@ -20,6 +20,7 @@
 #import "OrderListViewController.h"
 #import "TicketListViewController.h"
 #import "TicketDetailViewController.h"
+#import "ActivityOrderViewController.h"
 
 @implementation ControllerFactory
 
@@ -124,6 +125,10 @@ static LeftViewController *leftContrller = nil;
 + (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url
 {
     return [[WebViewController  alloc] initWithTitle:title URL:[NSURL URLWithString:url]];
+}
+
++(UIViewController *) posListViewController {
+    return [ActivityOrderViewController viewController];
 }
 
 @end

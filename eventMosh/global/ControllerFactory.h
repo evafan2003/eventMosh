@@ -103,4 +103,7 @@
 
 //增加票种
 //+ (UIViewController *) addTicketTypeViewController;
+
++(UIViewController *) posListViewController;
+
 @end

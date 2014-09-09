@@ -45,7 +45,7 @@
 #define URL_GETTICKETLIST       @"getticketlist?"                      //查询票列表 page
 #define URL_GETTICKET           @"getticketbyid?"                      //票详情
 #define URL_SAVEMOD             @"savemod?"                      //修改票种信息
-#define URL_POS                 @"pos?"                      //活动排名
+#define URL_POS                 @"pos?type=4&"                      //活动排名
 
 @interface URLDefine : NSObject
 

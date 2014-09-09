@@ -160,9 +160,8 @@ typedef void (^Success)(id jsonData);
  活动排名
  selyear,selmonth,selweek,selday,type
  */
-- (void) posEvent:(NSString *)eid
-               success:(void (^)(NSDictionary *dic))success;
-
+- (void) posEvent:(NSString *)search
+          success:(void (^)(NSDictionary *dic))success;
 
 
 

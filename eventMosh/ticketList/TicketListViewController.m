@@ -47,7 +47,17 @@ static NSString *search_addon = @"";
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    //删除的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ticketReload) name:TICKET_NOTI object:nil];
 }
+
+-(void) ticketReload {
+    [self showLoadingView];
+    self.page = 1;
+    [self downloadData];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -106,7 +116,7 @@ static NSString *search_addon = @"";
     cell.date.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:theTic.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:theTic.end_date format:DATEFORMAT_03]];
     cell.sold.text = [NSString stringWithFormat:@"已售：%@",theTic.cou_num];
     cell.remain.text = [NSString stringWithFormat:@"剩余：%@",theTic.sur_num];
-    cell.price.text = [NSString stringWithFormat:@"票款：%@",theTic.price];
+    cell.price.text = [NSString stringWithFormat:@"票款：%@%@",theTic.currency,theTic.price];
     cell.event_name.text = [NSString stringWithFormat:@"活动：%@",theTic.event_title];
     cell.status.text = [NSString stringWithFormat:@"状态：%@",[self getStatus:theTic.status]];
     

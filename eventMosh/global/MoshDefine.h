@@ -206,6 +206,7 @@ _Pragma("clang diagnostic pop") \
 
 #define DRAFT_NOTI                  @"DraftRemoveNotification"
 #define FAQ_NOTI                  @"FaqRemoveNotification"
+#define TICKET_NOTI                  @"TicketNotification"
 
 @interface MoshDefine : NSObject
 

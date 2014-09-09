@@ -27,5 +27,5 @@
 @property (nonatomic, strong) NSString *lowest_sell;
 @property (nonatomic, strong) NSString *highest_sell;
 @property (nonatomic, strong) NSString *ticket_num;
-
+@property (nonatomic, strong) NSString *currency;
 @end

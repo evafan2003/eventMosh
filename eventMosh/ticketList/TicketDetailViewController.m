@@ -13,7 +13,7 @@
 static NSMutableDictionary *postDic;
 static Ticket *theTic;
 static WSDatePickerView *picker;
-
+static BOOL start = YES;
 @interface TicketDetailViewController ()
 
 @end
@@ -24,6 +24,21 @@ static WSDatePickerView *picker;
 #pragma WSDatePickerViewDelegate
 
 - (void)wsdatePickerSelectDate:(NSDate *)date mode:(UIDatePickerMode)mode {
+    
+    if (start) {
+
+        self.startDateLabel.text = [GlobalConfig date:date format:DATEFORMAT_02];
+        theTic.start_date = [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]];
+        ;
+    } else {
+        
+        start = YES;
+        
+        self.endDateLabel.text = [GlobalConfig date:date format:DATEFORMAT_02];
+        theTic.end_date = [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]];
+        ;
+    }
+
 
 }
 
@@ -31,12 +46,23 @@ static WSDatePickerView *picker;
 - (IBAction)startDatePressed:(id)sender {
 
 //    picker
+    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
+    picker.backgroundColor = WHITECOLOR;
+    picker.delegate = self;
+    
+    picker.datePicker.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)[theTic.start_date intValue]];
+    [self.view.window addSubview:picker];
 
 }
 
 - (IBAction)endDatePressed:(id)sender {
 
-    
+    start = NO;
+    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
+    picker.backgroundColor = WHITECOLOR;
+    picker.delegate = self;
+    picker.datePicker.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)[theTic.end_date intValue]];
+    [self.view.window addSubview:picker];
 }
 
 - (IBAction)savePressed:(id)sender {
@@ -44,6 +70,9 @@ static WSDatePickerView *picker;
     [self setPostValue];
     [[HTTPClient shareHTTPClient] replyTicket:theTic.ticket_id dic:postDic sucess:^(id json){
         [self hideLoadingView];
+        //修改的通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:TICKET_NOTI object:nil];
+        
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(){
         [self hideLoadingView];
@@ -68,8 +97,6 @@ static WSDatePickerView *picker;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TICKETDETAIL];
-
-    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
     
     self.t_num.keyboardType = UIKeyboardTypeNumberPad;
     self.t_price.keyboardType = UIKeyboardTypeNumberPad;
@@ -84,7 +111,6 @@ static WSDatePickerView *picker;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDisapper:) name:UIKeyboardWillHideNotification object:nil];
     
-    
     //设置数据
     self.ticketTitle.text = theTic.event_title;
     self.t_name.text = theTic.ticket_name;
@@ -93,10 +119,10 @@ static WSDatePickerView *picker;
     self.original_num.text = theTic.original_price;
     self.order_min_num.text = theTic.lowest_sell;
     self.order_max_num.text = theTic.highest_sell;
-    self.startDateLabel.text = [GlobalConfig dateFormater:theTic.start_date format:DATEFORMAT_03];
-    self.endDateLabel.text = [GlobalConfig dateFormater:theTic.end_date format:DATEFORMAT_03];
+    self.startDateLabel.text = [GlobalConfig dateFormater:theTic.start_date format:DATEFORMAT_02];
+    self.endDateLabel.text = [GlobalConfig dateFormater:theTic.end_date format:DATEFORMAT_02];
     
-    if ([theTic.is_free isEqualToString:@"y"]) {
+    if ([theTic.is_free isEqualToString:@"Y"]) {
         self.isFree.on = YES;
     } else {
         
@@ -118,9 +144,9 @@ static WSDatePickerView *picker;
     
     postDic = [NSMutableDictionary dictionary];
     [postDic setValue:theTic.ticket_id forKey:@"ticket_id"];
-    [postDic setValue:self.startDateLabel.text forKey:@"startDate"];
-    [postDic setValue:self.endDateLabel.text forKey:@"endDate"];
-    [postDic setValue:theTic.ticket_num forKey:@"ticket_num"];
+    [postDic setValue:theTic.start_date forKey:@"startDate"];
+    [postDic setValue:theTic.end_date forKey:@"endDate"];
+    [postDic setValue:self.t_num.text forKey:@"ticket_num"];
     [postDic setValue:self.order_min_num.text forKey:@"lowest_sell"];
     [postDic setValue:self.order_max_num.text forKey:@"highest_sell"];
     [postDic setValue:self.t_num.text forKey:@"sur_num"];
@@ -128,26 +154,26 @@ static WSDatePickerView *picker;
     [postDic setValue:self.original_num.text forKey:@"original_price"];
     [postDic setValue:self.t_name.text forKey:@"ticket_name"];
     if (self.isFree.on) {
-        [postDic setValue:@"y" forKey:@"is_free"];
+        [postDic setValue:@"Y" forKey:@"is_free"];
     } else {
-        [postDic setValue:@"n" forKey:@"is_free"];
+        [postDic setValue:@"N" forKey:@"is_free"];
     }
 
 }
 
 - (void)touchesBegan:(UITapGestureRecognizer *)gesture
 {
+    [picker removePickerView];
     for (UIView *textField in [self.view subviews]) {
         
         if ([textField isKindOfClass:[UITextField class] ]) {
             [textField resignFirstResponder];
         }
-        
     }
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
+        [picker removePickerView];
     if (self.t_name == textField || self.t_price == textField || self.t_num == textField) {
 
     } else {

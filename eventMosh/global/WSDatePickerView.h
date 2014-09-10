@@ -17,11 +17,13 @@
 @property (nonatomic , assign) id<WSDatePickerViewDelegate> delegate;
 @property (nonatomic, strong) UIDatePicker  *datePicker;
 @property (nonatomic, assign) UIDatePickerMode mode;
+@property (nonatomic, assign) BOOL isShow;
 
 - (NSDate *) currentDate;
 - (id) initWithdataPickerMode:(UIDatePickerMode)mode;
 -(void)removePickerView;
-
+-(void)ShowPickerView;
+-(void)hiddenPickerView;
 @end
 
 @protocol WSDatePickerViewDelegate <NSObject>

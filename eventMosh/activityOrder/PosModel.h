@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSString *uid;
 @property (nonatomic, strong) NSString *currency;
 @property (nonatomic, strong) NSString *c;
-@property (nonatomic, strong) NSString *o_meney;
+@property (nonatomic, strong) NSString *o_money;
 @property (nonatomic, strong) NSString *t_count;
 @property (nonatomic, strong) NSString *succ;
 @property (nonatomic, strong) NSString *orgname;

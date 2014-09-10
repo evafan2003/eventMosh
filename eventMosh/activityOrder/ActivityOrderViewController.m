@@ -10,9 +10,11 @@
 #import "PoseCell.h"
 #import "PosModel.h"
 
-static CGFloat activityHeight = 145;
+static CGFloat activityHeight = 160;
 static CGFloat headerHeight = 13;
-static NSString *cellIdentifier = @"draftCell";
+static NSString *cellIdentifier = @"poseCell";
+
+static NSDictionary *resDic;
 
 @interface ActivityOrderViewController ()
 
@@ -32,7 +34,7 @@ static NSString *cellIdentifier = @"draftCell";
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_FAQLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_POS];
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
     [self addHeaderView];
@@ -40,6 +42,7 @@ static NSString *cellIdentifier = @"draftCell";
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+    resDic = [NSDictionary dictionary];
 }
 
 
@@ -60,8 +63,10 @@ static NSString *cellIdentifier = @"draftCell";
 //下载数据
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] posEvent:nil success:^(NSDictionary *array){
-//                                          [self listFinishWithDataArray:array];
+    [[HTTPClient shareHTTPClient] posEvent:nil success:^(NSDictionary *dictionary){
+                                        resDic = dictionary;
+
+                                        [self listFinishWithDic:dictionary];
     }];
 }
 
@@ -74,49 +79,95 @@ static NSString *cellIdentifier = @"draftCell";
         //        cell.delegate = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
-    
-    //背景
-    //    [self changeBackgroundColorForCell:cell indexPath:indexPath];
-    
     //赋值
     [self addDataToCell:cell indexPath:indexPath];
     
     //加载更多
-    [self downloadMore:indexPath textColor:BLACKCOLOR];
+//    [self downloadMore:indexPath textColor:BLACKCOLOR];
     
     return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Faq *act = self.dataArray[indexPath.row];
-    UIViewController *ctl = [ControllerFactory faqDetailControllerWithFaq:act];
+    switch (indexPath.section) {
+        case 0:
+            self.dataArray = resDic[@"paydata"];
+            break;
+        case 1:
+            self.dataArray = resDic[@"ticketdata"];
+            break;
+        case 2:
+            self.dataArray = resDic[@"ordersuccdata"];
+            break;
+        case 3:
+            self.dataArray = resDic[@"orderdata"];
+            break;
+        case 4:
+            self.dataArray = resDic[@"fromdata"];
+            break;
+        default:
+            break;
+    }
+    PosModel *act = self.dataArray[indexPath.row];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:nil Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid]];
     [self.navigationController pushViewController:ctl animated:YES];
+
 }
 
 
 //对cell内容赋值
 - (void) addDataToCell:(PoseCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    Faq *act = self.dataArray[indexPath.row];
-    cell.title.text = act.content;
-    cell.sold_num.text = act.username;
-    cell.sold_price.text = [GlobalConfig dateFormater:act.sug_date format:DATEFORMAT_01];
-    cell.succ_order.text = act.email;
-    cell.order.text = act.sug_class;
-    cell.views.text = act.sug_class;
-    cell.pub.text = act.sug_class;
+    switch (indexPath.section) {
+        case 0:
+            self.dataArray = resDic[@"paydata"];
+            break;
+        case 1:
+            self.dataArray = resDic[@"ticketdata"];
+            break;
+        case 2:
+            self.dataArray = resDic[@"ordersuccdata"];
+            break;
+        case 3:
+            self.dataArray = resDic[@"orderdata"];
+            break;
+        case 4:
+            self.dataArray = resDic[@"fromdata"];
+            break;
+        default:
+            break;
+    }
+    PosModel *act = self.dataArray[indexPath.row];
+    cell.title.text = act.title;
+    cell.sold_num.text = [NSString stringWithFormat:@"售票数：%@",act.t_count];
+    cell.sold_price.text = [NSString stringWithFormat:@"售票额：%@%@",act.bz,act.o_money];
+    cell.succ_order.text = [NSString stringWithFormat:@"成功订单数：%@",act.succ];
+    cell.order.text = [NSString stringWithFormat:@"订单数：%@",act.c];
+    cell.views.text = [NSString stringWithFormat:@"点击数：%@",act.a];
+    cell.pub.text = [NSString stringWithFormat:@"发布者：%@",act.orgname];
     
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return [resDic allKeys].count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 44)];
+    view.backgroundColor = [UIColor whiteColor];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 43, SCREENWIDTH, 1)];
+    line.backgroundColor = [UIColor grayColor];
+    
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 44)];
+    lable.textColor = [UIColor redColor];
+    
+    [view addSubview:line];
+    [view addSubview:lable];
     switch (section) {
         case 0:
             lable.text  = @"售票额";
@@ -138,6 +189,30 @@ static NSString *cellIdentifier = @"draftCell";
     }
     return view;
     
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            self.dataArray = resDic[@"paydata"];
+            break;
+        case 1:
+            self.dataArray = resDic[@"ticketdata"];
+            break;
+        case 2:
+            self.dataArray = resDic[@"ordersuccdata"];
+            break;
+        case 3:
+            self.dataArray = resDic[@"orderdata"];
+            break;
+        case 4:
+            self.dataArray = resDic[@"fromdata"];
+            break;
+        default:
+            break;
+    }
+    return self.dataArray.count;
 }
 
 @end

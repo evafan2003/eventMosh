@@ -369,8 +369,8 @@
             NSMutableArray *dataArray = [NSMutableArray new];
             NSArray *dicaaaa = resDic[key];
             for (NSDictionary *dic in dicaaaa) {
-//                PosModel *act = [[PosModel alloc] initWithDictionary:dic];
-//                [dataArray addObject:act];
+                PosModel *act = [[PosModel alloc] initWithDictionary:dic];
+                [dataArray addObject:act];
             }
             [newDic setObject:dataArray forKey:key];
             

@@ -12,10 +12,12 @@
 
 static NSMutableDictionary *postDic;
 static Ticket *theTic;
-static WSDatePickerView *picker;
+//static WSDatePickerView *picker;
 static BOOL start = YES;
 @interface TicketDetailViewController ()
-
+{
+     WSDatePickerView *picker;
+}
 @end
 
 @implementation TicketDetailViewController
@@ -46,12 +48,8 @@ static BOOL start = YES;
 - (IBAction)startDatePressed:(id)sender {
 
 //    picker
-    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
-    picker.backgroundColor = WHITECOLOR;
-    picker.delegate = self;
-    
+    [picker ShowPickerView];
     picker.datePicker.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)[theTic.start_date intValue]];
-    [self.view.window addSubview:picker];
 
 }
 
@@ -97,6 +95,12 @@ static BOOL start = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TICKETDETAIL];
+    
+    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
+    picker.backgroundColor = WHITECOLOR;
+    picker.delegate = self;
+    
+    [self.view addSubview:picker];
     
     self.t_num.keyboardType = UIKeyboardTypeNumberPad;
     self.t_price.keyboardType = UIKeyboardTypeNumberPad;

@@ -49,7 +49,7 @@
  加载完成解析
  */
 -(void)listFinishWithDataArray:(NSArray *)tmpArr;
-
+-(void)listFinishWithDic:(NSDictionary *)tmpDic;
 /*
  加载数据（子类重写）
  加载更多 color为nil代表不需要显示“加载更多“内容

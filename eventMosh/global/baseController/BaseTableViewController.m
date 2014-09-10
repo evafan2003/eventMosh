@@ -120,6 +120,20 @@
     [self hideLoadingView];
 }
 
+//字典加载完成
+-(void)listFinishWithDic:(NSDictionary *)tmpDic {
+    
+    if (tmpDic != nil) {
+
+        [self.baseTableView reloadData];
+        
+    }else{
+        self.hasMore = NO;
+        [GlobalConfig showAlertViewWithMessage:ERROR_EMPTYDATA superView:self.view];
+    }
+    [self hideLoadingView];
+}
+
 
 
 //加载更多

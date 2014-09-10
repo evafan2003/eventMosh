@@ -24,12 +24,15 @@
  网址
  */
 
-//#define MOSHHOST        @"http://api.mosh.cn/eventmosh/" //host
-#define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
+#define DESKEY                      @"98b515fb61daadb8"//加密用key
+
+#define MOSHHOST        @"http://apie.mosh.cn/eventmosh/" //host
+//#define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
 #define URL_USER        @"user=%@&pass=%@"
 #define URL_PAGE                @"&page=%d"
 
-#define URL_LOGIN               @"login?user=%@&pass=%@"             //登录
+#define URL_LOGIN               @"login?user=%@&pass=%@&code=%@"             //登录
+#define URL_SENDPHONE               @"sendphone?user=%@&pass=%@"             //登录
 #define URL_EVENTLIST           @"eventmanage?"                                 //活动列表 page
 #define URL_DRAFT               @"draft?"                            //审核    page
 #define URL_EVENTVIEW           @"eventview?"                        //详情eid(搜索)

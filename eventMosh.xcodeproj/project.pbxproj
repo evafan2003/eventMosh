@@ -127,6 +127,8 @@
 		50D2145B19AFA82B0076E5F4 /* OrderSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145919AFA82B0076E5F4 /* OrderSearchViewController.xib */; };
 		50D2145F19AFA8580076E5F4 /* FaqSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D2145D19AFA8580076E5F4 /* FaqSearchViewController.m */; };
 		50D2146019AFA8580076E5F4 /* FaqSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145E19AFA8580076E5F4 /* FaqSearchViewController.xib */; };
+		50F1CE7B19C0509F0058B815 /* WSEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7A19C0509F0058B815 /* WSEncryption.m */; };
+		50F1CE8019C051580058B815 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7E19C051580058B815 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		667CFE7A19664BDA00D15783 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7919664BDA00D15783 /* Foundation.framework */; };
 		667CFE7C19664BDA00D15783 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7B19664BDA00D15783 /* CoreGraphics.framework */; };
 		667CFE7E19664BDA00D15783 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7D19664BDA00D15783 /* UIKit.framework */; };
@@ -338,6 +340,11 @@
 		50D2145C19AFA8580076E5F4 /* FaqSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqSearchViewController.h; sourceTree = "<group>"; };
 		50D2145D19AFA8580076E5F4 /* FaqSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqSearchViewController.m; sourceTree = "<group>"; };
 		50D2145E19AFA8580076E5F4 /* FaqSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaqSearchViewController.xib; sourceTree = "<group>"; };
+		50F1CE7919C0509F0058B815 /* WSEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSEncryption.h; sourceTree = "<group>"; };
+		50F1CE7A19C0509F0058B815 /* WSEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSEncryption.m; sourceTree = "<group>"; };
+		50F1CE7D19C051580058B815 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		50F1CE7E19C051580058B815 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		50F1CE7F19C051580058B815 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		667CFE7619664BDA00D15783 /* eventMosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eventMosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		667CFE7919664BDA00D15783 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		667CFE7B19664BDA00D15783 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -602,6 +609,16 @@
 			path = activityList;
 			sourceTree = "<group>";
 		};
+		50F1CE7C19C051580058B815 /* DES */ = {
+			isa = PBXGroup;
+			children = (
+				50F1CE7D19C051580058B815 /* GTMBase64.h */,
+				50F1CE7E19C051580058B815 /* GTMBase64.m */,
+				50F1CE7F19C051580058B815 /* GTMDefines.h */,
+			);
+			path = DES;
+			sourceTree = "<group>";
+		};
 		667CFE6D19664BDA00D15783 = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +776,8 @@
 		667CFEA919664C2800D15783 /* global */ = {
 			isa = PBXGroup;
 			children = (
+				50F1CE7919C0509F0058B815 /* WSEncryption.h */,
+				50F1CE7A19C0509F0058B815 /* WSEncryption.m */,
 				667CFF0719664CE600D15783 /* WSScrollViewController.h */,
 				667CFF0819664CE600D15783 /* WSScrollViewController.m */,
 				667CFF0319664CC100D15783 /* webView */,
@@ -791,6 +810,7 @@
 		667CFEAA19664C2800D15783 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				50F1CE7C19C051580058B815 /* DES */,
 				667CFED019664C6D00D15783 /* Reachability */,
 				667CFEC819664C5600D15783 /* EGORefresh */,
 				667CFECC19664C6000D15783 /* MBProgressHUD */,
@@ -1123,6 +1143,7 @@
 				667CFEDB19664C9300D15783 /* ServerRequest.m in Sources */,
 				503322A6198FB32F005D4C06 /* FaqViewController.m in Sources */,
 				503322C0198FB54A005D4C06 /* OrderCell.m in Sources */,
+				50F1CE7B19C0509F0058B815 /* WSEncryption.m in Sources */,
 				667CFEF719664CB300D15783 /* WSDatePickerView.m in Sources */,
 				667CFEF119664CB300D15783 /* ControllerFactory.m in Sources */,
 				667CFE8619664BDA00D15783 /* main.m in Sources */,
@@ -1131,6 +1152,7 @@
 				667CFEC319664C3F00D15783 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				50A457AD1990DDB4002CC678 /* Order.m in Sources */,
 				50988661198B7CD800B71D7A /* ActivityCell.m in Sources */,
+				50F1CE8019C051580058B815 /* GTMBase64.m in Sources */,
 				507667CA19BF1AAC00D3079D /* PoseCell.m in Sources */,
 				667CFEC719664C3F00D15783 /* UIImageView+AFNetworking.m in Sources */,
 				500644E11966C87D0047DF77 /* UserInfoCell.m in Sources */,

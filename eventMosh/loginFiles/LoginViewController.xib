@@ -62,7 +62,7 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jS5-Ru-yOU">
-                                    <rect key="frame" x="41" y="129" width="238" height="37"/>
+                                    <rect key="frame" x="41" y="157" width="238" height="37"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="登录" backgroundImage="login_button.png">
@@ -85,7 +85,7 @@
                                         <action selector="forgetPassword:" destination="-1" eventType="touchUpInside" id="ins-ZD-azf"/>
                                     </connections>
                                 </button>
-                                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textFieldBg_02.png" id="adg-ie-dze">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="textFieldBg_02.png" id="adg-ie-dze">
                                     <rect key="frame" x="41" y="111" width="126" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -94,7 +94,7 @@
                                         <outlet property="delegate" destination="-1" id="CYU-LS-f1k"/>
                                     </connections>
                                 </textField>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="etr-H4-aiW">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="etr-H4-aiW">
                                     <rect key="frame" x="175" y="112" width="104" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.72549019607843135" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>

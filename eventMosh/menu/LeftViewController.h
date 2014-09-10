@@ -26,5 +26,6 @@
 @property (strong, nonatomic) MoshNavigationController *partnerNav;
 @property (assign, nonatomic) NSInteger  selButtonTag;
 @property (weak, nonatomic) IBOutlet UIView *leftButtonView;
+- (IBAction)logOut:(id)sender;
 
 @end

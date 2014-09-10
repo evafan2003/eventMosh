@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ControllerFactory.h"
+#import "WSEncryption.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIPrintInteractionControllerDelegate>
 

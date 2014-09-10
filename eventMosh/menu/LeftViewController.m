@@ -129,4 +129,8 @@
 - (IBAction)button_bj:(id)sender {
     
 }
+- (IBAction)logOut:(id)sender {
+    [GlobalConfig saveObject:@NO withKey:USERDEFULT_LOGIN];
+    [[ControllerFactory getSingleDDMenuController] setRootController:[[BaseNavigationController alloc] initWithRootViewController:[ControllerFactory loginInViewController]] animated:YES];
+}
 @end

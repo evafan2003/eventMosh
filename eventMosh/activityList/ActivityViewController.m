@@ -57,7 +57,6 @@ static NSString *act_notStart = @"actList_cellBg02";
     [self downloadData];
     [self showLoadingView];
     
-//    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     [self addEGORefreshOnTableView:self.baseTableView];
 }

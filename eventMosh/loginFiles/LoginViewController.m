@@ -75,14 +75,14 @@ static NSInteger autoTimer = 60;
 //    [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];
 //    return;
     
-    
     if (![self loginCheck]) {
         return;
     }
-
+    
     [self showLoadingView];
     [[HTTPClient shareHTTPClient] loginWithUserName:self.userName.text
                                            password:self.password.text
+                                          phoneCode:self.checkNumber.text
                                             success:^(id json){
                                                 [self hideLoadingView];
                                                 
@@ -107,22 +107,35 @@ static NSInteger autoTimer = 60;
     [self.navigationController pushViewController:[ControllerFactory webViewControllerWithTitle:NAVTITLE_ACTIVITYLIST Url:@"http://www.evente.cn"] animated:YES];
 }
 
+//发送验证码
 - (IBAction)checkButtonPress:(id)sender {
     if (![self loginCheck]) {
         return;
     }
+    
+//    if (![self.checkNumber.text isEqualToString:@"1111"]) {
+//        
+//        if (![GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.checkNumber.text Alert:ERROR_CHECKNUMBER]) {
+//            return NO;
+//        }
+//    }
+    
+    [self touchesBegan:nil];
+    
     [self showLoadingView];
-//    [[HTTPClient shareHTTPClient] checkNumberWithUserName:self.userName.text
-//                                                 password:self.password.text
-//                                                  success:^(id json){
-//                                                      [self hideLoadingView];
-//                                                      [self getCheckNumberSuccess:json];
-//                                                  }
-//                                                     fail:^{
-//                                                         [self hideLoadingView];
-//                                                         [GlobalConfig showAlertViewWithMessage:ERROR superView:self.view];
-//                                                         [self getCheckNUmberFail];
-//                                                     }];
+    
+    [[HTTPClient shareHTTPClient] sendPhoneCodeWithUserName:self.userName.text
+                                                   password:self.password.text
+                                                    success:^(id success){
+    
+        [self hideLoadingView];
+        [GlobalConfig alert:success];
+        
+    } fail:^{
+        
+        [GlobalConfig alert:ERROR_LOGINFAIL];
+        
+    }];
 }
 
 - (void) requestSuccess:(id)json
@@ -162,7 +175,7 @@ static NSInteger autoTimer = 60;
 {
     [self.userName resignFirstResponder];
     [self.password resignFirstResponder];
-//    [self.checkNumber resignFirstResponder];
+    [self.checkNumber resignFirstResponder];
 }
 
 - (void) getCheckNumberSuccess:(id)json
@@ -199,6 +212,7 @@ static NSInteger autoTimer = 60;
     if (![GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.password.text Alert:ERROR_PASSWORD]) {
         return NO;
     }
+
     return YES;
 }
 

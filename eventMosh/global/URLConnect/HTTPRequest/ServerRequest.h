@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import <CommonCrypto/CommonCryptor.h>
+#import "GTMBase64.h"
+#import "GTMDefines.h"
 
 /*
  服务器请求 异步加载

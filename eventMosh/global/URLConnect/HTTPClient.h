@@ -32,8 +32,19 @@ typedef void (^Success)(id jsonData);
  */
 - (void) loginWithUserName:(NSString *)userName
                   password:(NSString *)password
+                 phoneCode:(NSString *)phoneCode
                    success:(void (^)(id jsonData))success
                       fail:(void (^)(void))fail;
+
+/*
+ 登录
+ name 用化名
+ password 密码
+ */
+- (void) sendPhoneCodeWithUserName:(NSString *)userName
+                                       password:(NSString *)password
+                                        success:(void (^)(id jsonData))success
+                         fail:(void (^)(void))fail;
 
 /*
  活动列表

@@ -103,25 +103,34 @@
     
 }
 
-
-- (void) testWithUserName:(NSString *)userName
-                  password:(NSString *)password
-                   success:(void (^)(id jsonData))success
-                      fail:(void (^)(void))fail
-{
-    [_request beginRequestWithUrl:[NSString stringWithFormat:URL_LOGIN,userName,password]
-                     isAppendHost:YES
-                        isEncrypt:YES
-                          success:success
-                             fail:fail];
-}
-
 -(void)loginWithUserName:(NSString *)userName
                 password:(NSString *)password
+               phoneCode:(NSString *)phoneCode
                  success:(void (^)(id))success
                     fail:(void (^)(void))fail {
     
-    [_request beginRequestWithUrl:[NSString stringWithFormat:URL_LOGIN,userName,password] isAppendHost:YES isEncrypt:NO success:success fail:fail];
+    [_request beginRequestWithUrl:[NSString stringWithFormat:URL_LOGIN,userName,password,phoneCode] isAppendHost:YES isEncrypt:YES success:success fail:fail];
+}
+
+
+/*
+ 登录
+ name 用化名
+ password 密码
+ */
+- (void) sendPhoneCodeWithUserName:(NSString *)userName
+                          password:(NSString *)password
+                           success:(void (^)(id jsonData))success
+                         fail:(void (^)(void))fail {
+    [_request beginRequestWithUrl:[NSString stringWithFormat:URL_SENDPHONE,userName,password] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
+        if (jsondata[JSONKEY_SUCCESS]) {
+            success(jsondata[@"msg"]);
+        }
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
 }
 
 /*
@@ -131,7 +140,7 @@
 - (void) eventListWithPage:(int)page
                    success:(void (^)(NSMutableArray *array))success
 {
-    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTLIST page:page addon:nil] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTLIST page:page addon:nil] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
     
          NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];
@@ -156,7 +165,7 @@
                 search:(NSString *)search
                success:(void (^)(NSMutableArray *array))success {
     
-    [_request beginRequestWithUrl:[self makeUrl:URL_DRAFT page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_DRAFT page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         
         NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];
@@ -191,7 +200,7 @@
              success:(void (^)(NSDictionary *dic))success
                 fail:(void (^)(void))fail
 {
-    [_request postRequestWithUrl:[self makeUrl:URL_MANAGE page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
+    [_request postRequestWithUrl:[self makeUrl:URL_MANAGE page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:YES success:success fail:fail];
 
 }
 /*
@@ -213,7 +222,7 @@
 - (void) faqWithPage:(int)page
               search:(NSString *)search
              success:(void (^)(NSMutableArray *array))success {
-    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGEST page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGEST page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         
         NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];
@@ -235,7 +244,7 @@
  */
 - (void) faqWithId:(NSString *)sid
            success:(void (^)(NSDictionary *dic))success {
-    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGESTSHOW page:0 addon:[NSString stringWithFormat:@"&sid=%@",sid]] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_SUGGESTSHOW page:0 addon:[NSString stringWithFormat:@"&sid=%@",sid]] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         NSDictionary *dic = [self dicAnalyze:jsondata arrayKey:JSONKEY_RES];
         success(dic);
     } fail:^{
@@ -253,7 +262,7 @@
            sucess:(void (^)(NSString *str))success
              fail:(void (^)(void))fail {
     
-    [_request postRequestWithUrl:[self makeUrl:URL_SUGGESTREPLY page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
+    [_request postRequestWithUrl:[self makeUrl:URL_SUGGESTREPLY page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:YES success:success fail:fail];
 }
 
 
@@ -266,7 +275,7 @@
                 search:(NSString *)search
                success:(void (^)(NSMutableArray *array))success {
 
-    [_request beginRequestWithUrl:[self makeUrl:URL_ORDER page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_ORDER page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         
         NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];
@@ -311,7 +320,7 @@
 - (void) ticketWithPage:(int)page
                  search:(NSString *)search
                 success:(void (^)(NSMutableArray *array))success {
-    [_request beginRequestWithUrl:[self makeUrl:URL_TICKET page:page addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_TICKET page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         
         NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];
@@ -346,7 +355,7 @@
                  dic:(NSDictionary *)dic
               sucess:(void (^)(NSString *str))success
                 fail:(void (^)(void))fail {
-        [_request postRequestWithUrl:[self makeUrl:URL_SAVEMOD page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:NO success:success fail:fail];
+        [_request postRequestWithUrl:[self makeUrl:URL_SAVEMOD page:0 addon:nil] dic:dic isAppendHost:YES isEncrypt:YES success:success fail:fail];
     
 }
 
@@ -356,7 +365,7 @@
  */
 - (void) posEvent:(NSString *)search
                 success:(void (^)(NSDictionary *dic))success {
-    [_request beginRequestWithUrl:[self makeUrl:URL_POS page:0 addon:search] isAppendHost:YES isEncrypt:NO success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_POS page:0 addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
         
         NSDictionary *resDic = [self posAnalyze:jsondata arrayKey:JSONKEY_RES];
 

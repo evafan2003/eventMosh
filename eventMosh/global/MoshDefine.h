@@ -163,6 +163,7 @@ _Pragma("clang diagnostic pop") \
 #define CITYNAME                    @"CityName"     //gps城市名称
 #define CITYID                      @"CityId"       //gps城市代码
 #define USER_TOKEN                  @"userToken"        //token
+#define USER_GROUP                  @"userGroup"
 //标题
 #define NAVTITLE_LOGIN              @"登录"
 #define NAVTITLE_FINDPASSWORD       @"找回密码"
@@ -205,6 +206,7 @@ _Pragma("clang diagnostic pop") \
 #define ERROR_LOGINFAIL2            @"用户名不存在"
 #define ERROR_LOGINFAIL3            @"请求失败，请检查用户名"
 #define ERROR_LOGINFAIL4             @"登录失败，请检查密码格式"
+#define ERROR_LOGINFAIL5             @"你所在的用户组无使用权限，无法使用"
 
 #define DRAFT_NOTI                  @"DraftRemoveNotification"
 #define FAQ_NOTI                  @"FaqRemoveNotification"

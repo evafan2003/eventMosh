@@ -538,6 +538,7 @@
                         city:(NSString *)city
                       gender:(NSString *)gender
                        image:(NSString *)image
+                       group:(NSString *)group
                      binding:(NSArray *)array
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -550,6 +551,7 @@
     [defaults setObject:city forKey:USER_CITY];
     [defaults setObject:gender forKey:USER_GENDER];
     [defaults setObject:image forKey:USER_IMAGE];
+    [defaults setObject:group forKey:USER_GROUP];
     [defaults setObject:array forKey:USER_BINDING];
     
     [defaults synchronize];

@@ -10,6 +10,7 @@
 #import "ControllerFactory.h"
 
 static NSInteger autoTimer = 60;
+static UIButton *returnButton;
 
 @interface LoginViewController ()
 {
@@ -49,6 +50,16 @@ static NSInteger autoTimer = 60;
     
      UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBegan:)];
     [self.backScrollView addGestureRecognizer:tapGesture];
+    
+    self.checkNumber.keyboardType = UIKeyboardTypeNumberPad;
+    
+    
+    returnButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    returnButton.frame = CGRectMake(0, SCREENHEIGHT-50, 109, 50);
+    [returnButton addTarget:self action:@selector(touchesBegan:) forControlEvents:UIControlEventTouchUpInside];
+
+    [returnButton setTitle:@"完成" forState:UIControlStateNormal];
+
 }
 
 
@@ -113,13 +124,6 @@ static NSInteger autoTimer = 60;
         return;
     }
     
-//    if (![self.checkNumber.text isEqualToString:@"1111"]) {
-//        
-//        if (![GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:self.checkNumber.text Alert:ERROR_CHECKNUMBER]) {
-//            return NO;
-//        }
-//    }
-    
     [self touchesBegan:nil];
     
     [self showLoadingView];
@@ -141,13 +145,15 @@ static NSInteger autoTimer = 60;
 - (void) requestSuccess:(id)json
 {
     if ([GlobalConfig isKindOfNSDictionaryClassAndCountGreaterThanZero:json]) {
-//        NSString *uid = json[JSONKEY];
+
         NSNumber *feedback = json[@"status"];
         NSString *alert = json[@"msg"];
-        NSString *admin_id = json[@"res"][@"uid"];
-        if ([feedback isEqualToNumber:@1]) {
+        
+        //暂用权限规则：超级管理员才可登录 gid=1
+        
+        if ([feedback isEqualToNumber:@1] && [json[@"res"][@"gid"] isEqualToString:@"1"]) {
             //保存用户信息
-            [GlobalConfig saveUserInfoWithUid:admin_id
+            [GlobalConfig saveUserInfoWithUid:json[@"res"][@"uid"]
                                      userName:self.userName.text
                                      passWord:self.password.text
                                         phone:nil
@@ -155,6 +161,7 @@ static NSInteger autoTimer = 60;
                                          city:nil
                                        gender:nil
                                         image:nil
+                                        group:json[@"res"][@"gid"]
                                       binding:nil];
             [GlobalConfig saveObject:@YES withKey:USERDEFULT_LOGIN];
             //登录成功 进入下一个controller
@@ -165,7 +172,7 @@ static NSInteger autoTimer = 60;
             [GlobalConfig alert:alert];
         }
         else {
-            [GlobalConfig alert:ERROR_LOGINFAIL];
+            [GlobalConfig alert:ERROR_LOGINFAIL5];
         }
     }
 }
@@ -259,28 +266,38 @@ static NSInteger autoTimer = 60;
         
     }
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    if ([self.checkNumber isFirstResponder]) {
+        UIWindow *win = [[[UIApplication sharedApplication] windows] lastObject];
+        [win addSubview:returnButton];
+    } else {
+        [returnButton removeFromSuperview];
+    }
+}
 
 
 #pragma mark uitextFieldDelegate
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-//    [GlobalConfig textFieldReturnKeyWithArray:@[self.userName,self.password,self.checkNumber]
-//                                fistResponder:textField
-//                                  andEndBlock:^{
-//                                    [self login:nil];
-//    }];
+    if (textField==self.userName) {
+        [self.password becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
+
 
 #pragma mark - UIKeyboardNotification -
 - (void) keyBoardDidShow:(NSNotification *)noti
 {
-    [GlobalConfig keyBoardDidShow:noti scrollView:self.backScrollView];
+
 }
 
 - (void) keyBoardDidDisapper:(NSNotification *)noti
 {
-    [GlobalConfig keyBoardDidDisapper:noti scrollView:self.backScrollView];
+
 }
 
 @end

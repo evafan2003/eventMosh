@@ -165,9 +165,17 @@ static NSDictionary *resDic;
     
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 44)];
     lable.textColor = [UIColor redColor];
+    lable.font = [UIFont systemFontOfSize:14];
     
+    UILabel *totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(155, 0, 160, 44)];
+    totalLabel.textColor = [UIColor redColor];
+    totalLabel.font = [UIFont systemFontOfSize:14];
+    totalLabel.textAlignment = UITextAlignmentRight;
+    
+    [view addSubview:totalLabel];
     [view addSubview:line];
     [view addSubview:lable];
+    
     switch (section) {
         case 0:
             lable.text  = @"售票额";
@@ -187,6 +195,7 @@ static NSDictionary *resDic;
         default:
             break;
     }
+    totalLabel.text = [NSString stringWithFormat:@"总%@：%@",lable.text,[self countTotal:0]];
     return view;
     
 }
@@ -213,6 +222,42 @@ static NSDictionary *resDic;
             break;
     }
     return self.dataArray.count;
+}
+
+-(NSString *) countTotal:(int )key {
+
+    int total = 0;
+    switch (key) {
+        case 0:
+            for (PosModel *pos in self.dataArray) {
+                total += [pos.o_money intValue];
+            }
+            break;
+        case 1:
+            for (PosModel *pos in self.dataArray) {
+                total += [pos.t_count intValue];
+            }
+            break;
+        case 2:
+            for (PosModel *pos in self.dataArray) {
+                total += [pos.succ intValue];
+            }
+            break;
+        case 3:
+            for (PosModel *pos in self.dataArray) {
+                total += [pos.c intValue];
+            }
+            break;
+        case 4:
+            for (PosModel *pos in self.dataArray) {
+                total += [pos.a intValue];
+            }
+            break;
+        default:
+            break;
+    }
+    return [NSString stringWithFormat:@"%d",total];
+
 }
 
 @end

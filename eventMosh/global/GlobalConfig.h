@@ -422,6 +422,7 @@ typedef enum {
                         city:(NSString *)city
                       gender:(NSString *)gender
                        image:(NSString *)image
+                       group:(NSString *)group
                      binding:(NSArray *)array;
 
 /**

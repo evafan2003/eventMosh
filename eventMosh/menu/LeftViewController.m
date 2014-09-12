@@ -93,8 +93,17 @@
        
     }
     else if (button.tag == 107) {
+
         //更多
-        [menuController setRootController:self.moreNav animated:YES];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"]) {
+        if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"] ||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"hefei"]) {
+            [menuController setRootController:self.moreNav animated:YES];
+        } else {
+            [GlobalConfig alert:ERROR_LOGINFAIL5];
+        }
+
+
     }
 }
 
@@ -130,7 +139,7 @@
     
 }
 - (IBAction)logOut:(id)sender {
-    [GlobalConfig saveObject:@NO withKey:USERDEFULT_LOGIN];
+    [GlobalConfig deleteUserInfo];
     [[ControllerFactory getSingleDDMenuController] setRootController:[[BaseNavigationController alloc] initWithRootViewController:[ControllerFactory loginInViewController]] animated:YES];
 }
 @end

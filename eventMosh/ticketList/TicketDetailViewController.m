@@ -12,12 +12,10 @@
 
 static NSMutableDictionary *postDic;
 static Ticket *theTic;
-//static WSDatePickerView *picker;
 static BOOL start = YES;
+static WSDatePickerView *picker;
 @interface TicketDetailViewController ()
-{
-     WSDatePickerView *picker;
-}
+
 @end
 
 @implementation TicketDetailViewController
@@ -28,7 +26,7 @@ static BOOL start = YES;
 - (void)wsdatePickerSelectDate:(NSDate *)date mode:(UIDatePickerMode)mode {
     
     if (start) {
-
+        
         self.startDateLabel.text = [GlobalConfig date:date format:DATEFORMAT_02];
         theTic.start_date = [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]];
         ;
@@ -47,9 +45,12 @@ static BOOL start = YES;
 
 - (IBAction)startDatePressed:(id)sender {
 
-//    picker
-    [picker ShowPickerView];
+    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
+    picker.backgroundColor = WHITECOLOR;
+    picker.delegate = self;
+    
     picker.datePicker.date = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)[theTic.start_date intValue]];
+    [self.view.window addSubview:picker];
 
 }
 
@@ -95,12 +96,6 @@ static BOOL start = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createBarWithLeftBarItem:MoshNavigationBarItemBack rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_TICKETDETAIL];
-    
-    picker = [[WSDatePickerView alloc] initWithdataPickerMode:UIDatePickerModeDateAndTime];
-    picker.backgroundColor = WHITECOLOR;
-    picker.delegate = self;
-    
-    [self.view addSubview:picker];
     
     self.t_num.keyboardType = UIKeyboardTypeNumberPad;
     self.t_price.keyboardType = UIKeyboardTypeNumberPad;
@@ -177,7 +172,9 @@ static BOOL start = YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-        [picker removePickerView];
+
+    [picker removePickerView];
+    
     if (self.t_name == textField || self.t_price == textField || self.t_num == textField) {
 
     } else {

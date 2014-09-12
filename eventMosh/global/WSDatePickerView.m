@@ -31,7 +31,6 @@ static CGFloat pickerHeight = 216.0f;
     if (self) {
         // Initialization code
         self.mode = mode;
-        self.isShow = NO;
     }
     return self;
 }
@@ -50,7 +49,7 @@ static CGFloat pickerHeight = 216.0f;
     self.datePicker.backgroundColor = CLEARCOLOR;
     [self addSubview:self.datePicker];
     
-//    [self ShowPickerView];
+    [self ShowPickerView];
 }
 
 - (NSDate *) currentDate
@@ -61,15 +60,11 @@ static CGFloat pickerHeight = 216.0f;
 
 -(void)ShowPickerView
 {
-        if (!self.isShow) {
-            [self.superview bringSubviewToFront:self];
-        //    if (self.frame.origin.y < SCREENHEIGHT) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.frame = CGRectOffset(self.frame, 0, - self.frame.size.height);
-                }];
-        //    }
-            self.isShow = YES;
-        }
+//    if (self.frame.origin.y < SCREENHEIGHT) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.frame = CGRectOffset(self.frame, 0, - self.frame.size.height);
+        }];
+//    }
     
 }
 //PickerView Disappear
@@ -84,18 +79,6 @@ static CGFloat pickerHeight = 216.0f;
     }];
 }
 
--(void)hiddenPickerView
-{
-    if (self.isShow) {
-        [UIView animateWithDuration:0.3 animations:^{
-            self.frame = CGRectOffset(self.frame, 0, self.frame.size.height);
-        } completion:^(BOOL finished) {
-            
-        }];
-            self.isShow = NO;
-    }
-}
-
 
 
 
@@ -104,7 +87,7 @@ static CGFloat pickerHeight = 216.0f;
     if ([self.delegate respondsToSelector:@selector(wsdatePickerSelectDate:mode:)]) {
         [self.delegate wsdatePickerSelectDate:self.datePicker.date mode:self.mode];
     }
-    [self hiddenPickerView];
+    [self removePickerView];
     
 }
 

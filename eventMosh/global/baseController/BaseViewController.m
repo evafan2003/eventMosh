@@ -10,6 +10,8 @@
 #import "BaseNavigationController.h"
 #import "GlobalConfig.h"
 
+static UIButton *menuButton;
+
 @interface BaseViewController ()
 
 @end
@@ -321,6 +323,19 @@
             break;
     }
     return value;
+}
+
+-(void) setMenuButton {
+    
+    //菜单button
+    menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    menuButton.frame = CGRectMake(10, SCREENHEIGHT-NAVHEIGHT-44-20, 50, 50);
+    menuButton.backgroundColor = [UIColor grayColor];
+    [menuButton setImage:[UIImage imageNamed:NAVBUTTON_list] forState:UIControlStateNormal];
+    menuButton.alpha = 0.9;
+    [menuButton addTarget:self action:@selector(navListClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:menuButton];
+    [self.view bringSubviewToFront:menuButton];
 }
 
 

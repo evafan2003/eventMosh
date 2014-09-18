@@ -15,6 +15,7 @@ static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
+static NSString *searchString = @"";
 
 @interface OrderListViewController ()
 
@@ -31,19 +32,27 @@ static NSString *act_notStart = @"actList_cellBg02";
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ORDERLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemRefresh title:NAVTITLE_ORDERLIST];
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     //    [self createSearchBar];
-    [self addHeaderView];
+//    [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    //设置菜单按钮
+    [self setMenuButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +71,9 @@ static NSString *act_notStart = @"actList_cellBg02";
 
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] orderWithPage:self.page search:nil success:^(NSMutableArray *array){
+    [[HTTPClient shareHTTPClient] orderWithPage:self.page
+                                         search:searchString
+                                        success:^(NSMutableArray *array){
                                [self listFinishWithDataArray:array];
     }];
 }
@@ -136,4 +147,25 @@ static NSString *act_notStart = @"actList_cellBg02";
     
 }
 
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
+}
+
+- (void) navRefreshClick
+{
+    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void) searchFinish:(NSDictionary *)theDic {
+    
+    [self showLoadingView];
+    searchString = [NSString stringWithFormat:@"&o_id=%@&title=%@",theDic[@"id"],theDic[@"title"]];
+    self.page = 1;
+    [self downloadData];
+}
 @end

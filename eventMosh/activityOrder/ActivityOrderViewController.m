@@ -14,7 +14,30 @@ static CGFloat activityHeight = 160;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"poseCell";
 
+
+static NSString *pos_by_month = @"&type=1&";
+static NSString *pos_by_week = @"&type=2&";
+static NSString *pos_by_day = @"&type=3&";
+static NSString *pos_by_all = @"&type=4&";
+
+static NSString *title_by_month = @"活动-日排名";
+static NSString *title_by_week = @"活动-日排名";
+static NSString *title_by_day = @"活动-日排名";
+static NSString *title_by_all = @"活动-日排名";
+
+static NSString *search = @"&type=3&";
+
 static NSDictionary *resDic;
+
+static NSMutableArray *paydata;
+static NSMutableArray *ticketdata;
+static NSMutableArray *ordersuccdata;
+static NSMutableArray *orderdata;
+static NSMutableArray *fromdata;
+
+
+static CustomTabbar *titleBar;
+
 
 @interface ActivityOrderViewController ()
 
@@ -25,24 +48,32 @@ static NSDictionary *resDic;
 - (void) viewWillAppear:(BOOL)animated
 {
     [self.navigationController.navigationBar setHidden:NO];
-    
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
 }
-
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_POS];
-    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:title_by_all];
+    self.baseTableView.frame = CGRectMake(0, 44, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT-44);
+
     //    [self createSearchBar];
-    [self addHeaderView];
+//    [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
     resDic = [NSDictionary dictionary];
+    
+    titleBar = [[CustomTabbar alloc]initWithFrame:CGRectMake(0, 0, SCREENHEIGHT, 44)];
+    titleBar.tabbarType = TabbarTypeTop;
+    [titleBar setButtons:@[@"按日",@"按周",@"按月",@"全部"]];
+    titleBar.customTabbarDelegate = self;
+    [self.view addSubview:titleBar];
+    
+    [self setMenuButton];
 }
 
 
@@ -63,8 +94,14 @@ static NSDictionary *resDic;
 //下载数据
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] posEvent:nil success:^(NSDictionary *dictionary){
+    [[HTTPClient shareHTTPClient] posEvent:search success:^(NSDictionary *dictionary){
                                         resDic = dictionary;
+        
+                                        paydata = resDic[@"paydata"];
+                                        ticketdata = resDic[@"ticketdata"];
+                                        ordersuccdata = resDic[@"ordersuccdata"];
+                                        orderdata = resDic[@"orderdata"];
+                                        fromdata = resDic[@"fromdata"];
 
                                         [self listFinishWithDic:dictionary];
     }];
@@ -195,7 +232,7 @@ static NSDictionary *resDic;
         default:
             break;
     }
-    totalLabel.text = [NSString stringWithFormat:@"总%@：%@",lable.text,[self countTotal:0]];
+    totalLabel.text = [NSString stringWithFormat:@"总%@：%@",lable.text,[self countTotal:section]];
     return view;
     
 }
@@ -204,19 +241,19 @@ static NSDictionary *resDic;
 {
     switch (section) {
         case 0:
-            self.dataArray = resDic[@"paydata"];
+            return paydata.count;
             break;
         case 1:
-            self.dataArray = resDic[@"ticketdata"];
+            return ticketdata.count;
             break;
         case 2:
-            self.dataArray = resDic[@"ordersuccdata"];
+            return ordersuccdata.count;
             break;
         case 3:
-            self.dataArray = resDic[@"orderdata"];
+            return orderdata.count;
             break;
         case 4:
-            self.dataArray = resDic[@"fromdata"];
+            return fromdata.count;
             break;
         default:
             break;
@@ -229,27 +266,27 @@ static NSDictionary *resDic;
     int total = 0;
     switch (key) {
         case 0:
-            for (PosModel *pos in self.dataArray) {
+            for (PosModel *pos in paydata) {
                 total += [pos.o_money intValue];
             }
             break;
         case 1:
-            for (PosModel *pos in self.dataArray) {
+            for (PosModel *pos in ticketdata) {
                 total += [pos.t_count intValue];
             }
             break;
         case 2:
-            for (PosModel *pos in self.dataArray) {
+            for (PosModel *pos in ordersuccdata) {
                 total += [pos.succ intValue];
             }
             break;
         case 3:
-            for (PosModel *pos in self.dataArray) {
+            for (PosModel *pos in orderdata) {
                 total += [pos.c intValue];
             }
             break;
         case 4:
-            for (PosModel *pos in self.dataArray) {
+            for (PosModel *pos in fromdata) {
                 total += [pos.a intValue];
             }
             break;
@@ -258,6 +295,42 @@ static NSDictionary *resDic;
     }
     return [NSString stringWithFormat:@"%d",total];
 
+}
+
+
+#pragma mark
+#pragma CustomTabbarDelegate
+
+-(void) switchTabBar:(id)sender {
+    switch ([sender tag]) {
+        case 0:
+            //日
+            search = pos_by_day;
+            break;
+        case 1:
+            //周
+            search = pos_by_week;
+            break;
+        case 2:
+            //月
+            search = pos_by_month;
+            break;
+        case 3:
+            //全部
+            search = pos_by_all;
+            break;
+            
+        default:
+            break;
+    }
+    [self showLoadingView];
+    [self downloadData];
+    
+}
+
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
 }
 
 @end

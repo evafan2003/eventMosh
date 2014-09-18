@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
+#import "ActivitySearchController.h"
 
-@interface TicketListViewController : BaseTableViewController
+@interface TicketListViewController : BaseTableViewController<ActivitySearchDelegate>
 
 @end

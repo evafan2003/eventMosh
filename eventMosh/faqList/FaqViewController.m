@@ -14,6 +14,7 @@
 static CGFloat activityHeight = 145;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"draftCell";
+static NSString *searchString = @"";
 
 @interface FaqViewController ()
 
@@ -51,6 +52,9 @@ static NSString *cellIdentifier = @"draftCell";
     
     [self addEGORefreshOnTableView:self.baseTableView];
     
+    //设置菜单按钮
+    [self setMenuButton];
+    
     //刷新的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(faqReload) name:FAQ_NOTI object:nil];
 }
@@ -79,7 +83,8 @@ static NSString *cellIdentifier = @"draftCell";
 //下载数据
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] faqWithPage:self.page search:nil
+    [[HTTPClient shareHTTPClient] faqWithPage:self.page
+                                       search:searchString
                                       success:^(NSMutableArray *array){
                                           [self listFinishWithDataArray:array];
                                       }];
@@ -132,4 +137,25 @@ static NSString *cellIdentifier = @"draftCell";
     
 }
 
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
+}
+
+- (void) navRefreshClick
+{
+    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void) searchFinish:(NSDictionary *)theDic {
+
+    [self showLoadingView];
+    searchString = [NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]];
+    self.page = 1;
+    [self downloadData];
+}
 @end

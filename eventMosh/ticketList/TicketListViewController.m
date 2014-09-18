@@ -17,7 +17,7 @@ static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 
-static NSString *search_addon = @"";
+static NSString *searchString = @"";
 
 @interface TicketListViewController ()
 
@@ -34,19 +34,28 @@ static NSString *search_addon = @"";
     return self;
 }
 
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemRefresh title:NAVTITLE_TICKETLIST];
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
-    //    [self createSearchBar];
-    [self addHeaderView];
+//    [self createSearchBar];
+//    [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
     [self addEGORefreshOnTableView:self.baseTableView];
+
+    //设置菜单按钮
+    [self setMenuButton];
     
     //删除的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ticketReload) name:TICKET_NOTI object:nil];
@@ -75,10 +84,20 @@ static NSString *search_addon = @"";
 
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] ticketWithPage:self.page search:search_addon success:^(NSMutableArray *array){
-                                                        [self listFinishWithDataArray:array];
-        
-    }];
+    if (searchString.length>0) {
+
+        [[HTTPClient shareHTTPClient] searchTicketWithPage:self.page search:searchString success:^(NSMutableArray *array){
+            [self listFinishWithDataArray:array];
+            
+        }];
+    } else {
+
+        [[HTTPClient shareHTTPClient] ticketWithPage:self.page search:searchString success:^(NSMutableArray *array){
+            [self listFinishWithDataArray:array];
+            
+        }];
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,4 +159,32 @@ static NSString *search_addon = @"";
     
 }
 
+
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
+}
+
+- (void) navRefreshClick
+{
+    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void) searchFinish:(NSDictionary *)theDic {
+    
+    [self showLoadingView];
+
+    if ([theDic[@"id"] length]>0 ||[theDic[@"title"] length]>0) {
+        searchString = [NSString stringWithFormat:@"&ticket_id=%@&ticket_name=%@",theDic[@"id"],theDic[@"title"]];
+    } else {
+        searchString = @"";
+    }
+
+    self.page = 1;
+    [self downloadData];
+}
 @end

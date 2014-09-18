@@ -56,7 +56,7 @@ typedef void (^Success)(id jsonData);
 /*
  审核管理
  page 加载的页数
- eid,title,uid,username,startDate,endDate,status,class_id
+ 搜索条件 eid,title,uid,username,startDate,endDate,status,class_id
  */
 - (void) draftWithPage:(int)page
                 search:(NSString *)search
@@ -148,6 +148,9 @@ typedef void (^Success)(id jsonData);
              search:(NSString *)search
                success:(void (^)(NSMutableArray *array))success;
 
+- (void) searchTicketWithPage:(int)page
+                 search:(NSString *)search
+                success:(void (^)(NSMutableArray *array))success;
 
 /*
  票详情

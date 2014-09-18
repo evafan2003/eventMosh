@@ -26,8 +26,8 @@
 
 #define DESKEY                      @"98b515fb61daadb8"//加密用key
 
-//#define MOSHHOST        @"http://apie.mosh.cn/eventmosh/" //host
-#define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
+#define MOSHHOST        @"http://apie.mosh.cn/eventmosh/" //host
+//#define MOSHHOST        @"http://api.inner.mosh.cn:30218/eventmosh/" //host
 #define URL_USER        @"user=%@&pass=%@"
 #define URL_PAGE                @"&page=%d"
 

@@ -8,6 +8,8 @@
 
 #import "BaseTableViewController.h"
 #import "OrderCell.h"
-@interface OrderListViewController : BaseTableViewController
+#import "ActivitySearchController.h"
+
+@interface OrderListViewController : BaseTableViewController<ActivitySearchDelegate>
 
 @end

@@ -13,6 +13,8 @@ static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
+static NSString *searchString = @"";
+
 
 @interface DraftViewController ()
 
@@ -32,7 +34,7 @@ static NSString *act_notStart = @"actList_cellBg02";
 - (void) viewWillAppear:(BOOL)animated
 {
     [self.navigationController.navigationBar setHidden:NO];
-    
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -45,18 +47,20 @@ static NSString *act_notStart = @"actList_cellBg02";
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_DRAFTLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemRefresh title:NAVTITLE_DRAFTLIST];
     //    [self createSearchBar];
 
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     
-    [self addHeaderView];
+//    [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
-//    self.dataArray = (NSMutableArray *)@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
-    
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    
+    //设置菜单按钮
+    [self setMenuButton];
     
     //删除的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(draftReload) name:DRAFT_NOTI object:nil];
@@ -86,7 +90,7 @@ static NSString *act_notStart = @"actList_cellBg02";
 - (void) downloadData
 {
     [[HTTPClient shareHTTPClient] draftWithPage:self.page
-                                         search:nil
+                                         search:searchString
                                         success:^(NSMutableArray *array){
                                             
                                             [self listFinishWithDataArray:array];
@@ -141,5 +145,25 @@ static NSString *act_notStart = @"actList_cellBg02";
     }
 }
 
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
+}
 
+- (void) navRefreshClick
+{
+    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void) searchFinish:(NSDictionary *)theDic {
+    
+    [self showLoadingView];
+    searchString = [NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]];
+    self.page = 1;
+    [self downloadData];
+}
 @end

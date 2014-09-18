@@ -338,6 +338,28 @@
     
 }
 
+- (void) searchTicketWithPage:(int)page
+                 search:(NSString *)search
+                success:(void (^)(NSMutableArray *array))success {
+    [_request beginRequestWithUrl:[self makeUrl:URL_GETTICKETLIST page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
+        
+        NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
+        NSMutableArray *dataArray = [NSMutableArray new];
+        for (NSDictionary *dic in array) {
+            Ticket *act = [[Ticket alloc] initWithDictionary:dic];
+            [dataArray addObject:act];
+        }
+        success(dataArray);
+        
+    } fail:^{
+        success(nil);
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADFAIL superView:nil];
+    }];
+    
+    
+}
+
+
 /*
  票详情
  eid 活动id

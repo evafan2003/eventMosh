@@ -183,6 +183,7 @@ static UIButton *returnButton;
     [self.userName resignFirstResponder];
     [self.password resignFirstResponder];
     [self.checkNumber resignFirstResponder];
+    [returnButton removeFromSuperview];
 }
 
 - (void) getCheckNumberSuccess:(id)json

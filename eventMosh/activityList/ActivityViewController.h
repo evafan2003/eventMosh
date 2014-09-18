@@ -15,6 +15,8 @@
 #import "BaseTableViewController.h"
 #import "ActivityCell.h"
 #import "Activity.h"
-@interface ActivityViewController : BaseTableViewController<ActivityCellDelegate>
+#import "ActivitySearchController.h"
+
+@interface ActivityViewController : BaseTableViewController<ActivityCellDelegate,ActivitySearchDelegate>
 
 @end

@@ -97,6 +97,7 @@
 		503322C0198FB54A005D4C06 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 503322BE198FB54A005D4C06 /* OrderCell.m */; };
 		503322C1198FB54A005D4C06 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 503322BF198FB54A005D4C06 /* OrderCell.xib */; };
 		503322C4198FB718005D4C06 /* ActivityOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 503322C3198FB718005D4C06 /* ActivityOrderViewController.m */; };
+		504275C919C6EEE500860250 /* CustomTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 504275C819C6EEE500860250 /* CustomTabbar.m */; };
 		507667C619BF1A8B00D3079D /* PosModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 507667C519BF1A8B00D3079D /* PosModel.m */; };
 		507667CA19BF1AAC00D3079D /* PoseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 507667C819BF1AAC00D3079D /* PoseCell.m */; };
 		507667CB19BF1AAC00D3079D /* PoseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 507667C919BF1AAC00D3079D /* PoseCell.xib */; };
@@ -107,6 +108,8 @@
 		50988664198B7CD800B71D7A /* TicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5098865F198B7CD800B71D7A /* TicketType.m */; };
 		50988668198B831E00B71D7A /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50988666198B831E00B71D7A /* ActivityDetailViewController.m */; };
 		50988669198B831E00B71D7A /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50988667198B831E00B71D7A /* ActivityDetailViewController.xib */; };
+		509AC07D19C83C8F003998BF /* nav_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 509AC07B19C83C8F003998BF /* nav_menu@2x.png */; };
+		509AC07E19C83C8F003998BF /* nav_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 509AC07C19C83C8F003998BF /* nav_search@2x.png */; };
 		50A457A01990951B002CC678 /* DraftDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A4579E1990951B002CC678 /* DraftDetailViewController.m */; };
 		50A457A11990951B002CC678 /* DraftDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50A4579F1990951B002CC678 /* DraftDetailViewController.xib */; };
 		50A457A31990A5D7002CC678 /* arrow_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A457A21990A5D7002CC678 /* arrow_gray@2x.png */; };
@@ -293,6 +296,8 @@
 		503322BF198FB54A005D4C06 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		503322C2198FB718005D4C06 /* ActivityOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityOrderViewController.h; sourceTree = "<group>"; };
 		503322C3198FB718005D4C06 /* ActivityOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityOrderViewController.m; sourceTree = "<group>"; };
+		504275C719C6EEE500860250 /* CustomTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabbar.h; sourceTree = "<group>"; };
+		504275C819C6EEE500860250 /* CustomTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabbar.m; sourceTree = "<group>"; };
 		507667C419BF1A8B00D3079D /* PosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosModel.h; sourceTree = "<group>"; };
 		507667C519BF1A8B00D3079D /* PosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PosModel.m; sourceTree = "<group>"; };
 		507667C719BF1AAC00D3079D /* PoseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoseCell.h; sourceTree = "<group>"; };
@@ -310,6 +315,8 @@
 		50988665198B831E00B71D7A /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		50988666198B831E00B71D7A /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		50988667198B831E00B71D7A /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		509AC07B19C83C8F003998BF /* nav_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_menu@2x.png"; sourceTree = "<group>"; };
+		509AC07C19C83C8F003998BF /* nav_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_search@2x.png"; sourceTree = "<group>"; };
 		50A4579D1990951B002CC678 /* DraftDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftDetailViewController.h; sourceTree = "<group>"; };
 		50A4579E1990951B002CC678 /* DraftDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftDetailViewController.m; sourceTree = "<group>"; };
 		50A4579F1990951B002CC678 /* DraftDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftDetailViewController.xib; sourceTree = "<group>"; };
@@ -587,6 +594,15 @@
 			path = ticketList;
 			sourceTree = "<group>";
 		};
+		504275C619C6EEE500860250 /* CustomTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				504275C719C6EEE500860250 /* CustomTabbar.h */,
+				504275C819C6EEE500860250 /* CustomTabbar.m */,
+			);
+			path = CustomTabbar;
+			sourceTree = "<group>";
+		};
 		50988656198B7CD800B71D7A /* activityList */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,6 +721,8 @@
 		667CFEA819664C2800D15783 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				509AC07B19C83C8F003998BF /* nav_menu@2x.png */,
+				509AC07C19C83C8F003998BF /* nav_search@2x.png */,
 				50A457A41990A772002CC678 /* btn_red@2x.png */,
 				50A457A21990A5D7002CC678 /* arrow_gray@2x.png */,
 				5019B61B198A564B00B3920C /* btn_bg_1@2x.png */,
@@ -810,6 +828,7 @@
 		667CFEAA19664C2800D15783 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				504275C619C6EEE500860250 /* CustomTabbar */,
 				50F1CE7C19C051580058B815 /* DES */,
 				667CFED019664C6D00D15783 /* Reachability */,
 				667CFEC819664C5600D15783 /* EGORefresh */,
@@ -1049,6 +1068,7 @@
 				500644A71966B1BE0047DF77 /* actSta_info@2x.png in Resources */,
 				500644C21966B1BE0047DF77 /* navBg@2x.png in Resources */,
 				500644AD1966B1BE0047DF77 /* btn_done_down@2x.png in Resources */,
+				509AC07E19C83C8F003998BF /* nav_search@2x.png in Resources */,
 				5019B622198A564B00B3920C /* btn_exit@2x.png in Resources */,
 				500644D41966B1BE0047DF77 /* user_info3@2x.png in Resources */,
 				507667CB19BF1AAC00D3079D /* PoseCell.xib in Resources */,
@@ -1057,6 +1077,7 @@
 				500644C41966B1BE0047DF77 /* on@2x.png in Resources */,
 				500644AA1966B1BE0047DF77 /* blue@2x.png in Resources */,
 				500644B41966B1BE0047DF77 /* greyPressed@2x.png in Resources */,
+				509AC07D19C83C8F003998BF /* nav_menu@2x.png in Resources */,
 				500644B11966B1BE0047DF77 /* detail@2x.png in Resources */,
 				500644BD1966B1BE0047DF77 /* nav_delete@2x.png in Resources */,
 				500644A91966B1BE0047DF77 /* blank@2x.png in Resources */,
@@ -1135,6 +1156,7 @@
 				667CFEF319664CB300D15783 /* MapTest.mm in Sources */,
 				5033229F198FB21B005D4C06 /* Draft.m in Sources */,
 				667CFEC619664C3F00D15783 /* AFXMLRequestOperation.m in Sources */,
+				504275C919C6EEE500860250 /* CustomTabbar.m in Sources */,
 				667CFEF619664CB300D15783 /* URLDefine.m in Sources */,
 				50A457A81990CD62002CC678 /* Faq.m in Sources */,
 				50332296198FB19E005D4C06 /* DraftViewController.m in Sources */,

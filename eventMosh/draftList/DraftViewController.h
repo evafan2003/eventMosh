@@ -9,6 +9,8 @@
 #import "BaseTableViewController.h"
 #import "Draft.h"
 #import "DraftCell.h"
-@interface DraftViewController : BaseTableViewController
+#import "ActivitySearchController.h"
+
+@interface DraftViewController : BaseTableViewController<ActivitySearchDelegate>
 
 @end

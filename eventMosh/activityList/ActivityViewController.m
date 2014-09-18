@@ -8,10 +8,8 @@
 
 #import "ActivityViewController.h"
 #import "ControllerFactory.h"
-//#import "NotificationDate.h"
-//#import "MOSHLocalNotification.h"
-//#import "Reachability.h"
 #import "WebViewController.h"   
+
 
 static CGFloat activityHeight = 150;
 static CGFloat headerHeight = 13;
@@ -19,7 +17,7 @@ static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
-
+static UIButton *menuButton;
 
 
 @interface ActivityViewController ()
@@ -41,7 +39,8 @@ static NSString *act_notStart = @"actList_cellBg02";
 {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setHidden:NO];
-    
+    [[ControllerFactory getSingleDDMenuController] gestureSetEnable:NO isShowRight:NO];
+
 }
 
 
@@ -53,12 +52,15 @@ static NSString *act_notStart = @"actList_cellBg02";
     [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
     self.navigationItem.hidesBackButton = YES;
 //    [self createSearchBar];
-    [self addHeaderView];
+//    [self addHeaderView];
     [self downloadData];
     [self showLoadingView];
     
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     [self addEGORefreshOnTableView:self.baseTableView];
+    
+    [self setMenuButton];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,5 +127,22 @@ static NSString *act_notStart = @"actList_cellBg02";
     cell.ticket_status.text = [self setSellStatus:act.sell_status];
 }
 
+- (void) navListClick
+{
+    [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
+}
+
+- (void) navRefreshClick
+{
+    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+-(void) searchFinish:(NSDictionary *)theDic {
+    
+}
 
 @end

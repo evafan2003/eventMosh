@@ -179,7 +179,7 @@ _Pragma("clang diagnostic pop") \
 #define NAVTITLE_TICKETLIST         @"票种管理"
 #define NAVTITLE_TICKETDETAIL       @"票种详情"
 #define NAVTITLE_POS                @"活动排名"
-
+#define NAVTITLE_SEARCH             @"搜索"
 //userdefault
 #define USERDEFULT_LOGIN            @"userlogin"
 //时间格式

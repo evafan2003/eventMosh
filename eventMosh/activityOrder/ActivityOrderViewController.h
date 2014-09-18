@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
+#import "CustomTabbar.h"
 
-@interface ActivityOrderViewController : BaseTableViewController
+@interface ActivityOrderViewController : BaseTableViewController<CustomTabbarDelegate>
 
 @end

@@ -97,7 +97,7 @@
         //更多
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //        if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"]) {
-        if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"] ||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"hefei"]) {
+        if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"] ||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"hefei"]||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"limuzi"] ) {
             [menuController setRootController:self.moreNav animated:YES];
         } else {
             [GlobalConfig alert:ERROR_LOGINFAIL5];

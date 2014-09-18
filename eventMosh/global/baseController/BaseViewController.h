@@ -16,7 +16,7 @@
 
 static NSString *NAVBUTTON_back = @"nav_back";
 static NSString *NAVBUTTON_share = @"nav_share";
-static NSString *NAVBUTTON_list = @"nav_list";
+static NSString *NAVBUTTON_list = @"nav_menu";
 static NSString *NAVBUTTON_user = @"nav_user";
 static NSString *NAVBUTTON_exit = @"nav_exit";
 static NSString *NAVBUTTON_back_h = @"nav_back";
@@ -29,7 +29,7 @@ static NSString *NAVBUTTON_delete_h = @"nav_delete";
 static NSString *NAVBUTTON_delete = @"nav_delete";
 
 static NSString *NAVBUTTON_refresh_h = @"nav_refresh";
-static NSString *NAVBUTTON_refresh = @"nav_refresh";
+static NSString *NAVBUTTON_refresh = @"nav_search";
 
 static NSString *NAVBUTTON_check_h = @"nav_check";
 static NSString *NAVBUTTON_check = @"nav_check";
@@ -125,4 +125,8 @@ typedef enum {
 
 //设置结款状态
 -(NSString *) setIsAllpay:(NSString *)status;
+
+
+//设置菜单按钮
+-(void) setMenuButton;
 @end

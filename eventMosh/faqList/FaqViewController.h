@@ -7,7 +7,8 @@
 //
 
 #import "BaseTableViewController.h"
+#import "ActivitySearchController.h"
 
-@interface FaqViewController : BaseTableViewController
+@interface FaqViewController : BaseTableViewController<ActivitySearchDelegate>
 
 @end

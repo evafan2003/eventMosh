@@ -540,6 +540,7 @@
                        image:(NSString *)image
                        group:(NSString *)group
                      binding:(NSArray *)array
+                  permission:(NSArray *)pArray
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -553,6 +554,7 @@
     [defaults setObject:image forKey:USER_IMAGE];
     [defaults setObject:group forKey:USER_GROUP];
     [defaults setObject:array forKey:USER_BINDING];
+    [defaults setObject:pArray forKey:USER_PERMISSION];
     
     [defaults synchronize];
 }

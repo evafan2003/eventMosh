@@ -95,6 +95,9 @@ _Pragma("clang diagnostic pop") \
 #define ERROR_READCACHE             @"加载失败，读取缓存..."
 #define ERROR_EMPTYDATA             @"内容暂未更新，不要着急哦~~"
 
+#define ERROR_NO_PERMISSION               @"你的用户组没有权限访问该功能"
+
+
 #define ALERT_PHONE_EMPTY            @"手机号不能为空"
 #define ALERT_PHONE_ERROR            @"手机号不正确"
 
@@ -164,6 +167,7 @@ _Pragma("clang diagnostic pop") \
 #define CITYID                      @"CityId"       //gps城市代码
 #define USER_TOKEN                  @"userToken"        //token
 #define USER_GROUP                  @"userGroup"
+#define USER_PERMISSION                  @"permission"
 //标题
 #define NAVTITLE_LOGIN              @"登录"
 #define NAVTITLE_FINDPASSWORD       @"找回密码"
@@ -174,7 +178,7 @@ _Pragma("clang diagnostic pop") \
 #define NAVTITLE_DRAFTDETAIL        @"审核详情"
 #define NAVTITLE_ORDERLIST          @"订单管理"
 #define NAVTITLE_ORDERDETAIL        @"订单详情"
-#define NAVTITLE_FAQLIST            @"咨询与建议"
+#define NAVTITLE_FAQLIST            @"咨询建议"
 #define NAVTITLE_FAQDETAIL          @"咨询详情"
 #define NAVTITLE_TICKETLIST         @"票种管理"
 #define NAVTITLE_TICKETDETAIL       @"票种详情"

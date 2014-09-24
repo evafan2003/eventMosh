@@ -18,6 +18,7 @@ static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 
 static NSString *searchString = @"";
+static int perNum = 0;
 
 @interface TicketListViewController ()
 
@@ -49,8 +50,8 @@ static NSString *searchString = @"";
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
 //    [self createSearchBar];
 //    [self addHeaderView];
-    [self downloadData];
-    [self showLoadingView];
+    //检查用户权限先
+    [self checkPermission];
     
     [self addEGORefreshOnTableView:self.baseTableView];
 
@@ -121,9 +122,14 @@ static NSString *searchString = @"";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Ticket *act = self.dataArray[indexPath.row];
-    UIViewController *ctl = [ControllerFactory ticketDetailControllerWithTicket:act];
-    [self.navigationController pushViewController:ctl animated:YES];
+    if (perNum>=16) {
+        Ticket *act = self.dataArray[indexPath.row];
+        UIViewController *ctl = [ControllerFactory ticketDetailControllerWithTicket:act];
+        [self.navigationController pushViewController:ctl animated:YES];
+    } else {
+        [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+    }
+
 }
 
 //对cell内容赋值
@@ -186,5 +192,26 @@ static NSString *searchString = @"";
 
     self.page = 1;
     [self downloadData];
+}
+
+
+//检查权限
+-(void) checkPermission {
+    
+    NSDictionary *arr = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PERMISSION];
+    
+    //313代表活动管理
+    if (arr[@"320"]) {
+        perNum = [arr[@"320"] intValue];
+        
+        if (perNum>0) {
+            
+            [self showLoadingView];
+            [self downloadData];
+        } else {
+            [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+        }
+    }
+    
 }
 @end

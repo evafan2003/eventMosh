@@ -150,8 +150,22 @@ static UIButton *returnButton;
         NSString *alert = json[@"msg"];
         
         //暂用权限规则：超级管理员才可登录 gid=1
+        /*
+         全部的分组(线上)
+             超级管理员 1
+             地方站管理员 14
+             客服人员 17
+             北京站运营人员 20
+             超级管理员（无删除）44
+             市场营销人员 48
+             人事行政组 49
+             佛学公司组 50
+            
+         全部的分组(线下)
+         
+         */
         
-        if ([feedback isEqualToNumber:@1] && [json[@"res"][@"gid"] isEqualToString:@"1"]) {
+        if ([feedback isEqualToNumber:@1]) {
             //保存用户信息
             [GlobalConfig saveUserInfoWithUid:json[@"res"][@"uid"]
                                      userName:self.userName.text
@@ -162,7 +176,9 @@ static UIButton *returnButton;
                                        gender:nil
                                         image:nil
                                         group:json[@"res"][@"gid"]
-                                      binding:nil];
+                                      binding:nil
+                                   permission:json[@"res"][@"permission"]
+             ];
             [GlobalConfig saveObject:@YES withKey:USERDEFULT_LOGIN];
             //登录成功 进入下一个controller
             [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];

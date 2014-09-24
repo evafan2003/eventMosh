@@ -331,6 +331,9 @@ static UIButton *menuButton;
     menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     menuButton.frame = CGRectMake(10, SCREENHEIGHT-NAVHEIGHT-44-20, 50, 50);
     menuButton.backgroundColor = [UIColor grayColor];
+    
+    [menuButton.layer setMasksToBounds:YES];
+    [menuButton.layer setCornerRadius:5];
     [menuButton setImage:[UIImage imageNamed:NAVBUTTON_list] forState:UIControlStateNormal];
     menuButton.alpha = 0.9;
     [menuButton addTarget:self action:@selector(navListClick) forControlEvents:UIControlEventTouchUpInside];
@@ -338,5 +341,7 @@ static UIButton *menuButton;
     [self.view bringSubviewToFront:menuButton];
 }
 
-
+-(void) checkPermission {
+    
+}
 @end

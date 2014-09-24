@@ -14,7 +14,7 @@ static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 static NSString *searchString = @"";
-
+static int perNum = 0;
 
 @interface DraftViewController ()
 
@@ -53,8 +53,8 @@ static NSString *searchString = @"";
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     
 //    [self addHeaderView];
-    [self downloadData];
-    [self showLoadingView];
+    //检查用户权限先
+    [self checkPermission];
     
     [self addEGORefreshOnTableView:self.baseTableView];
     
@@ -122,9 +122,19 @@ static NSString *searchString = @"";
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Draft *act = self.dataArray[indexPath.row];
-    UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
-    [self.navigationController pushViewController:ctl animated:YES];
+    //检察权限
+    if (perNum >= 16) {
+
+        Draft *act = self.dataArray[indexPath.row];
+        UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
+        [self.navigationController pushViewController:ctl animated:YES];
+        
+    } else {
+        
+        [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+        
+    }
+
 }
 
 //对cell内容赋值
@@ -165,5 +175,25 @@ static NSString *searchString = @"";
     searchString = [NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]];
     self.page = 1;
     [self downloadData];
+}
+
+//检查权限
+-(void) checkPermission {
+    
+    NSDictionary *arr = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PERMISSION];
+    
+    //313代表活动管理
+    if (arr[@"314"]) {
+        perNum = [arr[@"314"] intValue];
+        
+        if (perNum>0) {
+            
+            [self showLoadingView];
+            [self downloadData];
+        } else {
+            [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+        }
+    }
+    
 }
 @end

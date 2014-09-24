@@ -358,7 +358,9 @@ static NSInteger autoTimer = 60;
                                        gender:nil
                                         image:nil
                                         group:nil
-                                      binding:nil];
+                                      binding:nil
+                                   permission:nil
+             ];
             [GlobalConfig showAlertViewWithMessage:ALERT_PASSWORDSUC  superView:self.view];
             //登录成功 进入下一个controller
             [self.navigationController pushViewController:[ControllerFactory controllerWithLoginSuccess] animated:YES];

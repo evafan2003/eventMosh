@@ -130,6 +130,14 @@
 		50D2145B19AFA82B0076E5F4 /* OrderSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145919AFA82B0076E5F4 /* OrderSearchViewController.xib */; };
 		50D2145F19AFA8580076E5F4 /* FaqSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D2145D19AFA8580076E5F4 /* FaqSearchViewController.m */; };
 		50D2146019AFA8580076E5F4 /* FaqSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145E19AFA8580076E5F4 /* FaqSearchViewController.xib */; };
+		50E4E9CE19D2E45E00047062 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C119D2E45D00047062 /* FMDatabase.m */; };
+		50E4E9CF19D2E45E00047062 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C319D2E45D00047062 /* FMDatabaseAdditions.m */; };
+		50E4E9D019D2E45E00047062 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C519D2E45D00047062 /* FMDatabasePool.m */; };
+		50E4E9D119D2E45E00047062 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C719D2E45D00047062 /* FMDatabaseQueue.m */; };
+		50E4E9D219D2E45E00047062 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C919D2E45D00047062 /* FMResultSet.m */; };
+		50E4E9D319D2E45E00047062 /* MoshTicketDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9CB19D2E45D00047062 /* MoshTicketDatabase.m */; };
+		50E4E9D419D2E45E00047062 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9CD19D2E45E00047062 /* NSString+Encrypt.m */; };
+		50E4E9D719D2E4EE00047062 /* EventDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9D619D2E4EE00047062 /* EventDatabase.m */; };
 		50F1CE7B19C0509F0058B815 /* WSEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7A19C0509F0058B815 /* WSEncryption.m */; };
 		50F1CE8019C051580058B815 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7E19C051580058B815 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		667CFE7A19664BDA00D15783 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7919664BDA00D15783 /* Foundation.framework */; };
@@ -347,6 +355,22 @@
 		50D2145C19AFA8580076E5F4 /* FaqSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqSearchViewController.h; sourceTree = "<group>"; };
 		50D2145D19AFA8580076E5F4 /* FaqSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqSearchViewController.m; sourceTree = "<group>"; };
 		50D2145E19AFA8580076E5F4 /* FaqSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FaqSearchViewController.xib; sourceTree = "<group>"; };
+		50E4E9C019D2E45D00047062 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		50E4E9C119D2E45D00047062 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		50E4E9C219D2E45D00047062 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		50E4E9C319D2E45D00047062 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		50E4E9C419D2E45D00047062 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		50E4E9C519D2E45D00047062 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		50E4E9C619D2E45D00047062 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		50E4E9C719D2E45D00047062 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		50E4E9C819D2E45D00047062 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		50E4E9C919D2E45D00047062 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		50E4E9CA19D2E45D00047062 /* MoshTicketDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoshTicketDatabase.h; sourceTree = "<group>"; };
+		50E4E9CB19D2E45D00047062 /* MoshTicketDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoshTicketDatabase.m; sourceTree = "<group>"; };
+		50E4E9CC19D2E45E00047062 /* NSString+Encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encrypt.h"; sourceTree = "<group>"; };
+		50E4E9CD19D2E45E00047062 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
+		50E4E9D519D2E4EE00047062 /* EventDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDatabase.h; sourceTree = "<group>"; };
+		50E4E9D619D2E4EE00047062 /* EventDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDatabase.m; sourceTree = "<group>"; };
 		50F1CE7919C0509F0058B815 /* WSEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSEncryption.h; sourceTree = "<group>"; };
 		50F1CE7A19C0509F0058B815 /* WSEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSEncryption.m; sourceTree = "<group>"; };
 		50F1CE7D19C051580058B815 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -625,6 +649,37 @@
 			path = activityList;
 			sourceTree = "<group>";
 		};
+		50E4E9BE19D2E45D00047062 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				50E4E9BF19D2E45D00047062 /* FMDB */,
+				50E4E9CA19D2E45D00047062 /* MoshTicketDatabase.h */,
+				50E4E9CB19D2E45D00047062 /* MoshTicketDatabase.m */,
+				50E4E9D519D2E4EE00047062 /* EventDatabase.h */,
+				50E4E9D619D2E4EE00047062 /* EventDatabase.m */,
+				50E4E9CC19D2E45E00047062 /* NSString+Encrypt.h */,
+				50E4E9CD19D2E45E00047062 /* NSString+Encrypt.m */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		50E4E9BF19D2E45D00047062 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				50E4E9C019D2E45D00047062 /* FMDatabase.h */,
+				50E4E9C119D2E45D00047062 /* FMDatabase.m */,
+				50E4E9C219D2E45D00047062 /* FMDatabaseAdditions.h */,
+				50E4E9C319D2E45D00047062 /* FMDatabaseAdditions.m */,
+				50E4E9C419D2E45D00047062 /* FMDatabasePool.h */,
+				50E4E9C519D2E45D00047062 /* FMDatabasePool.m */,
+				50E4E9C619D2E45D00047062 /* FMDatabaseQueue.h */,
+				50E4E9C719D2E45D00047062 /* FMDatabaseQueue.m */,
+				50E4E9C819D2E45D00047062 /* FMResultSet.h */,
+				50E4E9C919D2E45D00047062 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
 		50F1CE7C19C051580058B815 /* DES */ = {
 			isa = PBXGroup;
 			children = (
@@ -828,6 +883,7 @@
 		667CFEAA19664C2800D15783 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				50E4E9BE19D2E45D00047062 /* Database */,
 				504275C619C6EEE500860250 /* CustomTabbar */,
 				50F1CE7C19C051580058B815 /* DES */,
 				667CFED019664C6D00D15783 /* Reachability */,
@@ -1123,6 +1179,7 @@
 				667CFF0119664CBB00D15783 /* BaseTableViewController.m in Sources */,
 				667CFEC019664C3F00D15783 /* AFHTTPRequestOperation.m in Sources */,
 				667CFF0919664CE600D15783 /* WSScrollViewController.m in Sources */,
+				50E4E9D019D2E45E00047062 /* FMDatabasePool.m in Sources */,
 				667CFF0619664CC100D15783 /* WebViewController.m in Sources */,
 				500644E31966C87D0047DF77 /* UserInfoViewController.m in Sources */,
 				50D2145A19AFA82B0076E5F4 /* OrderSearchViewController.m in Sources */,
@@ -1141,8 +1198,10 @@
 				503322B9198FB4F4005D4C06 /* OrderListViewController.m in Sources */,
 				503322C4198FB718005D4C06 /* ActivityOrderViewController.m in Sources */,
 				667CFEC219664C3F00D15783 /* AFJSONRequestOperation.m in Sources */,
+				50E4E9CF19D2E45E00047062 /* FMDatabaseAdditions.m in Sources */,
 				503322A9198FB348005D4C06 /* FaqDetailViewController.m in Sources */,
 				503322BC198FB524005D4C06 /* OrderDetailViewController.m in Sources */,
+				50E4E9D319D2E45E00047062 /* MoshTicketDatabase.m in Sources */,
 				667CFF0019664CBB00D15783 /* BaseNavigationController.m in Sources */,
 				667CFEC519664C3F00D15783 /* AFURLConnectionOperation.m in Sources */,
 				50988664198B7CD800B71D7A /* TicketType.m in Sources */,
@@ -1165,10 +1224,12 @@
 				667CFEDB19664C9300D15783 /* ServerRequest.m in Sources */,
 				503322A6198FB32F005D4C06 /* FaqViewController.m in Sources */,
 				503322C0198FB54A005D4C06 /* OrderCell.m in Sources */,
+				50E4E9D119D2E45E00047062 /* FMDatabaseQueue.m in Sources */,
 				50F1CE7B19C0509F0058B815 /* WSEncryption.m in Sources */,
 				667CFEF719664CB300D15783 /* WSDatePickerView.m in Sources */,
 				667CFEF119664CB300D15783 /* ControllerFactory.m in Sources */,
 				667CFE8619664BDA00D15783 /* main.m in Sources */,
+				50E4E9CE19D2E45E00047062 /* FMDatabase.m in Sources */,
 				667CFECF19664C6000D15783 /* MBProgressHUD.m in Sources */,
 				667CFEEF19664CB300D15783 /* GlobalConfig.m in Sources */,
 				667CFEC319664C3F00D15783 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1182,12 +1243,15 @@
 				667CFEF819664CB300D15783 /* WSPickerView.m in Sources */,
 				667CFEBF19664C3F00D15783 /* AFHTTPClient.m in Sources */,
 				5019B62C198A61D900B3920C /* MoshNavigationController.m in Sources */,
+				50E4E9D419D2E45E00047062 /* NSString+Encrypt.m in Sources */,
 				50D2145019AFA7AE0076E5F4 /* DraftSearchViewController.m in Sources */,
+				50E4E9D219D2E45E00047062 /* FMResultSet.m in Sources */,
 				667CFEF419664CB300D15783 /* MoshDefine.m in Sources */,
 				50988663198B7CD800B71D7A /* ActivityViewController.m in Sources */,
 				50A457B31990EA11002CC678 /* TicketDetailViewController.m in Sources */,
 				500644611966AFC60047DF77 /* LoginViewController.m in Sources */,
 				5019B62E198A61D900B3920C /* LeftViewController.m in Sources */,
+				50E4E9D719D2E4EE00047062 /* EventDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

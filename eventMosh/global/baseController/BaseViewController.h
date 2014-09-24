@@ -129,4 +129,7 @@ typedef enum {
 
 //设置菜单按钮
 -(void) setMenuButton;
+
+//检察权限
+-(void) checkPermission;
 @end

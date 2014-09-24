@@ -16,6 +16,7 @@ static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 static NSString *searchString = @"";
+static int perNum = 0;
 
 @interface OrderListViewController ()
 
@@ -167,5 +168,26 @@ static NSString *searchString = @"";
     searchString = [NSString stringWithFormat:@"&o_id=%@&title=%@",theDic[@"id"],theDic[@"title"]];
     self.page = 1;
     [self downloadData];
+}
+
+
+//检查权限
+-(void) checkPermission {
+    
+    NSDictionary *arr = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PERMISSION];
+    
+    //313代表活动管理
+    if (arr[@"324"]) {
+        perNum = [arr[@"324"] intValue];
+        
+        if (perNum>0) {
+            
+            [self showLoadingView];
+            [self downloadData];
+        } else {
+            [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+        }
+    }
+    
 }
 @end

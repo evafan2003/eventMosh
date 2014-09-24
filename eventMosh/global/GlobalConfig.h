@@ -423,7 +423,8 @@ typedef enum {
                       gender:(NSString *)gender
                        image:(NSString *)image
                        group:(NSString *)group
-                     binding:(NSArray *)array;
+                     binding:(NSArray *)array
+                  permission:(NSArray *)pArray;
 
 /**
  *  删除用户信息

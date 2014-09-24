@@ -51,15 +51,19 @@ static UIButton *menuButton;
     self.cellHeight = activityHeight;
     [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
     self.navigationItem.hidesBackButton = YES;
+
 //    [self createSearchBar];
 //    [self addHeaderView];
-    [self downloadData];
-    [self showLoadingView];
+
+    //检查用户权限先
+    [self checkPermission];
+
     
     self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
     [self addEGORefreshOnTableView:self.baseTableView];
     
     [self setMenuButton];
+    
     
 }
 
@@ -142,6 +146,26 @@ static UIButton *menuButton;
 
 
 -(void) searchFinish:(NSDictionary *)theDic {
+    
+    
+}
+
+//检查权限
+-(void) checkPermission {
+    
+    NSDictionary *arr = [[NSUserDefaults standardUserDefaults] objectForKey:USER_PERMISSION];
+
+    //313代表活动管理
+    if (arr[@"313"]) {
+        
+        if ([arr[@"313"] intValue]==31) {
+            
+            [self showLoadingView];
+            [self downloadData];
+        } else {
+            [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
+        }
+    }
     
 }
 

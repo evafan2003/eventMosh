@@ -130,14 +130,15 @@
 		50D2145B19AFA82B0076E5F4 /* OrderSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145919AFA82B0076E5F4 /* OrderSearchViewController.xib */; };
 		50D2145F19AFA8580076E5F4 /* FaqSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D2145D19AFA8580076E5F4 /* FaqSearchViewController.m */; };
 		50D2146019AFA8580076E5F4 /* FaqSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D2145E19AFA8580076E5F4 /* FaqSearchViewController.xib */; };
-		50E4E9CE19D2E45E00047062 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C119D2E45D00047062 /* FMDatabase.m */; };
-		50E4E9CF19D2E45E00047062 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C319D2E45D00047062 /* FMDatabaseAdditions.m */; };
-		50E4E9D019D2E45E00047062 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C519D2E45D00047062 /* FMDatabasePool.m */; };
-		50E4E9D119D2E45E00047062 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C719D2E45D00047062 /* FMDatabaseQueue.m */; };
-		50E4E9D219D2E45E00047062 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C919D2E45D00047062 /* FMResultSet.m */; };
+		50E4E9CE19D2E45E00047062 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C119D2E45D00047062 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		50E4E9CF19D2E45E00047062 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C319D2E45D00047062 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		50E4E9D019D2E45E00047062 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C519D2E45D00047062 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		50E4E9D119D2E45E00047062 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C719D2E45D00047062 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		50E4E9D219D2E45E00047062 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9C919D2E45D00047062 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		50E4E9D319D2E45E00047062 /* MoshTicketDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9CB19D2E45D00047062 /* MoshTicketDatabase.m */; };
 		50E4E9D419D2E45E00047062 /* NSString+Encrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9CD19D2E45E00047062 /* NSString+Encrypt.m */; };
 		50E4E9D719D2E4EE00047062 /* EventDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E4E9D619D2E4EE00047062 /* EventDatabase.m */; };
+		50E95A5719D3BE8700715280 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E95A5619D3BE8700715280 /* libsqlite3.dylib */; };
 		50F1CE7B19C0509F0058B815 /* WSEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7A19C0509F0058B815 /* WSEncryption.m */; };
 		50F1CE8019C051580058B815 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F1CE7E19C051580058B815 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		667CFE7A19664BDA00D15783 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 667CFE7919664BDA00D15783 /* Foundation.framework */; };
@@ -371,6 +372,7 @@
 		50E4E9CD19D2E45E00047062 /* NSString+Encrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encrypt.m"; sourceTree = "<group>"; };
 		50E4E9D519D2E4EE00047062 /* EventDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDatabase.h; sourceTree = "<group>"; };
 		50E4E9D619D2E4EE00047062 /* EventDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDatabase.m; sourceTree = "<group>"; };
+		50E95A5619D3BE8700715280 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		50F1CE7919C0509F0058B815 /* WSEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSEncryption.h; sourceTree = "<group>"; };
 		50F1CE7A19C0509F0058B815 /* WSEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSEncryption.m; sourceTree = "<group>"; };
 		50F1CE7D19C051580058B815 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50E95A5719D3BE8700715280 /* libsqlite3.dylib in Frameworks */,
 				667CFE7C19664BDA00D15783 /* CoreGraphics.framework in Frameworks */,
 				667CFE7E19664BDA00D15783 /* UIKit.framework in Frameworks */,
 				667CFE7A19664BDA00D15783 /* Foundation.framework in Frameworks */,
@@ -715,6 +718,7 @@
 		667CFE7819664BDA00D15783 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50E95A5619D3BE8700715280 /* libsqlite3.dylib */,
 				667CFE7919664BDA00D15783 /* Foundation.framework */,
 				667CFE7B19664BDA00D15783 /* CoreGraphics.framework */,
 				667CFE7D19664BDA00D15783 /* UIKit.framework */,

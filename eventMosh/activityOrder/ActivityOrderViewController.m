@@ -8,7 +8,8 @@
 
 #import "ActivityOrderViewController.h"
 #import "PoseCell.h"
-#import "PosModel.h"
+//#import "PosModel.h"
+#import "Activity.h"
 
 static CGFloat activityHeight = 160;
 static CGFloat headerHeight = 13;
@@ -146,7 +147,8 @@ static CustomTabbar *titleBar;
         default:
             break;
     }
-    PosModel *act = self.dataArray[indexPath.row];
+//    PosModel *act = self.dataArray[indexPath.row];
+    Activity *act = self.dataArray[indexPath.row];
     UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:nil Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid]];
     [self.navigationController pushViewController:ctl animated:YES];
 
@@ -175,7 +177,8 @@ static CustomTabbar *titleBar;
         default:
             break;
     }
-    PosModel *act = self.dataArray[indexPath.row];
+//    PosModel *act = self.dataArray[indexPath.row];
+    Activity *act = self.dataArray[indexPath.row];
     cell.title.text = act.title;
     cell.sold_num.text = [NSString stringWithFormat:@"售票数：%@",act.t_count];
     cell.sold_price.text = [NSString stringWithFormat:@"售票额：%@%@",act.bz,act.o_money];
@@ -266,27 +269,27 @@ static CustomTabbar *titleBar;
     int total = 0;
     switch (key) {
         case 0:
-            for (PosModel *pos in paydata) {
+            for (Activity *pos in paydata) {
                 total += [pos.o_money intValue];
             }
             break;
         case 1:
-            for (PosModel *pos in ticketdata) {
+            for (Activity *pos in ticketdata) {
                 total += [pos.t_count intValue];
             }
             break;
         case 2:
-            for (PosModel *pos in ordersuccdata) {
+            for (Activity *pos in ordersuccdata) {
                 total += [pos.succ intValue];
             }
             break;
         case 3:
-            for (PosModel *pos in orderdata) {
+            for (Activity *pos in orderdata) {
                 total += [pos.c intValue];
             }
             break;
         case 4:
-            for (PosModel *pos in fromdata) {
+            for (Activity *pos in fromdata) {
                 total += [pos.a intValue];
             }
             break;

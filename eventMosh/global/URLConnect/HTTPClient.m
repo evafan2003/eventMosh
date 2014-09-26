@@ -13,7 +13,6 @@
 #import "Faq.h"
 #import "Order.h"
 #import "Ticket.h"
-#import "PosModel.h"
 
 #define errorMessage = {@"-4":@"用户不存在",@"1":@"登录超时，请重新登录",,@"2":@"用户账号或密码错误",,@"":@"",,@"":@"",,@"":@"",,@"":@"",}
 
@@ -400,7 +399,7 @@
             NSMutableArray *dataArray = [NSMutableArray new];
             NSArray *dicaaaa = resDic[key];
             for (NSDictionary *dic in dicaaaa) {
-                PosModel *act = [[PosModel alloc] initWithDictionary:dic];
+                Activity *act = [[Activity alloc] initWithDictionary:dic];
                 [dataArray addObject:act];
             }
             [newDic setObject:dataArray forKey:key];
@@ -428,5 +427,40 @@
     }
     return str;
 }
+
+/*
+ 活动统计结果
+ */
+- (void) statisticalResultWithEid:(NSString *)eid
+                              uid:(NSString *)uid
+                          success:(void (^)(ActivityStatistical *sta))success
+{
+    
+    [_request beginRequest:[NSString stringWithFormat:URL_STATISTICALRESULT,eid,uid]
+                     isAppendHost:NO
+                        isEncrypt:Encrypt
+                          success:^(id json){
+                              success ([self converToActivityStatistical:json eid:eid]);
+                          }
+                             fail:^{
+                                 success ([self converToActivityStatistical:nil eid:eid]);
+                             }];
+}
+
+
+//转换成activityStaModel
+- (ActivityStatistical *) converToActivityStatistical:(id)json eid:(NSString *)eid
+{
+    NSDictionary *dic = [CacheHanding parseDetailWithDic:json path:[NSString stringWithFormat:CACHE_STATISTICAL,eid] key:JSONKEY];
+    ActivityStatistical *sta = nil;
+    if (dic) {
+        sta = [ActivityStatistical activityStatistical:dic];
+    }
+    else {
+        [GlobalConfig showAlertViewWithMessage:ERROR_LOADINGFAIL superView:nil];
+    }
+    return sta;
+}
+
 
 @end

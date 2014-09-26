@@ -8,10 +8,13 @@
 
 #import "BaseViewController.h"
 #import "EGORefreshTableHeaderView.h"
+#import "EmptyView.h"
 
 @interface BaseTableViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,EGORefreshTableHeaderDelegate>
 
 @property (nonatomic, strong) UITableView   *baseTableView;
+
+@property (strong, nonatomic) EmptyView             *emptyView;
 
 //数据
 @property (nonatomic, assign) int                   page;
@@ -44,6 +47,14 @@
  添加下拉刷新控件
  */
 -(void)addEGORefreshOnTableView:(UITableView *)tableView;
+
+/**
+ *  添加数据为空时显示的view
+ *
+ *  @param content
+ *  @param name
+ */
+- (void) addEmptyViewWithAlertContent:(NSString *)content AlertImageName:(NSString *)name;
 
 /*
  加载完成解析

@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString *sell_ticket_num;//售票
 @property (nonatomic, strong) NSString *sell_ticket_money;//票款
 @property (nonatomic, strong) NSString *issue_name;//联系人
-
+@property (nonatomic, strong) NSString *issue_tel;//联系电话
 
 //实验用活动
 //@property (nonatomic, strong) NSString *eid;//活动id

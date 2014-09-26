@@ -21,6 +21,13 @@
 #import "TicketListViewController.h"
 #import "TicketDetailViewController.h"
 #import "ActivityOrderViewController.h"
+#import "FavoriteController.h"
+#import "ActivityStatisticalViewController.h"
+#import "TicketStatistical.h"
+
+#import "TicketStatisticalViewController.h"
+#import "ResourceStatisticalViewController.h"
+#import "PartSaleTaskViewController.h"
 
 @implementation ControllerFactory
 
@@ -117,6 +124,11 @@ static LeftViewController *leftContrller = nil;
     return [TicketListViewController viewController];
 }
 
+//票种管理
++(UIViewController *) favoriteListViewController {
+    return [FavoriteController viewController];
+}
+
 //票种详情
 + (UIViewController *) ticketDetailControllerWithTicket:(Ticket *)ticket {
     return [[TicketDetailViewController alloc] initWithNibName:NSStringFromClass([TicketDetailViewController class]) bundle:nil ticket:ticket];
@@ -130,5 +142,36 @@ static LeftViewController *leftContrller = nil;
 +(UIViewController *) posListViewController {
     return [ActivityOrderViewController viewController];
 }
+
+
++ (UIViewController *) activityStatisticalWithActivity:(Activity *)act
+{
+    return [[ActivityStatisticalViewController alloc] initWithNibName:NSStringFromClass([ActivityStatisticalViewController class]) bundle:nil activity:act];
+}
+
++ (UIViewController *) ticketStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act
+{
+    return [[TicketStatisticalViewController alloc] initWithActivity:act dataArray:array];
+}
+
++ (UIViewController *) resourceStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act
+{
+    return [[ResourceStatisticalViewController alloc] initWithActivity:act dataArray:array];
+}
+
++ (UIViewController *) partSaleTaskViewControllerWithData:(NSMutableArray *)array activity:(Activity *)act
+{
+    return [[PartSaleTaskViewController alloc] initWithActivity:act dataArray:array];
+}
+
+//+ (UIViewController *) singleresourceStaViewControllerWithResourceStatistical:(ResourceStatistical *)res
+//{
+//    return [[SingleResourceStaViewController alloc] initWithNibName:NSStringFromClass([SingleResourceStaViewController class]) bundle:nil resourceStatistical:res];
+//}
+//
+//+ (UIViewController *) singleTicketStaViewControllerWithTicketStatistical:(TicketStatistical *)tic
+//{
+//    return [[SingleTicketStatisticalViewController alloc] initWithTicketStatistical:tic];
+//}
 
 @end

@@ -32,6 +32,38 @@
     return [[ServerRequest alloc] init];
 }
 
+//为活动易准备的蛋疼接口
+-(void)beginRequest:(NSString *)urlStr
+       isAppendHost:(BOOL)isAppendHost
+          isEncrypt:(BOOL)encrypt
+            success:(void (^)(id jsonData))success
+               fail:(void (^)(void))fail{
+    
+    //初始化
+    self.jsonData = nil;
+    self.requestSuccess = NO;
+    
+    //中文转码
+    NSString *requestUrl = [GlobalConfig convertToString:urlStr];
+    
+    requestUrl = [requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    //加密
+    if (encrypt) {
+        requestUrl = [self urlEncrypt:requestUrl key:@"d51da0e7ae40b437"];
+    }
+    
+    //加服务器
+    if (isAppendHost) {
+        requestUrl = [self appendingMoshHost:requestUrl];
+    }
+    
+    
+    MOSHLog(@"%@",requestUrl);
+    //加载
+    [self serverRequestWithUrl:requestUrl success:success fail:fail];
+}
+
 
 -(void)beginRequestWithUrl:(NSString *)urlStr
               isAppendHost:(BOOL)isAppendHost
@@ -50,7 +82,7 @@
     
     //加密
     if (encrypt) {
-        requestUrl = [self urlEncrypt:requestUrl];
+        requestUrl = [self urlEncrypt:requestUrl key:nil];
 //        requestUrl = [self appendingLoginHost:requestUrl];
     }
     
@@ -85,7 +117,7 @@
     
     //加密
     if (encrypt) {
-        requestUrl = [self urlEncrypt:requestUrl];
+        requestUrl = [self urlEncrypt:requestUrl key:nil];
 //        requestUrl = [self appendingLoginHost:requestUrl];
     }
     
@@ -176,14 +208,14 @@
     return [MOSHHOST stringByAppendingString:url];
 }
 
-- (NSString *) urlEncrypt:(NSString *)url
+- (NSString *) urlEncrypt:(NSString *)url key:(NSString *)key
 {
     NSArray *resArray = [url componentsSeparatedByString:@"?"];
     NSMutableArray *array = [NSMutableArray arrayWithArray:resArray];
     if (array.count == 2) {
         NSString *str = array[1];
         if (str.length > 0) {
-            str = [self encryptUseDES:str key:DESKEY];
+            str = [self encryptUseDES:str key:key?key:DESKEY];
             [array replaceObjectAtIndex:1 withObject:str];
         }
         NSString *encryStr = [array componentsJoinedByString:@"?key="];

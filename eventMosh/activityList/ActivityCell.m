@@ -9,6 +9,7 @@
 #import "ActivityCell.h"
 
 @implementation ActivityCell
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,5 +25,13 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)makeCall:(id)sender {
+    
+    [delegate call:self];
+}
+
+- (IBAction)checkStatisticalResult:(id)sender {
+    [self.delegate checkStatisticalWithCell:self];
 }
 @end

@@ -743,4 +743,51 @@
     [UIView setAnimationDidStopSelector:@selector(moveFinished:)];   //动画停止后，执行的方法
     [UIView commitAnimations];
 }
+
+
++ (NSString *) currencyConver:(NSString *)currentcy
+{
+    if ([currentcy isEqualToString:@"CNY"]) {
+        return @"元";
+    }
+    else if ([currentcy isEqualToString:@"USD"]) {
+        return @"美元";
+    }
+    else if ([currentcy isEqualToString:@"HKD"]) {
+        return @"港币";
+    }
+    else if ([currentcy isEqualToString:@"TWD"]) {
+        return @"台币";
+    }
+    return @"";
+}
+
++ (NSString *) priceConver:(id)price
+{
+    long int integer = 0;
+    if ([price isKindOfClass:[NSString class]]) {
+        
+        integer = [[GlobalConfig convertToString:price] intValue];
+        if (integer >= 1000) {
+            return [NSString stringWithFormat:@"%ld",integer];
+        }
+        else {
+            return price;
+        }
+        
+    }
+    else if ([price isKindOfClass:[NSNumber class]]){
+        NSNumber *p = price;
+        integer = [[GlobalConfig convertToNumber:p] intValue];
+        if (integer >= 1000) {
+            return [NSString stringWithFormat:@"%ld",integer];
+        }
+        else {
+            return [NSString stringWithFormat:@"%.2f",[p floatValue]];
+        }
+    }
+    
+    return @"";
+    
+}
 @end

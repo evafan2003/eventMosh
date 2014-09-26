@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "URLDefine.h"
 #import "UserInfo.h"
+#import "ActivityStatistical.h"
 
 typedef void (^Success)(id jsonData);
 
@@ -176,6 +177,13 @@ typedef void (^Success)(id jsonData);
  */
 - (void) posEvent:(NSString *)search
           success:(void (^)(NSDictionary *dic))success;
+
+/*
+ 统计结果
+ */
+- (void) statisticalResultWithEid:(NSString *)eid
+                              uid:(NSString *)uid
+                          success:(void (^)(ActivityStatistical *sta))success;
 
 
 

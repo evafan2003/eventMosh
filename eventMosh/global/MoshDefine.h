@@ -144,6 +144,13 @@ _Pragma("clang diagnostic pop") \
 #define SYNC_ADDSUCCESS           @"同步成功"
 #define SYNC_DELFAILED           @"同步失败"
 
+//各种收藏
+#define FAVORITE_ADD            @"已添加至收藏"
+#define FAVORITE_REMOVE            @"已移除收藏"
+#define FAVORITE                @"收藏"
+#define DEFAVORITE                @"取消收藏"
+#define NO_FAVORITE                @"暂无收藏"
+
 //占位符
 #define PLACE_SEARCH                @"请输入查询内容"
 
@@ -215,6 +222,16 @@ _Pragma("clang diagnostic pop") \
 #define DRAFT_NOTI                  @"DraftRemoveNotification"
 #define FAQ_NOTI                  @"FaqRemoveNotification"
 #define TICKET_NOTI                  @"TicketNotification"
+
+
+#define NAVTITLE_TOP10              @"来源TOP10"
+#define NAVTITLE_PARTTASK          @"分销统计"
+#define NAVTITLE_TICKETSTA          @"票种统计"
+#define NAVTITLE_ACTIVITYSTA        @"活动统计"
+
+#define CACHE_STATISTICAL       @"STATISTICAL%@"//统计结果
+#define JSONKEY     @"res"
+
 
 @interface MoshDefine : NSObject
 

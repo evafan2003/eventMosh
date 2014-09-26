@@ -50,6 +50,11 @@
 #define URL_SAVEMOD             @"savemod?"                      //修改票种信息
 #define URL_POS                 @"pos?"                      //活动排名
 
+#define URL_STATISTICALRESULT   @"http://e.mosh.cn/eapiiphone/eventcoutn?eid=%@&uid=%@"  //统计结果
+//创建新的分销任务 如果任务名为空 则不添加只返回所有的分销任务
+#define URL_ADDNEWPRATTASK              @"http://e.mosh.cn/eapiiphone/tasklist?eid=%@&task_name=%@&uid=%@"
+
+
 @interface URLDefine : NSObject
 
 @end

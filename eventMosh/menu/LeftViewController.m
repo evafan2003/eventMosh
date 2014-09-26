@@ -38,7 +38,7 @@
     self.weiboNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory faqListViewController]];
     self.moreNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory posListViewController]];
     self.partnerNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory ticketListViewController]];
-    
+    self.favoriteNav = [ControllerFactory createNavigationControllerWithRootViewController:[ControllerFactory favoriteListViewController]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,39 +70,43 @@
 //    }
 //    else
     if (button.tag == 102) {
-        //活动
+        //活动管理
         [menuController setRootController:self.actNav animated:YES];
     }
     else if (button.tag == 103) {
-        //新闻
+        //审核管理
         [menuController setRootController:self.newsNav animated:YES];
 
     }
     else if (button.tag == 104) {
-        //微博
+        //咨询建议
         [menuController setRootController:self.weiboNav animated:YES];
     }
     else if (button.tag == 105) {
-        //现场图集
+        //订单查询
         [menuController setRootController:self.photoNav animated:YES];
         
     }
     else if (button.tag == 106) {
-        //合作
+        //票种管理
         [menuController setRootController:self.partnerNav animated:YES];
        
     }
     else if (button.tag == 107) {
 
-        //更多
+        //活动统计
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+        
         if ([[defaults objectForKey:USER_USERNAME] isEqualToString:@"guanshaobo"] ||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"hefei"]||[[defaults objectForKey:USER_USERNAME] isEqualToString:@"limuzi"] ) {
             [menuController setRootController:self.moreNav animated:YES];
         } else {
             [GlobalConfig alert:ERROR_LOGINFAIL5];
         }
+    }
+    else if (button.tag == 108) {
 
+        //收藏
+        [menuController setRootController:self.favoriteNav animated:YES];
 
     }
 }

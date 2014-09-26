@@ -24,6 +24,8 @@
 @property (strong, nonatomic) MoshNavigationController *weiboNav;
 @property (strong, nonatomic) MoshNavigationController *moreNav;
 @property (strong, nonatomic) MoshNavigationController *partnerNav;
+@property (strong, nonatomic) MoshNavigationController *favoriteNav;
+
 @property (assign, nonatomic) NSInteger  selButtonTag;
 @property (weak, nonatomic) IBOutlet UIView *leftButtonView;
 - (IBAction)logOut:(id)sender;

@@ -11,14 +11,14 @@
 #import "WebViewController.h"   
 
 
-static CGFloat activityHeight = 150;
+static CGFloat activityHeight = 205;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 static UIButton *menuButton;
-
+static NSString *phone = @"";
 
 @interface ActivityViewController ()
 
@@ -124,7 +124,8 @@ static UIButton *menuButton;
     cell.activityTitle.text = act.title;
     cell.activityDate.text = [NSString stringWithFormat:@"%@ - %@",[GlobalConfig dateFormater:act.start_date format:DATEFORMAT_03],[GlobalConfig dateFormater:act.end_date format:DATEFORMAT_03]];
     cell.contact.text = [NSString stringWithFormat:@"联系人：%@",act.issue_name];
-    cell.sell_ticket_num.text = [NSString stringWithFormat:@"成功订单：%@",act.sell_order_num];
+    cell.sell_order_money.text = [NSString stringWithFormat:@"成功订单：%@",act.sell_order_num];
+    cell.sell_ticket_num.text = [NSString stringWithFormat:@"售票数：%@",act.sell_ticket_num];
     cell.sell_ticket_money.text = [NSString stringWithFormat:@"票款：%@",act.sell_ticket_money];
     cell.status.text = [self setStatus:act.status];
     cell.is_allpay.text = [self setIsAllpay:act.is_allpay];
@@ -167,6 +168,35 @@ static UIButton *menuButton;
         }
     }
     
+}
+
+
+-(void) call:(ActivityCell *)cell {
+    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+    Activity *act = self.dataArray[indexPath.row];
+    //验票 act.eid
+    phone = act.issue_tel;
+    if ([GlobalConfig isKindOfNSStringClassAndLenthGreaterThanZero:act.issue_tel]) {
+        UIAlertView *a = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"拨打电话：%@？",phone] delegate:self cancelButtonTitle:@"是" otherButtonTitles:@"否", nil];
+        [a show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex==0) {
+        [GlobalConfig makeCall:phone];
+    }
+}
+
+
+#pragma mark AcitivityCellDelegate
+//数据统计
+- (void) checkStatisticalWithCell:(ActivityCell *)cell
+{
+    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+    Activity *act = self.dataArray[indexPath.row];
+    //查看统计 act.eid
+    [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
 }
 
 @end

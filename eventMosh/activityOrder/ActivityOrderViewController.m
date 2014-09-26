@@ -7,9 +7,8 @@
 //
 
 #import "ActivityOrderViewController.h"
-#import "PoseCell.h"
-//#import "PosModel.h"
 #import "Activity.h"
+#import "EventDatabase.h"
 
 static CGFloat activityHeight = 160;
 static CGFloat headerHeight = 13;
@@ -108,13 +107,64 @@ static CustomTabbar *titleBar;
     }];
 }
 
+
+//设置Cell可编辑
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Activity *act = self.dataArray[indexPath.row];
+    if ([[EventDatabase sharedInstance] isFavorite:act.eid]) {
+        return DEFAVORITE;
+    }
+    return FAVORITE;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+     if(indexPath.row ==0)
+     {
+     [tableView setEditing:YES animated:YES];  //这个是整体出现
+     }
+     */
+    return UITableViewCellEditingStyleDelete;
+}
+
+
+//进入编辑模式，按下出现的编辑按钮后
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSLog(@"touchIIddddd");
+    /*
+     if(indexPath ==0)
+     {
+     [tableView setEditing:NO animated:YES];
+     }
+     */
+    Activity *act = self.dataArray[indexPath.row];
+    if ([[EventDatabase sharedInstance] isFavorite:act.eid]) {
+
+        [[EventDatabase sharedInstance] removeFavorite:act.eid];
+        [GlobalConfig alert:FAVORITE_REMOVE];
+    } else {
+        [[EventDatabase sharedInstance] addFavorite:act];
+        [GlobalConfig alert:FAVORITE_ADD];
+    }
+     [tableView setEditing:NO animated:YES];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PoseCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([PoseCell class]) owner:self options:nil][0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        cell.delegate = self;
+        cell.delegate = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     //赋值
@@ -336,4 +386,13 @@ static CustomTabbar *titleBar;
     [[ControllerFactory getSingleDDMenuController] showLeftController:YES];
 }
 
+#pragma mark AcitivityCellDelegate
+//数据统计
+- (void) checkStatisticalWithCell:(PoseCell *)cell
+{
+    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+    Activity *act = self.dataArray[indexPath.row];
+    //查看统计 act.eid
+    [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
+}
 @end

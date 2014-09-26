@@ -1,0 +1,37 @@
+//
+//  PoseCell.m
+//  eventMosh
+//
+//  Created by  evafan2003 on 14-9-9.
+//  Copyright (c) 2014年 mosh. All rights reserved.
+//
+
+#import "PoseCell.h"
+
+@implementation PoseCell
+//@synthesize delegate;
+
+- (void)awakeFromNib
+{
+    // Initialization code
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button setTitle:@"" forState:<#(UIControlState)#>
+    [button setTitle:@"活动统计》" forState:];
+    button.frame = CGRectMake(265, 103, 46, 30);
+    [button addTarget:self action:@selector(checkResult:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:button];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+
+- (IBAction)checkResult:(id)sender {
+    [self.delegate checkStatisticalWithCell:self];
+}
+@end

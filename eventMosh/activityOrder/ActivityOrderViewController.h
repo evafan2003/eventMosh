@@ -8,7 +8,7 @@
 
 #import "BaseTableViewController.h"
 #import "CustomTabbar.h"
-
-@interface ActivityOrderViewController : BaseTableViewController<CustomTabbarDelegate>
+#import "PoseCell.h"
+@interface ActivityOrderViewController : BaseTableViewController<CustomTabbarDelegate,PoseCellDelegate>
 
 @end

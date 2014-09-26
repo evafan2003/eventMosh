@@ -9,7 +9,9 @@
 #import "BaseTableViewController.h"
 #import "GlobalConfig.h"
 
-@interface BaseTableViewController ()
+@interface BaseTableViewController (){
+    EGORefreshTableHeaderView *_emptyHeader;
+}
 
 @end
 
@@ -253,4 +255,18 @@
     
 }
 
+- (void) addEmptyViewWithAlertContent:(NSString *)content AlertImageName:(NSString *)name
+{
+    self.emptyView = [[EmptyView alloc] initWithFrame:self.baseTableView.frame];
+    self.emptyView.contentSize = CGSizeMake(CGRectGetWidth(self.emptyView.frame), CGRectGetHeight(self.emptyView.frame) + 1);
+    self.emptyView.delegate = self;
+    [self.emptyView setAlertContent:content alertImageName:name];
+    
+    _emptyHeader = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - self.emptyView.bounds.size.height, self.emptyView.frame.size.width, self.emptyView.bounds.size.height)];
+	_emptyHeader.delegate = self;
+    self.emptyView.hidden = YES;
+    _emptyHeader.backgroundColor = BACKGROUND;
+	[self.emptyView addSubview:_emptyHeader];
+    [self.view addSubview:self.emptyView];
+}
 @end

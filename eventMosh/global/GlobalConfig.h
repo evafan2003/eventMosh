@@ -501,5 +501,7 @@ typedef enum {
 + (void) add:(BOOL)add superViewController:(UIViewController *)superViewCtl viewController:(UIViewController *)viewCtl Duration:(CGFloat)time;
 
 
-
+//币种转换
++ (NSString *) currencyConver:(NSString *)currentcy;
++ (NSString *) priceConver:(id)price;
 @end

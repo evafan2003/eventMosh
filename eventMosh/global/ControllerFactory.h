@@ -23,6 +23,9 @@
 #import "Faq.h"
 #import "Order.h"
 #import "Ticket.h"
+
+
+
 @interface ControllerFactory : NSObject
 
 //菜单
@@ -66,44 +69,42 @@
 //票种管理
 +(UIViewController *) ticketListViewController;
 
+//票种管理
++(UIViewController *) favoriteListViewController;
+
 //票种详情
 + (UIViewController *) ticketDetailControllerWithTicket:(Ticket *)ticket;
-//活动统计
-//+ (UIViewController *) activityStatisticalWithActivity:(Activity *)act;
-
-//票统计
-//+ (UIViewController *) ticketStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act;
-
-//来源统计
-//+ (UIViewController *) resourceStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act;
-
-//分销任务统计
-//+ (UIViewController *) partSaleTaskViewControllerWithData:(NSMutableArray *)array activity:(Activity *)act;
-
-//圆环图
-//+ (UIViewController *) singleresourceStaViewControllerWithResourceStatistical:(ResourceStatistical *)res;
-
-//饼图
-//+ (UIViewController *) singleTicketStaViewControllerWithTicketStatistical:(TicketStatistical *)tic;
-
-//验票设置
-//+ (UIViewController *) ticketConfigViewControllerWithActivity:(Activity *)act;
-
-//报名信息
-//+ (UIViewController *) memberStatisticViewControllerWithActivity:(Activity *)act;
-
-//报名者个人信息
-//+ (UIViewController *) singleMemberViewControllerWithMemberInfo:(MemberInfo *)info;
 
 //网页
 + (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url;
 
-//发布活动
-//+ (UIViewController *) launchAcitivityViewController;
-
-//增加票种
-//+ (UIViewController *) addTicketTypeViewController;
 
 +(UIViewController *) posListViewController;
+//活动统计
++ (UIViewController *) activityStatisticalWithActivity:(Activity *)act;
+
+
+
+//活动列表
++(UIViewController *) activityListViewController;
+
+//活动统计
++ (UIViewController *) activityStatisticalWithActivity:(Activity *)act;
+
+//票统计
++ (UIViewController *) ticketStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act;
+
+//来源统计
++ (UIViewController *) resourceStatisticalWithData:(NSMutableArray *)array activity:(Activity *)act;
+
+//分销任务统计
++ (UIViewController *) partSaleTaskViewControllerWithData:(NSMutableArray *)array activity:(Activity *)act;
+
+////圆环图
+//+ (UIViewController *) singleresourceStaViewControllerWithResourceStatistical:(ResourceStatistical *)res;
+//
+////饼图
+//+ (UIViewController *) singleTicketStaViewControllerWithTicketStatistical:(TicketStatistical *)tic;
+
 
 @end

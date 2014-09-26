@@ -10,7 +10,7 @@
 
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
-#import "PosModel.h"
+#import "Activity.h"
 
 @interface EventDatabase : NSObject {
     FMDatabase *db;
@@ -26,11 +26,19 @@
  */
 - (void) dropTable:(NSString *)tableName;
 
-//添加一个活动到收藏
--(void) insertFavorite:(PosModel *)pos;
+//添加一个活动收藏
+-(void) addFavorite:(Activity *)act;
 
+//判断一个活动是否收藏过
+-(BOOL) isFavorite:(NSString *)eid;
+
+
+//删除一个活动收藏
+-(void) removeFavorite:(NSString *)eid;
 
 //查看收藏活动
--(NSArray *)getAllFavorite;
+-(NSMutableArray *)getAllFavorite;
 
+//删除所有活动
+-(void) removeAllFavorite;
 @end

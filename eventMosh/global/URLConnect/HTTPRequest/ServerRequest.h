@@ -25,6 +25,12 @@
  */
 + (ServerRequest *) serverRequest;
 
+//为活动易准备的蛋疼接口
+-(void)beginRequest:(NSString *)urlStr
+       isAppendHost:(BOOL)isAppendHost
+          isEncrypt:(BOOL)encrypt
+            success:(void (^)(id jsonData))success
+               fail:(void (^)(void))fail;
 
 /*
  发送请求

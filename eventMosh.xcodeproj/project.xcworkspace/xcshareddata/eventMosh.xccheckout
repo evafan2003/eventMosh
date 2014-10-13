@@ -10,29 +10,29 @@
 	<string>eventMosh</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D882393C-4C1E-46E9-A6EC-81D3E844EC28</key>
+		<key>45CF01881F3CD4A99AEEC6F538DF7F0683E7C93F</key>
 		<string>https://github.com/evafan2003/eventMosh.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>eventMosh.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D882393C-4C1E-46E9-A6EC-81D3E844EC28</key>
+		<key>45CF01881F3CD4A99AEEC6F538DF7F0683E7C93F</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/evafan2003/eventMosh.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D882393C-4C1E-46E9-A6EC-81D3E844EC28</string>
+	<string>45CF01881F3CD4A99AEEC6F538DF7F0683E7C93F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D882393C-4C1E-46E9-A6EC-81D3E844EC28</string>
+			<string>45CF01881F3CD4A99AEEC6F538DF7F0683E7C93F</string>
 			<key>IDESourceControlWCCName</key>
 			<string>eventMosh</string>
 		</dict>

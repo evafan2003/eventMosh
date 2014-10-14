@@ -69,7 +69,7 @@ static CustomTabbar *titleBar;
     
     titleBar = [[CustomTabbar alloc]initWithFrame:CGRectMake(0, 0, SCREENHEIGHT, 44)];
     titleBar.tabbarType = TabbarTypeTop;
-    [titleBar setButtons:@[@"按日",@"按周",@"按月",@"全部"]];
+    [titleBar setButtons:@[@"按日",@"按周",@"按月"]];
     titleBar.customTabbarDelegate = self;
     [self.view addSubview:titleBar];
     

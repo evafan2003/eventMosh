@@ -285,12 +285,12 @@ static UIButton *returnButton;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    if ([self.checkNumber isFirstResponder]) {
-        UIWindow *win = [[[UIApplication sharedApplication] windows] lastObject];
-        [win addSubview:returnButton];
-    } else {
-        [returnButton removeFromSuperview];
-    }
+//    if ([self.checkNumber isFirstResponder]) {
+//        UIWindow *win = [[[UIApplication sharedApplication] windows] lastObject];
+//        [win addSubview:returnButton];
+//    } else {
+//        [returnButton removeFromSuperview];
+//    }
 }
 
 

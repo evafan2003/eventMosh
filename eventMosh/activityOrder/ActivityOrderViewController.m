@@ -199,7 +199,7 @@ static CustomTabbar *titleBar;
     }
 //    PosModel *act = self.dataArray[indexPath.row];
     Activity *act = self.dataArray[indexPath.row];
-    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:nil Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid]];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:nil Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid] showToolBar:YES act:act.title];
     [self.navigationController pushViewController:ctl animated:YES];
 
 }

@@ -76,7 +76,7 @@
 + (UIViewController *) ticketDetailControllerWithTicket:(Ticket *)ticket;
 
 //网页
-+ (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url;
++ (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url showToolBar:(BOOL)show act:(NSString*)act;
 
 
 +(UIViewController *) posListViewController;

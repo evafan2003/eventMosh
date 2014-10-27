@@ -16,8 +16,11 @@
 @property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIAlertView *alv;
+@property (nonatomic, assign) BOOL showButtom;
+
+@property (nonatomic, strong) Activity *activity;
 
 @property (nonatomic, strong) MBProgressHUD *hud;
 
-- (id)initWithTitle:(NSString *)title URL:(NSURL *)theUrl;
+- (id)initWithTitle:(NSString *)title URL:(NSURL *)theUrl showToolBar:(BOOL)show act:(NSString *)act;
 @end

@@ -115,7 +115,7 @@ static UIButton *returnButton;
 
 - (IBAction)urlButtonPress:(id)sender {
 //    @"http://e.mosh.cn/23024"
-    [self.navigationController pushViewController:[ControllerFactory webViewControllerWithTitle:NAVTITLE_ACTIVITYLIST Url:@"http://www.evente.cn"] animated:YES];
+    [self.navigationController pushViewController:[ControllerFactory webViewControllerWithTitle:NAVTITLE_ACTIVITYLIST Url:@"http://www.evente.cn" showToolBar:NO act:nil] animated:YES];
 }
 
 //发送验证码

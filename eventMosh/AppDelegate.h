@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ControllerFactory.h"
 #import "WSEncryption.h"
+#import <Frontia/Frontia.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UIPrintInteractionControllerDelegate>
 

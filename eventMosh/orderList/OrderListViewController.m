@@ -102,7 +102,7 @@ static int perNum = 0;
     Order *order = self.dataArray[indexPath.row];
 //    UIViewController *ctl = [ControllerFactory draftDetailControllerWithDraft:act];
     NSLog(@"%@",[NSString stringWithFormat:@"http://e.mosh.cn/%@",order.eid]);
-    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ORDERDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",order.eid]];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ORDERDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",order.eid] showToolBar:YES act:order.e_title];
     [self.navigationController pushViewController:ctl animated:YES];
 }
 

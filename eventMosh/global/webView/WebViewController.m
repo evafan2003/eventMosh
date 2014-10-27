@@ -9,6 +9,8 @@
 #import "WebViewController.h"
 #import "GlobalConfig.h"
 #import "MBProgressHUD.h"
+#import <Frontia/Frontia.h>
+#import "ShareMethod.h"
 
 @interface WebViewController ()
 
@@ -25,12 +27,15 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title URL:(NSURL *)theUrl
+- (id)initWithTitle:(NSString *)title URL:(NSURL *)theUrl showToolBar:(BOOL)show act:(NSString *)act
 {
     self = [super init];
     if (self) {
         self.title = title;
         self.URL = theUrl;
+        self.showButtom = show;
+        self.activity = [Activity  new];
+        self.activity.title = act;
     }
     return self;
 }
@@ -53,6 +58,10 @@
     self.webView.backgroundColor = [UIColor clearColor];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:self.URL]];
+    
+    if (self.showButtom) {
+        [self createButtomBar];
+    }
 }
 
 - (void)viewDidUnload
@@ -61,6 +70,52 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.webView = nil;
+}
+
+
+//创建底部菜单
+- (void)createButtomBar {
+    UIView *buttom = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENHEIGHT-NAVHEIGHT-49, SCREENWIDTH, 49)];
+    buttom.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell_buttom"]];
+    [self.webView addSubview:buttom];
+
+    UIButton *left = [UIButton buttonWithType:UIButtonTypeCustom];
+    [left setTitle:@"分享" forState:UIControlStateNormal];
+    [left addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    [left setTitleColor:[UIColor colorWithRed:0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.000] forState:UIControlStateNormal];
+    left.frame = CGRectMake(0, 0, 160, 49);
+    left.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    [buttom addSubview:left];
+
+    UIButton *right = [UIButton buttonWithType:UIButtonTypeCustom];
+    [right setTitle:@"复制链接" forState:UIControlStateNormal];
+    [right addTarget:self action:@selector(copyUrl) forControlEvents:UIControlEventTouchUpInside];
+    [right setTitleColor:[UIColor colorWithRed:0/255.0 green:122.0/255.0 blue:255.0/255.0 alpha:1.000] forState:UIControlStateNormal];
+    right.frame = CGRectMake(160, 0, 160, 49);
+    right.titleLabel.font = [UIFont systemFontOfSize:15];
+    
+    [buttom addSubview:right];
+}
+
+
+-(void)share {
+    
+    FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+    content.url = [self.URL absoluteString];
+    content.title = self.activity.title;
+
+    content.description = [NSString stringWithFormat:@"刚刚发现一个不错的活动，赶快来报名参加吧：“%@”",self.activity.title];
+    content.imageObj = self.activity.imageUrl;
+    
+    [ShareMethod shareWithContent:content];
+}
+
+
+-(void) copyUrl {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = [self.URL absoluteString];
+    [GlobalConfig alert:@"已将链接复制到剪切板"];
 }
 
 #pragma mark - webViewDelegate -

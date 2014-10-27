@@ -134,9 +134,9 @@ static LeftViewController *leftContrller = nil;
     return [[TicketDetailViewController alloc] initWithNibName:NSStringFromClass([TicketDetailViewController class]) bundle:nil ticket:ticket];
 }
 
-+ (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url
++ (UIViewController *) webViewControllerWithTitle:(NSString *)title Url:(NSString *)url showToolBar:(BOOL)show act:(NSString*)act
 {
-    return [[WebViewController  alloc] initWithTitle:title URL:[NSURL URLWithString:url]];
+    return [[WebViewController  alloc] initWithTitle:title URL:[NSURL URLWithString:url] showToolBar:show act:act];
 }
 
 +(UIViewController *) posListViewController {

@@ -49,7 +49,10 @@
     
     //主屏
 //    [left startFirstPage];
-
+    
+    //初始化百度Frontia
+    [Frontia initWithApiKey:APPKEY_BAIDU];
+    
     
     self.window.rootViewController = self.menuController;
     [self.window makeKeyAndVisible];

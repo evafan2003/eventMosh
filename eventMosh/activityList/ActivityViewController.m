@@ -111,7 +111,7 @@ static NSString *phone = @"";
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Activity *act = self.dataArray[indexPath.row];
-    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ORDERDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid]];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ACTIVITYDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",act.eid] showToolBar:YES act:act.title];
     [self.navigationController pushViewController:ctl animated:YES];
 }
 

@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+//百度appid
+#define APPKEY_BAIDU        @"dowxgbXAWtaiFI40t9reNg9H"
+#define APPSECRET_BAIDU     @"aEi47Kzwx7VpsGmLSd60PK1Eb9vNwQU0"
+
+//#define APPKEY_BAIDU        @"54tAePPaV3r7yGYPHeMDfktz"
+//#define APPSECRET_BAIDU     @"vucHYWoBdw44C0lMEqYTSG6KGEXh5h8Z"
+
+
+//微信
+#define APPID_WEIXIN        @"wx8f059b5aaa2473ce"
+
 //基点
 #define POINT_X     0
 #define POINT_Y     0
@@ -181,6 +192,7 @@ _Pragma("clang diagnostic pop") \
 #define NAVTITLE_USERINFO           @"账户概览"
 #define NAVTITLE_ADDEVENT           @"发布活动"
 #define NAVTITLE_ACTIVITYLIST       @"活动管理"
+#define NAVTITLE_ACTIVITYDETAIL     @"活动详情"
 #define NAVTITLE_DRAFTLIST          @"审核管理"
 #define NAVTITLE_DRAFTDETAIL        @"审核详情"
 #define NAVTITLE_ORDERLIST          @"订单管理"

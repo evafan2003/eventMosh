@@ -14,7 +14,7 @@
 		<string>https://github.com/evafan2003/eventMosh.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>eventMosh.xcodeproj/project.xcworkspace</string>
+	<string>eventMosh.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>45CF01881F3CD4A99AEEC6F538DF7F0683E7C93F</key>

@@ -8,8 +8,8 @@
 
 #import "BaseTableViewController.h"
 #import "OrderCell.h"
-#import "ActivitySearchController.h"
+#import "OrderSearchViewController.h"
 
-@interface OrderListViewController : BaseTableViewController<ActivitySearchDelegate>
-
+@interface OrderListViewController : BaseTableViewController<OrderSearchDelegate>
+@property (nonatomic, strong) NSString *searchString;
 @end

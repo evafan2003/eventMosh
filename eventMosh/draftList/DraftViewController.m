@@ -94,6 +94,7 @@ static int perNum = 0;
                                         success:^(NSMutableArray *array){
                                             
                                             [self listFinishWithDataArray:array];
+                                            searchString = @"";
                                             
                                         }];
 }

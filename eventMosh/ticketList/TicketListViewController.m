@@ -17,7 +17,7 @@ static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 
-static NSString *searchString = @"";
+//static NSString *searchString = @"";
 static int perNum = 0;
 
 @interface TicketListViewController ()
@@ -60,6 +60,9 @@ static int perNum = 0;
     
     //删除的通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ticketReload) name:TICKET_NOTI object:nil];
+    
+    
+    self.searchString = @"";
 }
 
 -(void) ticketReload {
@@ -85,15 +88,16 @@ static int perNum = 0;
 
 - (void) downloadData
 {
-    if (searchString.length>0) {
+    if (self.searchString.length>0) {
 
-        [[HTTPClient shareHTTPClient] searchTicketWithPage:self.page search:searchString success:^(NSMutableArray *array){
+        [[HTTPClient shareHTTPClient] searchTicketWithPage:self.page search:self.searchString success:^(NSMutableArray *array){
             [self listFinishWithDataArray:array];
-            
+            self.searchString = @"";
         }];
+        
     } else {
 
-        [[HTTPClient shareHTTPClient] ticketWithPage:self.page search:searchString success:^(NSMutableArray *array){
+        [[HTTPClient shareHTTPClient] ticketWithPage:self.page search:nil success:^(NSMutableArray *array){
             [self listFinishWithDataArray:array];
             
         }];
@@ -173,7 +177,7 @@ static int perNum = 0;
 
 - (void) navRefreshClick
 {
-    ActivitySearchController *vc = [[ActivitySearchController alloc] initWithNibName:@"ActivitySearchController" bundle:nil];
+    TicketSearchViewController *vc = [[TicketSearchViewController alloc] initWithNibName:@"TicketSearchViewController" bundle:nil];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -184,10 +188,19 @@ static int perNum = 0;
     
     [self showLoadingView];
 
-    if ([theDic[@"id"] length]>0 ||[theDic[@"title"] length]>0) {
-        searchString = [NSString stringWithFormat:@"&ticket_id=%@&ticket_name=%@",theDic[@"id"],theDic[@"title"]];
+    if ([theDic[@"ticket_id"] length]>0 ||[theDic[@"ticket_name"] length]>0) {
+//        searchString = [NSString stringWithFormat:@"&ticket_id=%@&ticket_name=%@",theDic[@"id"],theDic[@"title"]];
+        
+        NSArray *allKey = [theDic allKeys];
+        NSArray *allValue = [theDic allValues];
+        
+        for(int i=0; i<allKey.count; i++){
+            
+            self.searchString = [self.searchString stringByAppendingString:[NSString stringWithFormat:@"&%@=%@",allKey[i],allValue[i]]];
+        }
+        
     } else {
-        searchString = @"";
+        self.searchString = @"";
     }
 
     self.page = 1;

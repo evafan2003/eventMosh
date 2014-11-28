@@ -7,8 +7,9 @@
 //
 
 #import "BaseTableViewController.h"
-#import "ActivitySearchController.h"
 
-@interface TicketListViewController : BaseTableViewController<ActivitySearchDelegate>
+#import "TicketSearchViewController.h"
 
+@interface TicketListViewController : BaseTableViewController<TicketSearchDelegate>
+@property (nonatomic, strong) NSString *searchString;
 @end

@@ -19,6 +19,7 @@ static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 static UIButton *menuButton;
 static NSString *phone = @"";
+static NSString *searchString = @"";
 
 @interface ActivityViewController ()
 
@@ -49,7 +50,7 @@ static NSString *phone = @"";
     [super viewDidLoad];
     //初始化
     self.cellHeight = activityHeight;
-    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemNone title:NAVTITLE_ACTIVITYLIST];
+    [self createBarWithLeftBarItem:MoshNavigationBarItemNone rightBarItem:MoshNavigationBarItemRefresh title:NAVTITLE_ACTIVITYLIST];
     self.navigationItem.hidesBackButton = YES;
 
 //    [self createSearchBar];
@@ -83,9 +84,13 @@ static NSString *phone = @"";
 
 - (void) downloadData
 {
-    [[HTTPClient shareHTTPClient] eventListWithPage:self.page success:^(NSMutableArray *array) {
-        [self hideLoadingView];
-       [self listFinishWithDataArray:array];
+    [[HTTPClient shareHTTPClient] eventListWithPage:self.page
+                                             search:searchString
+                                            success:^(NSMutableArray *array) {
+                                                
+//                                                [self hideLoadingView];
+                                                [self listFinishWithDataArray:array];
+                                                searchString = @"";
     }];
 }
 
@@ -147,7 +152,10 @@ static NSString *phone = @"";
 
 
 -(void) searchFinish:(NSDictionary *)theDic {
-    
+    [self showLoadingView];
+    searchString = [NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]];
+    self.page = 1;
+    [self downloadData];
     
 }
 

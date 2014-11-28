@@ -72,7 +72,7 @@ static NSString *sayNO = @"请填写审核不通过理由";
 //选择类型
 - (IBAction)changeType:(id)sender {
     
-    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NAVTITLE_DRAFTDETAIL delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"音乐组",@"非音乐组",@"运营组", nil];
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"音乐组",@"非音乐组",@"运营组", nil];
     [as showInView:self.view];
     
 }
@@ -113,6 +113,9 @@ static NSString *sayNO = @"请填写审核不通过理由";
 #pragma mark
 #pragma UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+//    self.statusLabel.text = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
     switch (buttonIndex) {
         case 0:
             self.type.text = @"指派给 - 音乐组";

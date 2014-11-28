@@ -17,7 +17,7 @@
                         success:(void (^)(id json))success
 {
     [self.request beginRequest:[NSString stringWithFormat:URL_ADDNEWPRATTASK,eid,name,uid]
-                  isAppendHost:YES
+                  isAppendHost:NO
                      isEncrypt:Encrypt
                        success:^(id json) {
                               success(json);

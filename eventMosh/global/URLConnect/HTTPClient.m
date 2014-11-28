@@ -137,9 +137,10 @@
  page 加载的页数
  */
 - (void) eventListWithPage:(int)page
+                    search:(NSString *)search
                    success:(void (^)(NSMutableArray *array))success
 {
-    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTLIST page:page addon:nil] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
+    [_request beginRequestWithUrl:[self makeUrl:URL_EVENTLIST page:page addon:search] isAppendHost:YES isEncrypt:YES success:^(id jsondata){
     
          NSArray *array = [self listAnalyze:jsondata arrayKey:JSONKEY_RES];
         NSMutableArray *dataArray = [NSMutableArray new];

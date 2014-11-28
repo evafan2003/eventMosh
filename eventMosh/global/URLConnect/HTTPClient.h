@@ -52,8 +52,8 @@ typedef void (^Success)(id jsonData);
  page 加载的页数
  */
 - (void) eventListWithPage:(int)page
-                      success:(void (^)(NSMutableArray *array))success;
-
+                    search:(NSString *)search
+                   success:(void (^)(NSMutableArray *array))success;
 /*
  审核管理
  page 加载的页数

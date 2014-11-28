@@ -10,7 +10,7 @@
 #import "PartTaskModel.h"
 #import "PartCell.h"
 //#import <Frontia/Frontia.h>
-//#import "ShareMethod.h"
+#import "ShareMethod.h"
 #import "HTTPClient+PartTask.h"
 
 static CGFloat headerHeight = 10;
@@ -151,16 +151,16 @@ static CGFloat headerHeight = 10;
 #pragma mark partCellDelegate
 - (void) shareWithCell:(PartCell *)cell
 {
-//    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
-//    PartTaskModel *resource = (PartTaskModel *)self.dataArray[indexPath.row];
-//    
-//    FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
-//    content.url = resource.url;
-//    content.title = _act.title;
-//    content.description = [NSString stringWithFormat:@"刚刚发现一个不错的活动，赶快来报名参加吧：“%@”",_act.title];
-//    content.imageObj = _act.imageUrl;
-//    
-//    [ShareMethod shareWithContent:content];
+    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+    PartTaskModel *resource = (PartTaskModel *)self.dataArray[indexPath.row];
+    
+    FrontiaShareContent *content=[[FrontiaShareContent alloc] init];
+    content.url = resource.url;
+    content.title = _act.title;
+    content.description = [NSString stringWithFormat:@"刚刚发现一个不错的活动，赶快来报名参加吧：“%@”",_act.title];
+    content.imageObj = _act.imageUrl;
+    
+    [ShareMethod shareWithContent:content];
     
 }
 

@@ -28,7 +28,7 @@ static NSString *NAVBUTTON_exit_h = @"nav_exit";
 static NSString *NAVBUTTON_delete_h = @"nav_delete";
 static NSString *NAVBUTTON_delete = @"nav_delete";
 
-static NSString *NAVBUTTON_refresh_h = @"nav_refresh";
+static NSString *NAVBUTTON_refresh_h = @"nav_search";
 static NSString *NAVBUTTON_refresh = @"nav_search";
 
 static NSString *NAVBUTTON_check_h = @"nav_check";

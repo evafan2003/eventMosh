@@ -188,7 +188,7 @@ static int perNum = 0;
     
     [self showLoadingView];
 
-    if ([theDic[@"ticket_id"] length]>0 ||[theDic[@"ticket_name"] length]>0) {
+    if ([theDic[@"ticket_name"] length]>0 ||[theDic[@"event_name"] length]>0) {
 //        searchString = [NSString stringWithFormat:@"&ticket_id=%@&ticket_name=%@",theDic[@"id"],theDic[@"title"]];
         
         NSArray *allKey = [theDic allKeys];

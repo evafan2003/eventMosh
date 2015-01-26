@@ -11,15 +11,20 @@
 #import "WebViewController.h"   
 
 
-static CGFloat activityHeight = 205;
+static CGFloat activityHeight = 230;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
 static NSString *act_display = @"actList_cellBg01";
 static NSString *act_notStart = @"actList_cellBg02";
 static UIButton *menuButton;
-static NSString *phone = @"";
-static NSString *searchString = @"";
+
+NSString *phone = @"";
+
+NSString *searchString = @"";
+NSString *sell_status = @"";
+
+static CustomTabbar *titleBar;
 
 @interface ActivityViewController ()
 
@@ -60,11 +65,17 @@ static NSString *searchString = @"";
     [self checkPermission];
 
     
-    self.baseTableView.frame = CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT);
+    self.baseTableView.frame = CGRectMake(0, 44, SCREENWIDTH, SCREENHEIGHT-NAVHEIGHT-44);
     [self addEGORefreshOnTableView:self.baseTableView];
     
-    [self setMenuButton];
     
+    titleBar = [[CustomTabbar alloc]initWithFrame:CGRectMake(0, 0, SCREENHEIGHT, 44)];
+    titleBar.tabbarType = TabbarTypeTop;
+    [titleBar setButtons:@[@"售票中",@"未开始",@"已结束"]];
+    titleBar.customTabbarDelegate = self;
+    [self.view addSubview:titleBar];
+    
+    [self setMenuButton];
     
 }
 
@@ -85,7 +96,7 @@ static NSString *searchString = @"";
 - (void) downloadData
 {
     [[HTTPClient shareHTTPClient] eventListWithPage:self.page
-                                             search:searchString
+                                             search:[sell_status stringByAppendingString:searchString]
                                             success:^(NSMutableArray *array) {
                                                 
 //                                                [self hideLoadingView];
@@ -134,7 +145,8 @@ static NSString *searchString = @"";
     cell.sell_ticket_money.text = [NSString stringWithFormat:@"票款：%@",act.sell_ticket_money];
     cell.status.text = [self setStatus:act.status];
     cell.is_allpay.text = [self setIsAllpay:act.is_allpay];
-    cell.ticket_status.text = [self setSellStatus:act.sell_status];
+    cell.account.text = [NSString stringWithFormat:@"%@/%@", act.account,act.passwd];
+//    cell.ticket_status.text = status;
 }
 
 - (void) navListClick
@@ -153,7 +165,7 @@ static NSString *searchString = @"";
 
 -(void) searchFinish:(NSDictionary *)theDic {
     [self showLoadingView];
-    searchString = [NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]];
+    searchString = [sell_status stringByAppendingString:[NSString stringWithFormat:@"&eid=%@&title=%@",theDic[@"id"],theDic[@"title"]]];
     self.page = 1;
     [self downloadData];
     
@@ -168,9 +180,12 @@ static NSString *searchString = @"";
     if (arr[@"313"]) {
         
         if ([arr[@"313"] intValue]==31) {
+
+            searchString = @"&sell_status=1";
             
             [self showLoadingView];
             [self downloadData];
+            
         } else {
             [GlobalConfig showAlertViewWithMessage:ERROR_NO_PERMISSION superView:nil];
         }
@@ -207,4 +222,30 @@ static NSString *searchString = @"";
     [self.navigationController pushViewController:[ControllerFactory activityStatisticalWithActivity:act] animated:YES];
 }
 
+
+#pragma mark
+#pragma CustomTabbarDelegate
+
+-(void) switchTabBar:(id)sender {
+    switch ([sender tag]) {
+        case 0:
+            //售票中
+            sell_status  = @"&sell_status=1";
+            break;
+        case 1:
+            //未开始
+            sell_status  = @"&sell_status=2";
+            break;
+        case 2:
+            //已结束
+            sell_status  = @"&sell_status=3";
+            break;
+        default:
+            break;
+    }
+    self.page = 1;
+    [self showLoadingView];
+    [self downloadData];
+    
+}
 @end

@@ -9,6 +9,7 @@
 #import "DraftCell.h"
 
 @implementation DraftCell
+@synthesize delegate;
 
 - (void)awakeFromNib
 {
@@ -22,4 +23,7 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)viewDetail:(id)sender {
+    [delegate view:self];
+}
 @end

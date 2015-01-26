@@ -7,7 +7,7 @@
 //
 
 #import "DraftViewController.h"
-static CGFloat activityHeight = 155;
+static CGFloat activityHeight = 204;
 static CGFloat headerHeight = 13;
 static NSString *cellIdentifier = @"activityCell";
 static NSString *act_end = @"actList_cellBg03";
@@ -105,7 +105,7 @@ static int perNum = 0;
     if (!cell) {
         cell = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([DraftCell class]) owner:self options:nil][0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.delegate = self;
+        cell.delegate = self;
         tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
 
@@ -196,5 +196,15 @@ static int perNum = 0;
         }
     }
     
+}
+
+#pragma mark
+#pragma DraftCellDelegate
+
+-(void) view:(DraftCell *)cell{
+    NSIndexPath *indexPath = [self.baseTableView indexPathForCell:cell];
+    Draft *draft = self.dataArray[indexPath.row];
+    UIViewController *ctl = [ControllerFactory webViewControllerWithTitle:NAVTITLE_ACTIVITYDETAIL Url:[NSString stringWithFormat:@"http://e.mosh.cn/%@",draft.eid] showToolBar:YES act:draft.title];
+    [self.navigationController pushViewController:ctl animated:YES];
 }
 @end

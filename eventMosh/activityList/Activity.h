@@ -26,6 +26,11 @@
 @property (nonatomic, strong) NSString *issue_name;//联系人
 @property (nonatomic, strong) NSString *issue_tel;//联系电话
 
+
+@property (nonatomic, strong) NSString *account;//验票账号
+@property (nonatomic, strong) NSString *passwd;//验票密码
+
+
 //实验用活动
 //@property (nonatomic, strong) NSString *eid;//活动id
 @property (nonatomic, strong) NSString *bz;//币种

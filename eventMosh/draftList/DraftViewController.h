@@ -11,6 +11,6 @@
 #import "DraftCell.h"
 #import "ActivitySearchController.h"
 
-@interface DraftViewController : BaseTableViewController<ActivitySearchDelegate>
+@interface DraftViewController : BaseTableViewController<ActivitySearchDelegate,DraftCellDelegate>
 
 @end

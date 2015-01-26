@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol DraftCellDelegate;
 
 @interface DraftCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *draftTitle;//活动标题
@@ -16,4 +17,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *type;//类别
 @property (weak, nonatomic) IBOutlet UILabel *publisher;//发布人
 @property (weak, nonatomic) IBOutlet UILabel *company;//主办方
+
+@property (nonatomic, assign) id<DraftCellDelegate> delegate;
+- (IBAction)viewDetail:(id)sender;
+
+@end
+
+@protocol DraftCellDelegate <NSObject>
+
+- (void) view:(DraftCell *)cell;
 @end

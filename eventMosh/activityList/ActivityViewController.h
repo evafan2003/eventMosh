@@ -17,6 +17,8 @@
 #import "Activity.h"
 #import "ActivitySearchController.h"
 
-@interface ActivityViewController : BaseTableViewController<ActivityCellDelegate,ActivitySearchDelegate>
+#import "CustomTabbar.h"
+
+@interface ActivityViewController : BaseTableViewController<ActivityCellDelegate,ActivitySearchDelegate,CustomTabbarDelegate>
 
 @end

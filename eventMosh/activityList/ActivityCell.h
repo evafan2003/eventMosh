@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sell_order_money;//票款
 @property (weak, nonatomic) IBOutlet UILabel *contact;//联系人
 @property (weak, nonatomic) IBOutlet UILabel *sell_ticket_money;//票款
+@property (weak, nonatomic) IBOutlet UILabel *account;//验票账号密码
 @property (nonatomic, assign) id<ActivityCellDelegate> delegate;
 
 - (IBAction)makeCall:(id)sender;
